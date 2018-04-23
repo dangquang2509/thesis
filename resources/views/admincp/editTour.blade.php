@@ -118,8 +118,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="js-replace-floormap-dialog" title="間取り図の差し替えと共にマーカー・リンクの情報も失われます。よろしいですか？" style="text-align:center"></div>
-		<div class="js-delete-floormap-dialog" title="間取り図を削除しますか？" style="text-align:center"></div>
+		<div class="js-replace-floormap-dialog" title="The information on the floor plan will be lost when you replace it. Is it OK?" style="text-align:center"></div>
+		<div class="js-delete-floormap-dialog" title="Do you want to delete floor plan ?" style="text-align:center"></div>
 		<div class="ot-page-title-area-bottom">
 			<a class="ot-page-title-btn ot-primary-bg" href="" onclick="uploadTour('tour', '{{ $tour->id }}'); return false;">Save</a>
 		</div>

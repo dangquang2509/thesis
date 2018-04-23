@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'コンテンツ作成'); ?>
+<?php $__env->startSection('title', 'House Edit'); ?>
 
 <?php $__env->startSection('css'); ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo asset('resource/css/lib/toastr/toastr.min.css'); ?>">
@@ -56,7 +56,7 @@
 		<div class="ot-floormap-view clearfix">
 			<div class="ot-floormap-label">
 				<input id="file_floormap" name="file[floormap]" onchange="uploadFloorMap(this.files[0])" style="display:none" type="file">
-				<span>Floor Map</span>
+				<span>Floor Plan</span>
 				<button class="btn-create-tour" onclick="openFileDialog('file_floormap');">Import</button>
 				<button class="btn-create-tour js-delete-floormap" onclick="confirm_delete_floormap();">Delete</button>
 				<button class="btn-create-tour js-move-mode">Move</button>
@@ -71,7 +71,7 @@
 				<div class="floormap-overlay"></div>
 				<div class="js-drop-floormap drop-floormap drop-area">
 					<p class="ot-message">
-						「インポート」ボタンから間取り図を選択してください。
+						Please select floor plan from 「Import」 button.
 					</p>
 					
 				</div>
@@ -110,7 +110,7 @@
 			</div>
 			<div class="ot-drop-sphere js-drop-spheres">
 				<p class="ot-message">
-					ここに360度画像をドラッグ & ドロップしてください。<br>もしくは<br>「インポート」ボタンから360度画像を選択してください。
+					Please drag and drop 360 degree images here.<br> Or <br>select 360 degree images from 「Import」 button.
 				</p>
 				<div class="js-scroll-area sortable ui-sortable clearfix">
 				</div>
