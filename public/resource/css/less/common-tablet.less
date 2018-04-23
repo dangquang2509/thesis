@@ -1,0 +1,945 @@
+@charset "utf-8";
+@import "variables.less";
+@import "default.less";
+@import "tables.less";
+
+.ot-container {
+	width: @widthTB;
+	margin: 0 auto;
+	display: table;
+	table-layout: fixed;
+	font-size: 1.3em;
+	padding: 10px 0 10px 0;
+}
+
+.ot-header {
+	width: 100%;
+	background-color: @blackColor;
+	margin-bottom: 8px;
+	display: table;
+	table-layout: fixed;
+	position: fixed;
+	z-index: 4;
+	box-shadow: 0 0 0 4px rgba(0,0,0,.25);
+	.ot-header-title {
+		font-size: 24px;
+		color: @whiteColor;
+		display: table-cell;
+		width: 65%;
+		vertical-align: middle;
+		line-height: 0;
+		padding-left: 12px;
+	}
+	.ot-login-btn-area {
+		display: table-cell;
+		width: 35%;
+		vertical-align: middle;
+		text-align: right;
+		padding-right: 16px;
+		.ot-login-btn {
+			background-color: @blackColor;
+			color: @whiteColor;
+			margin: 8px 8px;
+			border: 1px solid @whiteColor;
+			border-radius: 4px;
+			padding: 5px 16px;
+			font-family: 'yossan_misaki_gothic', sans-serif;
+			span {
+				color: @whiteColor;
+				text-decoration: none;
+				outline: none;
+				cursor: pointer;
+			}
+		}
+	}
+	.ot-menu-icon {
+		display: none;
+	}
+}
+.ot-footer {
+	background-color: @blackColor;
+	text-align: center;
+	color: @whiteColor;
+	font-size: 13px;
+	min-height: 34px;
+	line-height: 34px;
+	vertical-align: middle;
+	footer {
+		font-family: 'yossan_misaki_gothic', sans-serif;
+		font-size: 1.3em;
+	}
+}
+
+h4 {
+	font-size: 18px;
+	margin: 10px 0 10px 0;
+}
+body { 
+	padding-right: 0 !important 
+}
+
+//POPUP
+.modal-ot-dialog {
+	width: 600px;
+	margin: 100px auto;
+	&.modal-ot-dialog7 {
+		width: 400px;
+		.modal-ot-content {
+			position: relative;
+			background-color: @whiteColor;
+			-webkit-background-clip: padding-box;
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			border-radius: 0;
+			.modal-ot-body7 {
+				padding: 30px;
+				.modal-ot-contain7 {
+					.modal-ot-message7 {
+						&.mess1 {
+							width:80%;
+							margin: 0 auto;
+							margin-bottom: 20px;
+							color: @whiteColor;
+							background: @blackColor;
+							position: relative;
+							padding: 2px 0 0 10px;
+							div {
+								font-family: 'yossan_misaki_gothic', sans-serif;
+							    font-size: 38px;
+							    padding-top: 4px;
+							    &:after {
+									content: "";
+									border: 2px #fff dashed;
+									height: 100%;
+									position: absolute;
+									right: 15%;
+									top: 0;
+								}
+							}
+						}
+						&.mess2 {
+							color: @whiteColor;
+							background: @blackColor;
+							font-size: 15px;
+							width: 50%;
+							margin: 0 auto;
+							padding: 5px 0 5px 0;
+							margin-bottom: 20px;
+							text-align: center;
+							font-family: 'yossan_misaki_gothic', sans-serif;
+						}
+						&.mess3 {
+							margin: 0 auto;
+							margin-bottom: 20px;
+							textarea {
+								background: #ccc;
+								width: 100%;
+								height: 100px;
+								border: 2px solid #808080;
+								border-radius: 8px;
+								font-size: 14px;
+							}
+						}
+						&.mess4 {
+							color: @whiteColor;
+							background: @blackColor;
+							font-size: 26px;
+							width: 80%;
+							margin: 0 auto;
+							padding: 3px 0 3px 0;
+							margin-bottom: 20px;
+							text-align: center;
+							font-family: 'yossan_misaki_gothic', sans-serif;
+							button {
+								background: @blackColor;
+								color: @whiteColor;
+								border: none;
+							}
+						}
+						&.mess5 {
+							color: @whiteColor;
+							background: @blackColor;
+							font-size: 26px;
+							width: 80%;
+							margin: 0 auto;
+							padding: 3px 0 3px 0;
+							margin-bottom: 20px;
+							text-align: center;
+							font-family: 'yossan_misaki_gothic', sans-serif;
+							button {
+								background: @blackColor;
+								color: @whiteColor;
+								border: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.modal-ot-content {
+		position: relative;
+		background-color: @whiteColor;
+		-webkit-background-clip: padding-box;
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		border-radius: 0;
+		.modal-ot-header {
+			padding: 8px;
+			border-bottom: 1px solid #e5e5e5;
+			background: @blackColor;
+			button.ot-close {
+				-webkit-appearance: none;
+				padding: 0;
+				cursor: pointer;
+				background: 0 0;
+				border: 0;
+			}
+			.ot-close {
+				float: right;
+				font-size: 20px;
+				font-weight: 700;
+				line-height: 1;
+				color: #FFF;
+				text-shadow: 0 1px 0 #fff;
+				font-family: 'yossan_misaki_gothic', sans-serif;
+			}
+			.modal-ot-title {
+				margin: 0;
+				line-height: 1;
+				font-size: 20px;
+				text-align: center;
+				font-weight: lighter;
+				font-family: 'yossan_misaki_gothic', sans-serif;
+				color: #fff;
+			}
+		}
+		.modal-ot-body1 {
+			position: relative;
+			padding: 30px 0 30px 60px;
+			.modal-ot-message {
+				background: #77B6E1;
+				padding: 5px;
+				text-align: center;
+				color: @whiteColor;
+				border-radius: 5px;
+				width: 90%;
+				border: none;
+				font-family: 'yossan_misaki_gothic', sans-serif;
+			}
+		}
+		.modal-ot-body2 {
+			position: relative;
+			padding: 30px;
+			.modal-ot-contain2 {
+				position: relative;
+				&.contain-top {
+					padding-bottom: 15px;
+				}
+				&.contain-bottom {
+					margin-top: 20px;
+				}
+				.modal-ot-message2 {
+					display: inline-block;
+					&.mess1 {
+						width: 43%;
+						text-align: left;
+						color: @whiteColor;
+						background: @blackColor;
+						position: relative;
+						.mess1-top {
+							position: relative;
+							background-color: black;
+							font-family: 'yossan_misaki_gothic', sans-serif;
+						    padding: 6px 8px 0;
+						    font-size: 37px;
+							&:before {
+								content: "";
+								position: absolute;
+								top: 0;
+								bottom: 0;
+								right: 10%;
+								border-right: 3px dotted #fff;
+							}
+						}
+						.mess1-bottom {
+							background: @whiteColor;
+							text-align: right;
+							color: @blackColor;
+							font-size: 30px;
+							font-weight: bold;
+						}
+					}
+					&.mess2 {
+						background: @whiteColor;
+						width: 15%;
+						color: @blackColor;
+						border: 2px solid #969696;
+						padding: 2px 0 36px 0;
+						position: relative;
+						top: -43px;
+						margin-left: 14px;
+						.mess2-top {
+							font-size: 12px;
+							position: absolute;
+							top: 0;
+							color: #969696;
+						}
+						.mess2-bottom {
+							text-align: right;
+							padding-right: 2px;
+							position: relative;
+							bottom: -40px;
+							font-size: 25px;
+						}
+					}
+					&.mess3 {
+						width: 25%;
+						margin-left: 8px;
+						top: 0;
+						text-align: right;
+						position: relative;
+						top: -6px;
+						.mess3-top {
+							margin-bottom: 5px;
+							font-size: 12px;
+						}
+						.mess3-bottom {
+							font-size: 25px;
+							border: 2px solid #969696;
+						}
+					}
+					&.mess5 {
+						width: 7%;
+						position: relative;
+						margin-left: 4px;
+						.mess5-top {
+							position: relative;
+						    width: 24px;
+						    height: 24px;
+						    background: #000;
+						    cursor: pointer;
+						    &:before {
+						    	position: absolute;
+							    left: 50%;
+							    margin-left: -8px;
+							    content: "";
+							    top: 50%;
+							    margin-top: -7px;
+							    border-bottom: 12px solid #fff;
+							    border-left: 8px solid transparent;
+							    border-right: 8px solid transparent;
+						    }
+						    &:after {
+						    	position: absolute;
+							    content: "";
+							    left: 50%;
+							    margin-left: -8px;
+							    top: 50%;
+							    margin-top: -3px;
+							    border-bottom: 12px solid #000;
+							    border-left: 8px solid transparent;
+							    border-right: 8px solid transparent;
+							}
+						}
+						.mess5-bottom {
+							width: 24px;
+						    height: 24px;
+						    margin-top: 20px;
+						    background: #000;
+						    position: relative;
+						    cursor: pointer;
+						     &:before {
+						    	position: absolute;
+							    left: 50%;
+							    margin-left: -8px;
+							    content: "";
+							    top: 50%;
+							    margin-top: -5px;
+							    border-top: 12px solid #fff;
+							    border-left: 8px solid transparent;
+							    border-right: 8px solid transparent;
+						    }
+						    &:after {
+						    	position: absolute;
+							    content: "";
+							    left: 50%;
+							    margin-left: -8px;
+							    top: 50%;
+							    margin-top: -9px;
+							    border-top: 12px solid #000;
+							    border-left: 8px solid transparent;
+							    border-right: 8px solid transparent;
+							}
+						}
+					}
+					&.mess4 {
+						width: 100%;
+						text-align: center;
+						.mess4-top {
+							padding: 5px 0 5px 0;
+							font-size: 14px;
+							a {
+								text-decoration: none;
+								color: black;
+							}
+						}
+						.mess4-bottom {
+							width: 80%;
+							margin: 0;
+							line-height: 1;
+							text-align: center;
+							font-size: 18px;
+							background-color: @blackColor;
+							padding: 10px 0 10px 0;
+							margin: 0 auto;
+							button {
+								background: black;
+								color: white;
+								border: none;
+							}
+						}
+					}
+				}
+			}
+		}
+		.modal-ot-body3 {
+			padding: 30px;
+			.modal-ot-contain3 {
+				&.contain-bottom {
+					margin-top: 20px;
+				}
+				.modal-ot-message3 {
+					padding: 20px 0 20px 0;
+					font-size: 14px;
+					border-bottom: 4px dotted #969696;
+					&.mess1 {
+						padding: 0px 0 20px 0;
+						.mess1-contain {
+							width:43%;
+							display:inline-block;
+							top: 6px;
+							position:relative;
+							top:-7px;
+							.mess-right {
+								padding: 0 0 0 10px;
+							}
+						}
+						.mess1-img {
+							display: inline-block;
+							position: relative;
+							right: -30px;
+							.mess-ot-image {
+								margin: 0 5px 0 5px;
+								height: 25px;
+							}
+						}
+					}
+					&.mess2 {
+						padding: 20px 0 20px 0;
+						.mess2-contain {
+							width: 43%;
+							display: inline-block;
+							position: relative;
+							top: 6px;
+							float: left;
+							.mess-right {
+								padding: 0 0 0 10px;
+							}
+						}
+						.mess2-img {
+							width: 55%;
+							display: inline-block;
+							text-align: right;
+							.mess-ot-image {
+								margin: 0 5px 0 5px;
+								height: 30px;
+							}
+						}
+					}
+					&.mess3 {
+						border: none;
+						padding: 20px 0 20px 0;
+						.mess3-contain {
+							width: 70%;
+							display: inline-block;
+							position: relative;
+							float: left;
+							.mess-right {
+								padding: 0 0 0 10px;
+							}
+						}
+						.mess3-img {
+							width: 28%;
+							display: inline-block;
+							text-align: right;
+							.mess-ot-image {
+								margin: 0 5px 0 5px;
+								width: 100;
+							}
+						}
+					}
+					&.mess4 {
+						border: none;
+						padding: 20px 0 0 0;
+						.mess4-top {
+							text-align: center;
+							font-size: 14px;
+							a {
+								text-decoration: none;
+								color: black;
+							}
+						}
+						.mess4-middle {
+							text-align: center;
+							font-size: 18px;
+							background: @blackColor;
+							color: @whiteColor;
+							padding: 10px 0 10px 0;
+							line-height: 1;
+							width: 80%;
+							margin: 10px auto;
+							button {
+								background: black;
+								color: white;
+								border: none;
+							}
+						}
+						.mess4-bottom {
+							text-align: center;
+							font-size: 18px;
+							background: #ccc;
+							color: @blackColor;
+							padding: 10px 0 10px 0;
+							line-height: 1;
+							width: 80%;
+							margin: 10px auto;
+							button {
+								background: #ccc;
+								color: @blackColor;
+								border: none;
+							}
+						}
+					}
+				}
+			}
+		}
+		.modal-ot-body4 {
+			padding: 30px;
+			.modal-ot-contain4 {
+				width: 80%;
+				margin:0 auto;
+				.modal-ot-message4 {
+					width: 100%;
+					font-size: 18px;
+					text-align: center;
+					display: inline-block;
+					margin-bottom: 10px;
+					.mess4-left {
+						width: 50%;
+						display: table-cell;
+						background: @blackColor;
+						color: @whiteColor;
+						border: 1px solid black;
+						padding: 5px 0 5px 0;
+						&.mess-left {
+							background: @whiteColor;
+							color: @blackColor;
+							border: 1px solid @blackColor;
+						}
+					}
+					.mess4-bottom-white {
+						border-bottom: 1px solid white;
+					}
+					.mess4-bottom-black {
+						border-bottom: 1px solid black;
+					}
+					.mess4-right {
+						width: 50%;
+						display: table-cell;
+						border: 1px solid @blackColor;
+						padding: 5px 0 5px 0;
+						&.mess-right {
+							padding: 0;
+						}
+					}
+					&.mess4-middle {
+						background: @blackColor;
+						color: @whiteColor;
+						padding: 5px 0 5px 0;
+						border: 1px solid black;
+						box-sizing: border-box;
+						margin: 0;
+						button {
+							background: black;
+							color: white;
+							border: none;
+						}
+						&.mess-last {
+							background: #ccc;
+							color: @blackColor;
+							button {
+								background: #ccc;
+								color: @blackColor;
+								border: none;
+							}
+						}
+					}
+
+				}
+				.mess4-checkbox-area {
+					font-size: 14px;
+					text-align: center;
+					margin-top: 8px;
+					margin-bottom: 12px;
+				}
+				.mess4-top {
+					margin-bottom: 0;
+					display: table;
+					border-collapse: collapse;
+					box-sizing: border-box;
+				}
+
+				.mess4-last {
+					background: @blackColor;
+					padding: 4px 0 4px 0;
+					margin-top: 24px;
+					border: 1px solid @blackColor;
+					box-sizing: border-box;
+					button {
+						background: @blackColor;
+						color: @whiteColor;
+						border: none;
+					}
+				}
+				.mess4-last-grey {
+					background: #ccc;
+					padding: 4px 0 4px 0;
+					border: 1px solid #ccc;
+					margin-top: 4px;
+					box-sizing: border-box;
+					button {
+						background: #ccc;
+						color: @blackColor;
+						border: none;
+					}
+				}
+			}
+		}
+		.modal-ot-body5 {
+			position: relative;
+			padding: 12px 30px;
+			.modal-ot-contain5 {
+				position: relative;
+				&.contain-top:first-child {
+					padding-bottom: 15px;
+					border-bottom: 5px solid #B3B3B3;
+				}
+				&.contain-top {
+					padding-top: 20px;
+					padding-bottom: 15px;
+					border-bottom: 5px solid #B3B3B3;
+				}
+				&.contain-top:last-child {
+					padding-top: 15px;
+					border-bottom: none;
+				}
+				.modal-ot-message5 {
+					display: inline-block;
+					&.mess1 {
+						width: 48%;
+						text-align: left;
+						padding-top: 10px;
+						padding-left: 16px;
+						position: relative;
+						font-size: 42px;
+						min-height: 34px;
+						line-height: 34px;
+						font-family: 'yossan_misaki_gothic', sans-serif;
+						background: #000;
+						vertical-align: middle;
+						top: -4px;
+						color: white;
+						&:after {
+							content: "";
+							border: 2px #fff dashed;
+							height: 100%;
+							position: absolute;
+							right: 15%;
+							top: 0;
+						}
+					}
+					&.mess2 {
+						background: @whiteColor;
+						width: 15%;
+						border: 2px solid #969696;
+						padding: 10px 0 10px 0;
+						position: relative;
+						margin-left: 11px;
+						.mess2-top {
+							font-size: 11px;
+							position: absolute;
+							top: 0;
+							color: #969696;
+						}
+						.mess2-bottom {
+							text-align: right;
+							padding-right: 5px;
+							font-size: 16px;
+							position: relative;
+							bottom: -14px;
+							right: -4px;
+						}
+					}
+					&.mess3 {
+						width: 28%;
+						margin-left: 12px;
+						color: @whiteColor;
+						font-size: 16px;
+						text-align: center;
+						font-family: 'yossan_misaki_gothic', sans-serif;
+						min-height: 24px;
+						line-height: 26px;
+						float: right;
+						.mess3-content {
+							background-color: @blackColor;
+							margin-bottom: 10px;
+							button {
+								background: @blackColor;
+								color: @whiteColor;
+								border: none;
+							}
+						}
+					}
+				}
+			}
+		}
+		.modal-ot-body6 {
+			position: relative;
+			padding: 10px;
+			.modal-ot-message6 {
+				padding: 5px;
+				text-align: center;
+				font-family: 'yossan_misaki_gothic', sans-serif;
+			}
+		}
+		.modal-ot-body10 {
+			max-width: @widthSP;
+			width: 100%;
+			padding: 0 24px;
+			box-sizing: border-box;
+			font-size: 1.3em;
+			.ot-comment-input-sp {
+				width: 100%;
+				background: #ccc;
+			    height: 150px;
+			    border: 2px solid gray;
+			    border-radius: 8px;
+			    font-size: 12px;
+			    margin-top: 16px;
+			    margin-bottom: 10px;
+			    resize: none;
+			    box-sizing: border-box;
+			}
+			.error-message-sp {
+				color: red;
+				margin-bottom: 2px;
+				font-size: 13px;
+				font-weight: bold;
+			}
+			.ot-btn-comment-area {
+				.ot-post-comment-sp {
+					background-color: black;
+					color: white;
+					text-align: center;
+					font-family: 'yossan_misaki_gothic', sans-serif;
+					border: none;
+					font-size: 16px;
+					width: 100%;
+					margin-bottom: 16px;
+					min-height: 32px;
+				}
+			}
+		}
+		.modal-ot-body9 {
+			position: relative;
+			padding: 20px 30px;
+			.modal-ot-contain9 {
+				position: relative;
+				&.contain-top:first-child {
+					padding-bottom: 15px;
+					border-bottom: 5px solid #B3B3B3;
+				}
+				&.contain-top {
+					padding-top: 20px;
+					padding-bottom: 15px;
+					border-bottom: 5px solid #B3B3B3;
+				}
+				&.contain-top:last-child {
+					padding-top: 15px;
+					border-bottom: none;
+				}
+				.modal-ot-message9 {
+					display: inline-block;
+					&.mess1 {
+						width: 48%;
+						text-align: left;
+						padding-top: 10px;
+						padding-left: 16px;
+						position: relative;
+						font-size: 42px;
+						min-height: 34px;
+						line-height: 34px;
+						font-family: 'yossan_misaki_gothic', sans-serif;
+						background: #000;
+						vertical-align: middle;
+						top: -4px;
+						color: white;
+						background-color: #ccc;
+						&:after {
+							content: "";
+							border: 2px #fff dashed;
+							height: 100%;
+							position: absolute;
+							right: 15%;
+							top: 0;
+						}
+					}
+					&.mess2 {
+						background: @whiteColor;
+						width: 15%;
+						border: 2px solid #ccc;
+						padding: 10px 0 10px 0;
+						position: relative;
+						margin-left: 11px;
+						.mess2-top {
+							font-size: 11px;
+							position: absolute;
+							top: 0;
+							color: #ccc;
+						}
+						.mess2-bottom {
+							text-align: right;
+							padding-right: 5px;
+							font-size: 16px;
+							position: relative;
+							bottom: -14px;
+							right: -4px;
+							color: #ccc;
+						}
+					}
+					&.mess3 {
+						width: 28%;
+						margin-left: 12px;
+						color: @whiteColor;
+						font-size: 16px;
+						text-align: center;
+						font-family: 'yossan_misaki_gothic', sans-serif;
+						min-height: 24px;
+						line-height: 26px;
+						float: right;
+						.mess3-content {
+							background-color: #ccc;
+							margin-bottom: 10px;
+							button {
+								background: #ccc;
+								color: @whiteColor;
+								border: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// HELP
+.help-ot-title {
+	font-size: 25px;
+	padding: 10px 0 10px 0;
+	font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.help-ot-ques {
+	width: 100%;
+	background: black;
+	padding: 5px 10px 5px 0;
+	font-size: 18px;
+	a {
+		color: white;
+		padding-left: 15px;
+		text-decoration: none;
+	}
+	.help-ot-ques-title {
+		font-family: 'yossan_misaki_gothic', sans-serif;
+		font-size: 22px;
+	}
+}
+.help-ot-ans {
+	width: 100%;
+	font-size: 18px;
+	.help-ot-ans-mess {
+		padding: 10px 40px 10px 40px;
+		.help-ot-mess-child {
+			padding:5px 0 5px 0;
+		}
+	}
+}
+
+//POLICY
+.policy-ot-title {
+	font-size: 28px;
+	padding: 10px 0 10px 0;
+	font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.policy-ot-mess {
+	font-size: 13px;
+	width: 100%;
+	margin-bottom: 20px;
+	.policy-ot-child {
+		padding-left: 10px;
+	}
+}
+.policy-ot-heading {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+//CONTACT
+.contact-ot-title {
+	font-size: 24px;
+	padding: 12px 0 18px 0;
+	font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.contact-ot-contain {
+	padding-left: 10px;
+	margin-bottom: 15px;
+	width: 100%;
+	.contact-ot-label {
+		font-size: 13px;
+	}
+	.contact-ot-input {
+		width: 30%;
+		padding: 5px;
+		border: 1px solid #ccc;
+	}
+	.contact-ot-button {
+		background-color: #000;
+		color: #fff;
+		height: 35px;
+		width: 100px;
+		padding: 3px 15px;
+		margin-top: 16px;
+		border: none;
+		font-size: 16px;
+		font-family: 'yossan_misaki_gothic', sans-serif;
+		position: relative;
+	}
+	.contact-ot-textarea {
+		width: 60%;
+		height: 150px;
+		border: 1px solid #ccc;
+	}
+	.contact-ot-error {
+		color: white;
+		font-size: 13px;
+	}
+}

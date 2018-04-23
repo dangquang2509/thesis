@@ -1,0 +1,17 @@
+<krpano>
+	<include url="/vtour/skin/vtourskin.xml" />
+	<include url="/vtour/plugins/_custom/ControlBar/ControlBar.xml" />
+ 	<include url="/vtour/plugins/_custom/ModSkinActions.xml" />
+	<include url="/vtour/plugins/_custom/UiBlocker.xml" />
+	<include url="/vtour/plugins/_custom/HotspotStyles/HotspotStyles.xml" />
+	<include url="/vtour/plugins/_custom/InfoPanel/InfoPanel.xml" />
+	<include url="/vtour/plugins/_custom/TextDisplay/TextDisplay.xml" />
+	<include url="/vtour/plugins/_custom/LinkHotspot/LinkHotspot.xml" />
+	<include url="/vtour/plugins/_custom/CameraMod.xml" />
+	<!-- <include url="/vtour/plugins/_custom/UiMod/UiMod.xml" /> -->
+	<!-- <include url="/vtour/plugins/_custom/UiMod/WaterMarks.xml" /> -->
+	<include url="/vtour/plugins/_custom/Minimap/Minimap.xml" />
+	<include url="/vtour/plugins/_custom/HotspotMenu/HotspotMenu.xml" />
+	<include url="/vtour/plugins/_custom/Copyright/Copyright.xml" />
+	<!-- <include url="/vtour/plugins/_custom/Loading/Loading.xml" /> -->
+</krpano>

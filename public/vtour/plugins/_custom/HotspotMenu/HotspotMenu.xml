@@ -1,0 +1,131 @@
+<krpano>
+	<style name="HotspotMenu_Panel" distorted="true" enabled="false" zorder="1" url="./black.png" width="142" height="98" alpha="0.0" depth="700" ty="75"  />
+	<style name="HotspotMenu_Thumb" distorted="true" enabled="false" capture="false" alpha="0" depth="700" ty="75" onover="tween(depth,680);" onout="tween(depth,700);" onclick="style_linkhotspot_onloadnextscene();" linkedscene="" linkedscene_view_v="" linkedscene_view_h="" linkedscene_view_fov="" keeplookat="false" />
+	<action name="start_vr">
+		set(start_ty, 10000);
+		set(start_tt, 3.0);
+		if(vr_start_done === true,
+			set(start_ty, 150);
+			set(start_tt, 7.5);
+		  ,
+			set(vr_start_done, true);
+		  );
+		<!-- callwith(hotspot[p1],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p1_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p1_thumb2], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p1_thumb3], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p1_thumb4], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p1_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); ); -->
+
+		callwith(hotspot[p1],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p1_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p1_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); );
+
+		callwith(hotspot[p2],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p2_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p2_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); );
+
+		callwith(hotspot[p3],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p3_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p3_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); );
+
+		callwith(hotspot[p4],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p4_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p4_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); );
+
+		callwith(hotspot[p5],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p5_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p5_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); );
+
+		<!-- callwith(hotspot[p6],        copy(ty,start_ty); tween(alpha|ty, 0.5|75, get(start_tt), easeOutQuad|easeOutQuint); );
+		callwith(hotspot[p6_thumb1], copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint, set(enabled,true) ); );
+		callwith(hotspot[p6_txt],    copy(ty,start_ty); tween(alpha|ty, 1.0|75, get(start_tt), easeOutQuad|easeOutQuint); ); -->
+	</action>
+
+	<action name="linkhotspot_onloaded2" >
+		linkhotspot_addtitle();
+
+		<!-- Show up slowly -->
+		delayedcall(1, tween(alpha|hotspot[get(hs_title)].alpha, 1, 2););
+	</action>
+
+	<action name="linkhotspot_addtitle">
+		<!-- Get title if linked to scene on same room -->
+		<!-- Get room_title if linked to scene on different room -->
+		if(scene[get(linkedscene)].room_id === scene[get(xml.scene)].room_id,
+			set(linkedtitle, get(scene[get(linkedscene)].title));
+		,
+			set(linkedtitle, get(scene[get(linkedscene)].room_title));
+		);
+
+		<!-- Check if title null or empty -->
+		if(linkedtitle AND linkedtitle !== ' ',
+
+			txtadd(hsName, get(name),'_title');
+			copy(hotspot[get(name)].hs_title, hsName);
+
+			addhotspot(get(hsName));
+
+			hotspot[get(hsName)].loadstyle(style_textdisplay);
+
+			copy(hotspot[get(hsName)].html, linkedtitle);
+			copy(hotspot[get(hsName)].ath, ath);
+			copy(hotspot[get(hsName)].atv, atv);
+			set(hotspot[get(hsName)].oy, 25);
+			set(hotspot[get(hsName)].alpha, 0);
+			set(hotspot[get(hsName)].fontsize, '15px');
+
+			hotspot[get(hsName)].setcss();
+		);
+	</action>
+
+	<action name="linkhotspot_click">
+		if(linkedscene,
+			set(enabled, false);
+
+			<!-- rotate view to hotspot-->
+			<!-- looktohotspot(get(name), get(view.fov), smooth(200,200,500)); -->
+
+			<!-- Move to next scene -->
+			onloadnextscene();
+		);
+	</action>
+
+	<action name="style_linkhotspot_onloadnextscene" >
+		<!-- Cache all new view values if they exist and NO keeplookat -->
+		if(!keeplookat AND linkedscene_view_v AND linkedscene_view_h AND linkedscene_view_fov,
+			copy(target_view_v, linkedscene_view_v);
+			copy(target_view_h, linkedscene_view_h);
+			copy(target_view_fov, linkedscene_view_fov);
+		);
+
+		<!-- Always keep view in webvr and gyro mode -->
+		<!-- Also keep view if next spot is in the same room -->
+		if(		keeplookat
+				OR webvr.isenabled
+				OR plugin[skin_gyro].enabled
+				OR scene[get(linkedscene)].room_id === scene[get(xml.scene)].room_id,
+
+			<!-- Load new scene and keep lookat value (switch offseth) -->
+			<!-- Action from ModSkinActions.xml -->
+			ot_skin_loadscene_keepview(get(linkedscene));
+		,
+			<!-- Load new scene and reset lookat to default of scene -->
+			<!-- Action from ModSkinActions.xml -->
+			ot_skin_loadscene(get(linkedscene)
+				, null
+				, MERGE
+				, get(skin_settings.loadscene_blend)
+			);
+		);
+
+		<!-- Change the view to the specified values if all of those view values exist -->
+		if(target_view_v AND target_view_h AND target_view_fov,
+			skin_lookat(get(target_view_h), get(target_view_v), get(target_view_fov));
+			delete(target_view_h, target_view_v, target_view_fov);
+		);
+
+		<!-- Update scroll of thumbnail list -->
+		skin_updatescroll();
+	</action>
+</krpano>

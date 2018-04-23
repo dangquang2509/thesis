@@ -1,0 +1,272 @@
+@charset "utf-8";
+@import "variables.less";
+@import "tables.less";
+
+@charset "utf-8";
+@import "variables.less";
+@import "default.less";
+@import "tables.less";
+
+.ot-content {
+	.ot-text-title {
+		font-size: 24px;
+		font-weight: bold;
+		margin-top: 0;
+		padding-top: 60px;
+		font-family: 'yossan_misaki_gothic', sans-serif;
+	}
+	.ot-text-paragraph {
+		font-size: 13px;
+		margin: 32px 0;
+		.ot-text-paragraph-row {
+			margin: 24px 0;
+		}
+	}
+	.ot-text-header {
+		font-size: 19px;
+		font-weight: bold;
+	}
+}
+
+.ot-comment-area {
+	vertical-align: top;
+	.ot-comment-label {
+		display: none;
+	}
+	.ot-comment-input {
+		display: none;
+	}
+	.ot-post-comment-btn {
+		display: none;
+	}
+	.ot-other-comment {
+		width: 100%;
+		height: 200px;
+		padding: 2px 4px;
+		margin: 2px auto;
+		.ot-comment-item {
+			width: 100%;
+			display: table;
+			table-layout: fixed;
+			padding-top: 8px;
+			padding-bottom: 8px;
+			border-bottom: 1px @grayd4Color solid;
+			word-wrap: break-word;
+			&:nth-child(odd) {
+				background-color: #f9f9f9;
+			}
+			p {
+				margin: 6px 2px;
+			}
+			.ot-comment-item-avatar {
+				width: 20%;
+				display: table-cell;
+				vertical-align: top;
+				text-align: center;
+			}
+			.ot-comment-item-area {
+				width: 80%;
+				display: table-cell;
+				font-size: 12px;
+				vertical-align: top;
+				.ot-comment-item-account-name {
+					padding: 2px 2px;
+					font-weight: bold;
+				}
+				.ot-comment-item-content {
+					padding: 2px 2px;
+				}
+				.ot-comment-item-time {
+					color: @grayd4Color;
+					padding: 2px 2px;
+				}
+			}
+		}
+	}
+}
+.ot-bottom-menu {
+	display: none;
+}
+.ot-video-area {
+	width: 100%;
+	margin-top: 44px;
+	position:relative;
+	z-index: -2;
+}
+.ot-share-area {
+	display: none;
+}
+.ot-chip-information-area {
+	display: none;
+}
+.ot-chip-slogan {
+	display: none;
+}
+.ot-chip-item-area {
+	display: none;
+}
+.ot-menu-sp {
+	padding: 0 0 2px;
+	border-bottom: 2px dotted @blackColor;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	.ot-menu-sp-btn {
+		background-color: @blackColor;
+		color: @whiteColor;
+		width: 32%;
+		font-size: 13px;
+		min-height: 26px;
+		border: 1px solid @blackColor;
+		margin: 2px;
+		font-family: 'yossan_misaki_gothic', sans-serif;
+	}
+}
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+	clear: both;
+}
+.img-responsive {
+	max-width: 100%;
+	height: auto;
+}
+.bar1, .bar2, .bar3 {
+	width: 30px;
+	height: 3px;
+	background-color: @whiteColor;
+	margin: 7px 0;
+	transition: 0.4s;
+	margin-left: 55%;
+}
+.change .bar1 {
+	-webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+	transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+	-webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+	transform: rotate(45deg) translate(-8px, -8px) ;
+}
+.dropbtn {
+	color: white;
+	padding: 0px;
+	border: none;
+	cursor: pointer;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: black;
+	font-size: 12px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	left: 0;
+	width: 100%;
+}
+
+.dropdown-content a {
+	color: white;
+	padding: 12px 14px;
+	text-decoration: none;
+	display: block;
+	min-height: 12px;
+	white-space: nowrap;
+}
+.ot-sidenav-link {
+	padding: 12px 8px 6px 12px;
+	text-decoration: none;
+	font-size: 15px;
+	color: @whiteColor;
+	display: block;
+	transition: 0.3s;
+	border-bottom: 1px @whiteColor dashed;
+	white-space: nowrap;
+	margin: 0 18px;
+	&:hover {
+		background-color: #222;
+	}
+	a {
+		color: @whiteColor;
+		text-decoration: none;
+	}
+}
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 4;
+	top: 0;
+	right: 0;
+	background-color: @blackColor;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 36px;
+}
+
+// .sidenav a {
+//     padding: 8px 8px 6px 28px;
+//     text-decoration: none;
+//     font-size: 15px;
+//     color: @whiteColor;
+//     display: block;
+//     transition: 0.3s;
+//     border-bottom: 1px @whiteColor dashed;
+// }
+
+.sidenav a:hover, .offcanvas a:focus{
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: -5px;
+	right: 25px;
+	font-size: 38px;
+	margin-left: 50px;
+	cursor: pointer;
+	color: @whiteColor;
+}
+#video_box{
+	position:relative;
+	z-index: -1;
+}
+#video_overlays {
+	position:absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 3;
+}
+#video  {
+	width: 100%;
+}
+.ot-current-viewer-area {
+	position: absolute;
+	top: 4px;
+	right: 12px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	.ot-current-viewer {
+		vertical-align: middle;
+	}
+	.ot-current-viewer-icon {
+		vertical-align: middle;
+	}
+}
+
+

@@ -1,0 +1,135 @@
+@charset "utf-8";
+
+.transform(...) {
+	 -webkit-transform: @arguments;
+		-moz-transform: @arguments;
+		 -ms-transform: @arguments;
+		  -o-transform: @arguments;
+			 transform: @arguments;
+}
+
+/*--- box-sizing ---*/
+.box-sizing(@boxmodel: border-box) {
+	 -webkit-box-sizing: 	@boxmodel;
+		-moz-box-sizing: 	@boxmodel;
+			 box-sizing: 	@boxmodel;
+}
+.box-shadow(@arguments) {
+	 -webkit-box-shadow: @arguments;
+		-moz-box-shadow: @arguments;
+			 box-shadow: @arguments;
+}
+
+/*--- rotate ---*/
+.rotate(@degrees: 90deg) {
+	.transform(rotate(@degrees));
+}
+
+.rotateX(@degrees: 90deg) {
+	.transform(rotateX(@degrees));
+}
+
+.rotateY(@degrees: 90deg) {
+	.transform(rotateY(@degrees));
+}
+
+/*--- opacity ---*/
+.opacity(@opacity: 0.5) {
+	-webkit-opacity: @opacity;
+	-moz-opacity: @opacity;
+	-khtml-opacity: @opacity;
+	opacity: @opacity;
+	@opperc: @opacity * 100;
+	-ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+	filter: ~"alpha(opacity=@{opperc})";
+}
+
+/*--- transition ---*/
+.transition(@duration: 0.2s, @ease: ease-out) {
+	 -webkit-transition: all @duration @ease;
+		-moz-transition: all @duration @ease;
+		  -o-transition: all @duration @ease;
+			 transition: all @duration @ease;
+}
+
+.transition-duration(@duration: 0.2s) {
+	 -webkit-transition-duration: @duration;
+		-moz-transition-duration: @duration;
+		  -o-transition-duration: @duration;
+			 transition-duration: @duration;
+}
+
+/*--- scale ---*/
+.scale(@ratio: 1.5) {
+	.transform(scale(@ratio));
+}
+
+.scale(@ratioX; @ratioY) {
+	.transform(scale(@ratioX, @ratioY));
+}
+
+.scaleX(@ratio) {
+	.transform(scaleX(@ratio));
+}
+
+.scaleY(@ratio) {
+	.transform(scaleY(@ratio));
+}
+
+.skew(@x; @y) {
+	.transform(skewX(@x) skewY(@y));
+}
+
+.translate(@x: 0, @y: 0) {
+	.transform(translate(@x, @y));
+}
+
+.inner-shadow(@horizontal: 0, @vertical: 1px, @blur: 2px, @alpha: 0.4) {
+	 -webkit-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+		-moz-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+			 box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
+}
+
+.user-select(@argument: none) {
+	 -webkit-user-select: @argument;
+		-moz-user-select: @argument;
+		 -ms-user-select: @argument;
+			 user-select: @argument;
+}
+
+/*--- background ---*/
+.background-size(@argument: cover) {
+	 -webkit-background-size: @argument;
+		-moz-background-size: @argument;
+		  -o-background-size: @argument;
+			 background-size: @argument;
+}
+
+.box-shadow-clear() {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+			box-shadow: none;
+}
+
+/*--- font ---*/
+.font(@font-size, @font-weight) {
+	font-size: @font-size;
+	font-weight: @font-weight;
+}
+
+/*--- icon --- */
+.icon(@url, @xpos, @ypos) {
+	background: url(@url) no-repeat @xpos @ypos;
+}
+.icon(@bg, @url, @xpos, @ypos) {
+	background: @bg url(@url) no-repeat @xpos @ypos;
+}
+.icon-extends(@url, @xpos, @ypos, @xadd, @yadd) { // @xpos, @xadd ----> int + UNIT
+	background: url(@url) no-repeat (@xpos + @xadd) (@ypos + @yadd);
+}
+.icon-prefix(@url) {
+	background: url(@url) no-repeat left center;
+}
+.icon-suffix(@url) {
+	background: url(@url) no-repeat right center;
+}

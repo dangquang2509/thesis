@@ -1,0 +1,127 @@
+﻿<krpano version="1.19" title="住まいるOSCAR">
+	<include url="/vtour/plugins.xml" />
+
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+
+	<uimod logo="/uploads/tours/oscar/lg-header-logo-blue.png" tab_minwidth="105" tab_maxwidth="60" />
+
+	<scene name="scene_1_2" title="ホール" room_id="1" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_1.jpg" lat="" lng="" heading="" room_title="ホール" featured="true" smartvricon="Hotel/22.png">
+		<view vlookat="0" hlookat="0" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="60" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/1.jpg" />
+		</image>
+		<hotspot name="linked_2_1_1" ath="-23.39273" atv="14.86924" linkedscene="scene_2_2" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_2_2_3" ath="4.517624" atv="9.156563" linkedscene="scene_5_3" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_2_3_3" ath="-60" atv="50" linkedscene="scene_3_2" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+
+	<scene name="scene_2_2" title="LDK" room_id="2" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_3.jpg" lat="" lng="" heading="" room_title="LDK" featured="true" smartvricon="Hotel/32.png">
+		<view vlookat="10" hlookat="30" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-180" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/3.jpg" />
+		</image>
+		<hotspot name="linked_2_1_6" ath="13.27809" atv="22.67844" linkedscene="scene_2_3" style="style_linkhotspot" />
+		<hotspot name="linked_2_2_8" ath="-54.52245" atv="31.86256" linkedscene="scene_1_2" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_2_3_10" ath="-19.38742" atv="19.17148" linkedscene="scene_3_3" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_2_4_12" ath="-117.8261" atv="20.10421" linkedscene="scene_4_3" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+	<scene name="scene_2_3" title="" room_id="2" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_5.jpg" lat="" lng="" heading="" room_title="LDK">
+		<view vlookat="5" hlookat="-3" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="0" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/5.jpg" />
+		</image>
+		<hotspot name="linked_3_1_15" ath="51.78577" atv="22.25689" linkedscene="scene_1_2" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_3_2_17" ath="3.79509" atv="11.42286" linkedscene="scene_2_2" style="style_linkhotspot" />
+		<hotspot name="linked_3_3_19" ath="95.54602" atv="33.7369" linkedscene="scene_3_3" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_3_4_21" ath="25.64691" atv="17.95481" linkedscene="scene_4_3" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+
+	<scene name="scene_3_2" title="寝室" room_id="3" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_7.jpg" lat="" lng="" heading="" room_title="寝室" featured="true" smartvricon="Hotel/13.png">
+		<view vlookat="10" hlookat="-120" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-90" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/7.jpg" />
+		</image>
+		<hotspot name="linked_2_1_24" ath="-93.382" atv="20.89706" linkedscene="scene_1_2" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_2_2_26" ath="-150.327" atv="14.06821" linkedscene="scene_3_3" style="style_linkhotspot" />
+	</scene>
+
+	<scene name="scene_3_3" title="" room_id="3" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_10.jpg" lat="" lng="" heading="" room_title="寝室">
+		<view vlookat="0" hlookat="0" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-82" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/10.jpg" />
+		</image>
+		<hotspot name="linked_3_1_29" ath="175.2075" atv="26.05718" linkedscene="scene_2_3" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_3_2_31" ath="22.1754" atv="9.78434" linkedscene="scene_3_2" style="style_linkhotspot" />
+	</scene>
+
+	<scene name="scene_4_3" title="洗面脱衣室" room_id="4" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_12.jpg" lat="" lng="" heading="" room_title="洗面脱衣室" featured="true" smartvricon="Hotel/34.png">
+		<view vlookat="0" hlookat="0" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-87" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/12.jpg" />
+		</image>
+		<hotspot name="linked_3_1_34" ath="116.4529" atv="21.66801" linkedscene="scene_2_2" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+
+	<scene name="scene_5_3" title="洋室①" room_id="5" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_14.jpg" lat="" lng="" heading="" room_title="洋室①" featured="true" smartvricon="Hotel/12.png">
+		<view vlookat="5" hlookat="-165" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-180" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/14.jpg" />
+		</image>
+		<hotspot name="linked_3_1_37" ath="-127.6632" atv="42.18709" linkedscene="scene_6_1" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_3_2_39" ath="-139.4661" atv="36.19032" linkedscene="scene_1_2" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+
+	<scene name="scene_6_1" title="洋室②" room_id="6" havevrimage="true" thumburl="/uploads/tours/oscar/thumb_21.jpg" lat="" lng="" heading="" room_title="洋室②" featured="true" smartvricon="Hotel/12.png">
+		<view vlookat="5" hlookat="-162" fovtype="120" fovmin="100" fovmax="140" limitview="auto" offseth="-100" />
+		<image type="SPHERE">
+			<sphere url="/uploads/tours/oscar/21.jpg" />
+		</image>
+		<hotspot name="linked_1_1_42" ath="-151.5924" atv="40.57423" linkedscene="scene_5_3" style="style_linkhotspot|style_hotspot_circle1" />
+		<hotspot name="linked_1_2_44" ath="-140.0698" atv="36.28098" linkedscene="scene_1_2" style="style_linkhotspot|style_hotspot_circle1" />
+	</scene>
+
+	<layer name="testminimap" style="ot_style_minimap_container"
+			url="/uploads/tours/oscar/minimap.png"
+			>
+		<layer name="minimap_1_2" style="ot_style_minimap_point"
+				x="35%" y ="70%" viewoffset="-60"
+				linkedscene="scene_1_2"
+				onclick="openurl('https://onetech.jp/');"
+				/>
+		<layer name="minimap_2_2" style="ot_style_minimap_point"
+				x="40%" y ="20%" viewoffset="180"
+				linkedscene="scene_2_2"
+				onclick="js(modifySpot(get(view.hlookat), get(view.vlookat)));"
+
+				/>
+		<layer name="minimap_2_3" style="ot_style_minimap_point"
+				x="15%" y ="15%"
+				linkedscene="scene_2_3"
+				/>
+		<layer name="minimap_3_2" style="ot_style_minimap_point"
+				x="10%" y ="62%" viewoffset="90"
+				linkedscene="scene_3_2"
+				/>
+		<layer name="minimap_3_3" style="ot_style_minimap_point"
+				x="23%" y ="35%" viewoffset="82"
+				linkedscene="scene_3_3"
+				/>
+		<layer name="minimap_4_3" style="ot_style_minimap_point"
+				x="48%" y ="37.5%" viewoffset="87"
+				linkedscene="scene_4_3"
+				/>
+		<layer name="minimap_5_3" style="ot_style_minimap_point"
+				x="75%" y ="12%" viewoffset="180"
+				linkedscene="scene_5_3"
+				/>
+		<layer name="minimap_6_1" style="ot_style_minimap_point"
+				x="75%" y ="40%" viewoffset="100"
+				linkedscene="scene_6_1"
+				/>
+	</layer>
+</krpano>

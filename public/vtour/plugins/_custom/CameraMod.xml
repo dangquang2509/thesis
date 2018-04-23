@@ -1,0 +1,20 @@
+<krpano>
+	<!-- Autorotate Setting -->
+	<!-- <autorotate enabled="true"
+			waittime="3"
+			accel="2"
+			speed="5"
+			/>
+
+	<events name="cameramod_autorotate_event" keep="true"
+			onautorotatestop="set(autorotate.enabled, false);"
+			onnewscene="set(autorotate.enabled, true);"
+			/> -->
+	<!-- End Autorotate Setting -->
+
+	<!-- Scene's angle correction -->
+	<events name="cameramod_anglecorrection_event" keep="true"
+			onnewscene=""
+			/>
+	<!-- End Scene's angle correction -->
+</krpano>

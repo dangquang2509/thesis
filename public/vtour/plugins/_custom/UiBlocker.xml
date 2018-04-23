@@ -1,0 +1,12 @@
+<krpano>
+	<layer name="ot_ui_blocker" type="container" keep="true"
+			enabled="true" bgcapture="true" alpha="0" visible="false"
+			width="100%" height="100%" bgalpha=".5"
+			onloaded="ot_ui_blocker_actions_onloaded();"
+			/>
+
+	<action name="ot_ui_blocker_actions_onloaded">
+		<!-- Register ref of ui_blocker -->
+		copy(ot.uiblocker, layer[get(name)]);
+	</action>
+</krpano>

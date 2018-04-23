@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+.background-clip(@argument: padding-box) {
+	 -webkit-background-clip: @argument;
+		-moz-background-clip: @argument;
+			 background-clip: @argument;
+}
+
+.border-radius(@x: 0) {
+	 -webkit-border-radius: @x;
+		-moz-border-radius: @x;
+			 border-radius: @x;
+	.background-clip(padding-box);
+}
+
+.border-radius(@topright, @bottomright, @bottomleft, @topleft) {
+	-webkit-border-top-right-radius: @topright;
+	-webkit-border-top-left-radius: @topleft;
+	-webkit-border-bottom-right-radius: @bottomright;
+	-webkit-border-bottom-left-radius: @bottomleft;
+	-moz-border-radius-topright: @topright;
+	-moz-border-radius-topleft: @topleft;
+	-moz-border-radius-bottomright: @bottomright;
+	-moz-border-radius-bottomleft: @bottomleft;
+	border-top-right-radius: @topright;
+	border-top-left-radius: @topleft;
+	border-bottom-right-radius: @bottomright;
+	border-bottom-left-radius: @bottomleft;
+	.background-clip(padding-box);
+}

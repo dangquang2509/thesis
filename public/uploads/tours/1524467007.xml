@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<krpano version="1.19" title="New and well-kept 2 bedroom apartment" onstart="startup();">
+  <include url="/vtour/plugins.xml"/>
+  <layer name="map" style="ot_style_minimap_container" url="/uploads/plans/1524466957-Screen Shot 2017-10-17 at 1.30.33 PM.png" keep="1" align="lefttop" scale="1" handcursor="" scalechildren="1" maskchildren="1">
+    <layer style="ot_style_minimap_point" name="spot00_1524466966-1" x="332.96313268569" y="372.52310884636" onclick="loadscene(scene00_1524466966-1,null,MERGE,BLEND(1));" linkedscene="scene00_1524466966-1"/>
+    <layer style="ot_style_minimap_point" name="spot01_1524466966-2" x="1054.932697618" y="323.07313864552" onclick="loadscene(scene01_1524466966-2,null,MERGE,BLEND(1));" linkedscene="scene01_1524466966-2"/>
+  </layer>
+  <scene name="scene00_1524466966-1" title="" thumburl="/uploads/images/thumb/1524466966-1-IMG_1566.JPG" toursphereurl="/image/1524466966-1" onstart="settelop(,-0);activatespot(spot00_1524466966-1,359.99855356765534);setbottomurl();">
+    <preview url="/uploads/images/thumb/1524466966-1-IMG_1566.JPG"/>
+    <image>
+      <sphere url="/uploads/images/1524466966-1-IMG_1566.JPG"/>
+    </image>
+    <hotspot name="scene00_1524466966-1_0" style="skin_hotspotstyle" ath="86.083197568277" atv="15" linkedscene="scene01_1524466966-2" loadvars="view.hlookat=86.08319756827723"/>
+    <view hlookat="-333.85332" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0"/>
+  </scene>
+  <scene name="scene01_1524466966-2" title="" thumburl="/uploads/images/thumb/1524466966-2-IMG_1567.JPG" toursphereurl="/image/1524466966-2" onstart="settelop(,-0);activatespot(spot01_1524466966-2,359.9985535676554);setbottomurl();">
+    <preview url="/uploads/images/thumb/1524466966-2-IMG_1567.JPG"/>
+    <image>
+      <sphere url="/uploads/images/1524466966-2-IMG_1567.JPG"/>
+    </image>
+    <hotspot name="scene01_1524466966-2_0" style="skin_hotspotstyle" ath="-93.916802431723" atv="15" linkedscene="scene00_1524466966-1" loadvars="view.hlookat=-93.91680243172269"/>
+    <view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0"/>
+  </scene>
+</krpano>

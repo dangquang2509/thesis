@@ -1,0 +1,6 @@
+<krpano>
+	<data name="copyright_text">
+		<p>@2017 <a href="https://onetech.jp" target="_blank" style="color: #337ab7; text-decoration: none;">OnetechAsia</a> - © Powered by <a href="https://onetech.jp/service/vr" target="_blank" style="color: #337ab7; text-decoration: none;">VR-Web</a></p>
+	</data>
+	<plugin name="copyright_info_text" url="/vtour/plugins/textfield.swf" html="data:copyright_text" css="p{color:#fff; font-family:Arial; font-size:9px; text-align:center; margin-bottom: 2px; margin-left: 2px; margin-right: 2px; }" keep="true" children="false" visible="true" backgroundcolor="0x000000" roundedge="0" shadow="0.6" borderwidth="0" glow="4" align="bottomleft" x="0" y="0" autosize="center" zorder="999" bgalpha=".7" />
+</krpano>

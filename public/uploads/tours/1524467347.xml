@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<krpano version="1.19" title="Terrific mid-storey 2 bedroom apartment" onstart="startup();">
+  <include url="/vtour/plugins.xml"/>
+  <layer name="map" style="ot_style_minimap_container" url="/uploads/plans/1524467320-floor1.png" keep="1" align="lefttop" scale="1" handcursor="" scalechildren="1" maskchildren="1">
+    <layer style="ot_style_minimap_point" name="spot00_1524467333-2" x="61.076599620905" y="156.69065071029" onclick="loadscene(scene00_1524467333-2,null,MERGE,BLEND(1));" linkedscene="scene00_1524467333-2"/>
+    <layer style="ot_style_minimap_point" name="spot01_1524467332-1" x="218.70305531407" y="44.10032521518" onclick="loadscene(scene01_1524467332-1,null,MERGE,BLEND(1));" linkedscene="scene01_1524467332-1"/>
+  </layer>
+  <scene name="scene00_1524467333-2" title="" thumburl="/uploads/images/thumb/1524467333-2-IMG_1563.JPG" toursphereurl="/image/1524467333-2" onstart="settelop(,-0);activatespot(spot00_1524467333-2,360);setbottomurl();">
+    <preview url="/uploads/images/thumb/1524467333-2-IMG_1563.JPG"/>
+    <image>
+      <sphere url="/uploads/images/1524467333-2-IMG_1563.JPG"/>
+    </image>
+    <hotspot name="scene00_1524467333-2_0" style="skin_hotspotstyle" ath="54.462322208026" atv="15" linkedscene="scene01_1524467332-1" loadvars="view.hlookat=54.462322208025626"/>
+    <view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0"/>
+  </scene>
+  <scene name="scene01_1524467332-1" title="" thumburl="/uploads/images/thumb/1524467332-1-IMG_1558.JPG" toursphereurl="/image/1524467332-1" onstart="settelop(,-0);activatespot(spot01_1524467332-1,360);setbottomurl();">
+    <preview url="/uploads/images/thumb/1524467332-1-IMG_1558.JPG"/>
+    <image>
+      <sphere url="/uploads/images/1524467332-1-IMG_1558.JPG"/>
+    </image>
+    <hotspot name="scene01_1524467332-1_0" style="skin_hotspotstyle" ath="-125.53767779197" atv="15" linkedscene="scene00_1524467333-2" loadvars="view.hlookat=-125.53767779197437"/>
+    <view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0"/>
+  </scene>
+</krpano>

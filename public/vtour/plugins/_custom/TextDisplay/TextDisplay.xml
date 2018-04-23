@@ -1,0 +1,18 @@
+<krpano>
+
+	<!-- skin_info_panel - style for the ref hotspots -->
+	<style name="style_textdisplay" type="text" distorted="true" enabled="false"
+			zorder="100" mergedalpha="false"
+			bgalpha="0"
+			txtshadow="1 1 5 black 1"
+			fontsize="20px"
+			txtcolor="white"
+			onloaded="setcss();"
+			setcss="set(css, calc('
+				color: ' + txtcolor + ';
+				font-size: ' + fontsize + ';
+				text-align:center;
+			'));"
+			/>
+	<!-- Always call setcss() after changing the text's style -->
+</krpano>

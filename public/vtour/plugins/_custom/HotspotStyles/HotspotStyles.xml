@@ -1,0 +1,241 @@
+<krpano>
+	<!-- Arrow 1 -->
+	<style name="style_hotspot_arrow1" url="./Icons/arrow1.png"
+			scale=".3" edge="center"
+			onover="tween(scale, .35, .2);"
+			onout="tween(scale, .3, .2);"
+			onloaded="style_hotspot_arrow1_onloaded();"
+			onloadnextscene="style_arrow_tonextscene();"
+			/>
+	<action name="style_hotspot_arrow1_onloaded">
+		if(onloaded2, onloaded2(););
+
+		style_hotspot_arrow2_animate(get(name));
+	</action>
+	<!-- End Arrow 1 -->
+
+	<!-- Arrow 2 -->
+	<style name="style_hotspot_arrow2" url="./Icons/arrow2.png"
+			scale=".5" edge="center"
+			onloaded="style_hotspot_arrow2_onloaded();"
+			onloadnextscene="style_arrow_tonextscene();"
+			/>
+
+	<action name="style_hotspot_arrow2_onloaded">
+		if(onloaded2, onloaded2(););
+
+		style_hotspot_arrow2_animate(get(name));
+	</action>
+
+	<action name="style_hotspot_arrow2_animate" >
+		<!-- Ensure that the hotspot still exist while looping the animation -->
+		if(distorted,
+			if(hotspot[%1],
+
+				<!-- Arrow moving forward -->
+				if(hotspot[%1].depth === 1000,
+					set(hotspot[%1].depth, 1000);
+					set(hotspot[%1].ox, 0);
+					set(hotspot[%1].oy, 0);
+
+					tween(hotspot[%1].depth
+							| hotspot[%1].oy
+							| hotspot[%1].rx
+						, 1100 | -10 | -10
+						, 1.5
+						, easeInOutQuart
+						, style_hotspot_arrow2_animate(%1);
+					);
+				<!-- Arrow moving backward -->
+				,
+					tween(hotspot[%1].depth
+							| hotspot[%1].oy
+							| hotspot[%1].rx
+						, 1000 | 0 | 0
+						, 1
+						, linear
+						,
+						style_hotspot_arrow2_animate(%1);
+					);
+				);
+			);
+		);
+	</action>
+
+	<!-- End Arrow 2 -->
+
+	<!-- Arrow 3 -->
+	<style name="style_hotspot_arrow3" url="./Icons/arrow3.png"
+			scale="0.08" edge="center"
+			onloaded="style_hotspot_arrow3_onloaded();"
+			onloadnextscene="style_arrow_tonextscene();"
+			/>
+
+	<action name="style_hotspot_arrow3_onloaded">
+		if(onloaded2, onloaded2(););
+
+		copy(hotspot[get(name)].oriHeight, height);
+		style_hotspot_arrow3_animate(get(name));
+	</action>
+
+	<action name="style_hotspot_arrow3_animate" >
+		<!-- Ensure that the hotspot still exist while looping the animation -->
+		if(distorted,
+			if(hotspot[%1],
+				<!-- Arrow moving forward -->
+				if(hotspot[%1].height === 500,
+					tween(hotspot[%1].height
+							| hotspot[%1].depth
+							| hotspot[%1].oy
+							| hotspot[%1].rx
+						, 1000 | 1300 | -10 | -30
+						, 1
+						, linear
+						, style_hotspot_arrow3_animate(%1);
+					);
+				<!-- Arrow moving backward -->
+				,
+					tween(hotspot[%1].height
+							| hotspot[%1].depth
+							| hotspot[%1].oy
+							| hotspot[%1].rx
+						, 500 | 1000 | 0 | 0
+						, 1
+						, linear
+						, style_hotspot_arrow3_animate(%1);
+					);
+				);
+			);
+		);
+	</action>
+
+	<!-- End Arrow 3 -->
+
+
+	<!-- Arrow 4 -->
+	<style name="style_hotspot_arrow4" url="./Icons/arrow4.png"
+			scale=".3" edge="center"
+			onloaded="style_hotspot_arrow4_onloaded();"
+			onloadnextscene="style_arrow_tonextscene();"
+			/>
+
+	<action name="style_hotspot_arrow4_onloaded">
+		if(onloaded2, onloaded2(););
+
+		style_hotspot_arrow2_animate(get(name));
+	</action>
+
+	<!-- End Arrow 4 -->
+
+
+	<!-- Arrow 4 -->
+	<style name="style_hotspot_arrow5" url="./Icons/arrow5.png"
+			scale=".3" edge="center"
+			onloaded="style_hotspot_arrow5_onloaded();"
+			onloadnextscene="style_arrow_tonextscene();"
+			/>
+
+	<action name="style_hotspot_arrow5_onloaded">
+		if(onloaded2, onloaded2(););
+
+		style_hotspot_arrow2_animate(get(name));
+	</action>
+
+	<!-- End Arrow 4 -->
+
+
+	<action name="style_arrow_tonextscene" >
+		tween(depth|alpha|oy|rx
+			, 4000|0.0|-100|-60
+			, 0.5
+			, default
+			,
+				if(onloadnextscene2, onloadnextscene2(););
+		);
+	</action>
+
+
+	<!-- Circle 1 -->
+
+	<style name="style_hotspot_circle1" url="./Icons/circle1_inside.png"
+			scale=".15" edge="center"
+			onover="tween(scale|hotspot[get(extra_circle)].scale, .20, .20);"
+			onout="tween(scale|hotspot[get(extra_circle)].scale, .15, .15);"
+			onloadnextscene="style_hotspot_circle1_onloadnextscene();"
+			onloaded="style_hotspot_circle1_onload();"
+			/>
+
+	<style name="style_hotspot_circle1_extra" url="./Icons/circle1_outside.png"
+			scale=".15" edge="center" enabled="false"
+			/>
+
+	<action name="style_hotspot_circle1_onloadnextscene" >
+		tween(depth|alpha|oy|rx
+			|hotspot[get(extra_circle)].depth
+			|hotspot[get(extra_circle)].alpha
+			|hotspot[get(extra_circle)].oy
+			|hotspot[get(extra_circle)].rx
+			, 4000|0.0|-50|-60|4000|0.0|-50|-60
+			, 0.5
+			, default
+			,
+				if(onloadnextscene2, onloadnextscene2(););
+		);
+	</action>
+
+	<action name="style_hotspot_circle1_onload">
+		<!-- Set the outer circle -->
+		txtadd(hotspot_circle1_extra, get(name), '_extra_circle');
+		copy(hotspot[get(name)].extra_circle, hotspot_circle1_extra);
+
+		addhotspot(get(hotspot_circle1_extra));
+
+		hotspot[get(hotspot_circle1_extra)].loadstyle(style_hotspot_circle1_extra);
+
+		copy(hotspot[get(hotspot_circle1_extra)].ath, ath);
+		copy(hotspot[get(hotspot_circle1_extra)].atv, atv);
+		copy(hotspot[get(hotspot_circle1_extra)].distorted, distorted);
+		copy(hotspot[get(hotspot_circle1_extra)].alpha, alpha);
+
+		if(onloaded2, onloaded2(););
+
+		<!-- Show the icon after a delay -->
+		delayedcall(1, tween(hotspot[get(extra_circle)].alpha, 1, 2););
+
+		<!-- Start animating the icon -->
+		style_hotspot_circle1_rotate(get(name));
+	</action>
+
+	<action name="style_hotspot_circle1_rotate" >
+		<!-- Ensure that the hotspot still exist while looping the animation -->
+		if(hotspot[%1],
+
+			if(distorted,
+
+				set(hotspot[get(hotspot[%1].extra_circle)].rz, 0);
+
+				tween(hotspot[get(hotspot[%1].extra_circle)].rz
+					, 360
+					, 5
+					, linear
+					, style_hotspot_circle1_rotate(%1);
+				);
+
+			,
+
+				set(hotspot[get(hotspot[%1].extra_circle)].rotation, 0);
+
+				tween(hotspot[get(extra_circle)].rotation
+					, 360
+					, 5
+					, linear
+					, style_hotspot_circle1_rotate(%1);
+				);
+			);
+		);
+			
+	</action>
+
+	<!-- End Circle 1 -->
+
+</krpano>

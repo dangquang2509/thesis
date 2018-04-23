@@ -1,0 +1,399 @@
+@charset "utf-8";
+.ot-table {
+  display: table;
+  table-layout: fixed;
+}
+.ot-table .ot-table-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+.ot-content {
+  padding: 8px 12px 0;
+  margin-top: 52px;
+}
+.ot-content .ot-text-title {
+  font-size: 28px;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+  margin-top: 0;
+}
+.ot-content .ot-text-paragraph {
+  font-size: 13px;
+  margin: 36px 0;
+}
+.ot-content .ot-text-paragraph .ot-text-paragraph-row {
+  margin: 24px 0;
+}
+.ot-content .ot-text-header {
+  font-size: 22px;
+}
+.ot-left-content {
+  width: 65%;
+  display: table-cell;
+}
+.ot-left-content .ot-video-area {
+  width: 100%;
+  position: relative;
+}
+.ot-left-content .ot-video-area #video {
+  width: 100%;
+}
+.ot-left-content .ot-share-area {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+.ot-left-content .ot-share-area .ot-social-share {
+  width: 75%;
+  display: table-cell;
+}
+.ot-left-content .ot-share-area .ot-social-share a {
+  text-decoration: none;
+}
+.ot-left-content .ot-share-area .ot-social-share .ot-social-share-icon {
+  margin: 0;
+  vertical-align: middle;
+  height: 35px;
+}
+.ot-left-content .ot-share-area .ot-social-share .ot-social-share-icon-info {
+  font-size: 9px;
+}
+.ot-left-content .ot-share-area .ot-chip-btn-area {
+  width: 25%;
+  display: table-cell;
+}
+.ot-left-content .ot-share-area .ot-chip-btn-area .ot-chip-btn {
+  background-color: #000;
+  color: #fff;
+  text-align: left;
+  height: 28px;
+  width: 100%;
+  padding: 2px 15px;
+  margin-top: 10px;
+  border: none;
+  font-size: 13px;
+  position: relative;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.ot-left-content .ot-share-area .ot-chip-btn-area .ot-chip-btn:after {
+  content: "";
+  position: absolute;
+  right: 10%;
+  top: 0;
+  border: 1px #fff dashed;
+  height: 100%;
+}
+.ot-left-content .ot-chip-information-area {
+  width: 100%;
+  height: 200px;
+  margin-top: 8px;
+  overflow-y: scroll;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item {
+  display: table;
+  table-layout: fixed;
+  margin-bottom: 4px;
+  width: 100%;
+  word-wrap: break-word;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area {
+  display: table-cell;
+  width: 18%;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area .ot-chip-info-item-label {
+  width: 90%;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  padding: 0 6px;
+  position: relative;
+  vertical-align: middle;
+  min-height: 20px;
+  line-height: 20px;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area .ot-chip-info-item-label:after {
+  content: "";
+  position: absolute;
+  right: 10%;
+  top: 0;
+  border: 1px #fff dashed;
+  height: 100%;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area .ot-chip-info-item-quantity-area {
+  display: table;
+  width: 100%;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area .ot-chip-info-item-quantity-area .ot-chip-info-item-time {
+  width: 55%;
+  display: table-cell;
+  font-size: 7px;
+  padding-top: 3px;
+  vertical-align: top;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-label-area .ot-chip-info-item-quantity-area .ot-chip-info-item-quantity {
+  width: 45%;
+  display: table-cell;
+  text-align: right;
+  font-size: 12px;
+  font-weight: bold;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-username {
+  display: table-cell;
+  width: 32%;
+  font-size: 12px;
+  padding-left: 20px;
+}
+.ot-left-content .ot-chip-information-area .ot-chip-info-item .ot-chip-info-item-des {
+  display: table-cell;
+  width: 50%;
+  padding-left: 2px;
+  font-size: 12px;
+}
+.ot-left-content .ot-chip-slogan {
+  width: 100%;
+  background-color: #d4d4d4;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+  min-height: 24px;
+  line-height: 24px;
+  vertical-align: middle;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.ot-left-content .ot-chip-item-area {
+  width: 100%;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item {
+  display: inline-block;
+  width: 29%;
+  margin: 18px 8px;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-title {
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 22px;
+  padding: 6px 0 0 6px;
+  border: 1px solid #000;
+  font-size: 28px;
+  position: relative;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-title:after {
+  content: "";
+  position: absolute;
+  right: 10%;
+  top: 0;
+  border: 1px #fff dashed;
+  height: 100%;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-content {
+  text-align: left;
+  min-height: 24px;
+  vertical-align: middle;
+  line-height: 24px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px gray solid;
+  margin-top: 8px;
+  border-radius: 4px;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-content p {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-purchase-row {
+  margin-top: 8px;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-purchase-row .ot-chip-item-purchase-price {
+  display: table-cell;
+  width: 50%;
+  text-align: left;
+  font-size: 12px;
+  min-height: 26px;
+  vertical-align: middle;
+  line-height: 26px;
+  font-weight: bold;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-purchase-row .ot-chip-item-purchase-btn-area {
+  display: table-cell;
+  width: 50%;
+}
+.ot-left-content .ot-chip-item-area .ot-chip-item .ot-chip-item-purchase-row .ot-chip-item-purchase-btn-area .ot-chip-item-purchase-btn {
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  min-height: 26px;
+  vertical-align: middle;
+  font-size: 12px;
+  border: none;
+}
+.ot-comment-area {
+  width: 35%;
+  display: table-cell;
+  padding: 0 12px;
+  height: 1000px;
+  vertical-align: top;
+}
+.ot-comment-area .ot-comment-input {
+  width: 100%;
+  background-color: #eee;
+  resize: none;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;
+  box-sizing: border-box;
+}
+.ot-comment-area .error-message {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+}
+.ot-comment-area .ot-post-comment-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: #000;
+  color: #fff;
+  padding: 4px 8px;
+  float: right;
+  border: none;
+  font-size: 13px;
+  font-family: 'yossan_misaki_gothic', sans-serif;
+  border: 1px solid #000;
+}
+.ot-comment-area .ot-other-comment {
+  width: 100%;
+  max-height: 800px;
+  overflow-y: scroll;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px #d4d4d4 solid;
+  word-wrap: break-word;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item p {
+  margin: 6px 2px;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item .ot-comment-item-avatar {
+  width: 20%;
+  display: table-cell;
+  vertical-align: top;
+  text-align: center;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item .ot-comment-item-area {
+  width: 80%;
+  display: table-cell;
+  font-size: 12px;
+  vertical-align: top;
+  padding-left: 4px;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item .ot-comment-item-area .ot-comment-item-account-name {
+  padding: 2px 2px;
+  font-weight: bold;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item .ot-comment-item-area .ot-comment-item-content {
+  padding-bottom: 2px 2px;
+}
+.ot-comment-area .ot-other-comment .ot-comment-item .ot-comment-item-area .ot-comment-item-time {
+  color: #d4d4d4;
+  padding: 2px 2px;
+}
+.ot-bottom-menu {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  margin-top: 24px;
+}
+.ot-bottom-menu .ot-bottom-menu-left {
+  width: 50%;
+  display: table-cell;
+  text-align: left;
+  padding-left: 4px;
+  font-size: 12px;
+  color: #828282;
+  vertical-align: bottom;
+}
+.ot-bottom-menu .ot-bottom-menu-left .ot-bottom-menu-img {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ot-bottom-menu .ot-bottom-menu-left .ot-bottom-menu-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ot-bottom-menu .ot-bottom-menu-left .ot-bottom-menu-text p {
+  margin-top: 2px;
+  margin-left: 4px;
+  margin-bottom: 8px;
+}
+.ot-bottom-menu .ot-bottom-menu-right {
+  width: 50%;
+  display: table-cell;
+  text-align: right;
+}
+.ot-bottom-menu .ot-bottom-menu-right .ot-bottom-menu-link {
+  text-decoration: none;
+  color: #000;
+  padding: 0 6px 0 6px;
+  font-size: 13px;
+  border-right: 1px solid #000;
+}
+.ot-bottom-menu .ot-bottom-menu-right .ot-bottom-menu-link:hover {
+  color: #808080;
+}
+.ot-bottom-menu .ot-bottom-menu-right .ot-bottom-menu-link.last {
+  border: none;
+}
+.sidenav {
+  display: none;
+}
+.ot-menu-sp {
+  display: none;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+#video_box {
+  position: relative;
+}
+#video_overlays {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.ot-current-viewer-area {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+.ot-current-viewer-area .ot-current-viewer {
+  vertical-align: middle;
+}
+.ot-current-viewer-area .ot-current-viewer-icon {
+  vertical-align: middle;
+}

@@ -1,0 +1,240 @@
+<krpano>
+	<!-- Minimap -->
+	<style name="ot_style_minimap_container" keep="true" zorder="110"
+		   scalechildren="true" handcursor="true"
+		   align="center"
+		   closewidth="35%" openwidth="70%"
+		   closeheight="25%" openheight="70%"
+		   ot_minimap_close_offsetx="4"
+		   ot_minimap_close_offsety="20"
+		   ot_minimap_close_origin="bottomleft"
+		   onloaded="ot_minimap_container_action_onloaded();"
+		   onover="ot_minimap_container_action_onover();"
+		   onout="ot_minimap_container_action_onout();"
+		   onclick="ot_minimap_container_action_onclick();"
+		   pushup="ot_minimap_container_action_pushup();"
+		   pushdown="ot_minimap_container_action_pushdown();"
+	/>
+
+	<action name="ot_minimap_container_action_onover" >
+		if(!ot.minimap.isopen,
+		tween(alpha, 1);
+		);
+	</action>
+
+	<action name="ot_minimap_container_action_onout" >
+		if(!ot.minimap.isopen,
+		tween(alpha, .6);
+		);
+	</action>
+
+	<action name="ot_minimap_container_action_onloaded" >
+		<!-- Save default settings -->
+		copy(ot.xml.minimap.ot_minimap_close_offsetx, ot_minimap_close_offsetx);
+		copy(ot.xml.minimap.ot_minimap_close_offsety, ot_minimap_close_offsety);
+
+		<!-- Set original width/height -->
+		copy(layer[get(name)].oriwidth, width);
+		copy(layer[get(name)].oriheight, height);
+
+		<!-- Prevent map from going full-size on load -->
+		set(width, 0);
+		set(height, 0);
+
+		<!-- Check if using percentage for width/height settings -->
+		<!-- And parse the percentage value to decimal -->
+		indexoftxt(testvar, get(closewidth), '%');
+		ifnot(testvar === -1,
+		mul(layer[get(name)].closewidth_percent, closewidth, .01);
+		);
+
+		indexoftxt(testvar, get(closeheight), '%');
+		ifnot(testvar === -1,
+		mul(layer[get(name)].closeheight_percent, closeheight, .01);
+		);
+
+		indexoftxt(testvar, get(openwidth), '%');
+		ifnot(testvar === -1,
+		mul(layer[get(name)].openwidth_percent, openwidth, .01);
+		);
+
+		indexoftxt(testvar, get(openheight), '%');
+		ifnot(testvar === -1,
+		mul(layer[get(name)].openheight_percent, openheight, .01);
+		);
+		<!-- End Check if using percentage for width/height settings -->
+
+
+		<!-- Register the minimap ref to global OT setting -->
+		copy(ot.minimap.container, layer[get(name)]);
+		set(ot.minimap.isopen, false);
+		tween(alpha, .6);
+
+		<!-- Initial resize -->
+		ot_minimap_point_action_resize();
+
+		<!-- Trigger onnewscene -->
+		ot_minimap_event_onnewscene();
+	</action>
+
+	<action name="ot_minimap_container_action_onclick" >
+		<!-- Open minimap -->
+		set(ot.minimap.isopen, true);
+		set(enable, false);
+		set(handcursor, false);
+		tween(alpha, 1);
+
+		ot_minimap_point_action_resize();
+
+		<!-- Show uiblocker beneath -->
+		set(ot.uiblocker.visible, true);
+		tween(ot.uiblocker.alpha, 1);
+
+		<!-- Register click event for uiblocker -->
+		set(ot.uiblocker.onclick, '
+		set(ot.minimap.isopen, false);
+		set(ot.minimap.container.enable, true);
+		set(ot.minimap.container.handcursor, true);
+		tween(ot.minimap.container.alpha, .6);
+
+		ot_minimap_point_action_resize();
+
+		tween(ot.uiblocker.alpha, 0, 0.5, default,
+		set(ot.uiblocker.visible, false);
+		);
+		');
+	</action>
+
+	<action name="ot_minimap_point_action_resize" >
+
+		<!-- Prevent resizing before minimap is loaded -->
+		if(ot.minimap,
+		<!-- Change the caller to the minimap layer -->
+		callwith(ot.minimap.container,
+		<!-- Turn off all pending tweening of width/height x/y -->
+		stoptween(width, height, x, y);
+
+		if(ot.minimap.isopen,
+		<!-- Check if using percentage for width/height settings -->
+		<!-- Calc supposed new width/height -->
+		if(openwidth_percent AND openheight_percent,
+		set(newwidth, calc(stagewidth * openwidth_percent));
+		set(newheight, calc(stageheight * openheight_percent));
+		);
+
+		<!-- Reset position -->
+		changeorigin(center, center);
+		tween(x|y, 0);
+		,
+		<!-- Check if using percentage for width/height settings -->
+		<!-- Calc supposed new width/height -->
+		if(closewidth_percent AND closeheight_percent,
+		set(newwidth, calc(stagewidth * closewidth_percent));
+		set(newheight, calc(stageheight * closeheight_percent));
+		);
+
+		<!-- Reset position -->
+		changeorigin(get(ot_minimap_close_origin), get(ot_minimap_close_origin));
+		tween(x|y, get(calc(ot_minimap_close_offsetx + '|' + ot_minimap_close_offsety)));
+		);
+
+		<!-- Keep the original ratio -->
+		<!-- Take the new value of the smaller ratio side -->
+		if((newwidth/newheight) GT (oriwidth/oriheight),
+		tween(width, get(calc(oriwidth / oriheight * newheight)));
+		tween(height, get(newheight));
+		,
+		tween(width, get(newwidth));
+		tween(height, get(calc(oriheight / oriwidth * newwidth)));
+		);
+
+		<!-- Check if the new size is bigger than original -->
+		if(height GT oriheight OR width GT oriwidth,
+		stoptween(width, height);
+
+		tween(width, oriwidth);
+		tween(height, oriheight);
+		);
+		);
+		);
+	</action>
+
+	<action name="ot_minimap_container_action_pushup" >
+		callwith(ot.minimap.container,
+		set(ot_minimap_close_offsety, 90);
+
+		if(!ot.minimap.isopen,
+		tween(y, get(ot_minimap_close_offsety));
+		);
+		);
+	</action>
+
+	<action name="ot_minimap_container_action_pushdown" >
+		callwith(ot.minimap.container,
+		copy(ot_minimap_close_offsety, ot.xml.minimap.ot_minimap_close_offsety);
+
+		if(!ot.minimap.isopen,
+		tween(y, get(ot_minimap_close_offsety));
+		);
+		);
+	</action>
+
+	<!-- End Minimap -->
+
+	<!-- Minimap Point -->
+	<style name="ot_style_minimap_point" style="skin_glow" keep="true"
+		   url="./dot.png" width="prop" height="5%"
+		   align="lefttop" edge="center" zorder="1"
+		   viewoffset="0"
+		   onloaded="ot_minimap_point_action_onloaded();"
+		   onclick="ot_minimap_point_action_click();"
+	/>
+
+	<action name="ot_minimap_point_action_onloaded" >
+
+	</action>
+
+	<action name="ot_minimap_point_action_click">
+		if(linkedscene AND linkedscene !== xml.scene,
+		if(linkedscene_lookat,
+			txtsplit(linkedscene_lookat, ',', hs_lookat_h, hs_lookat_v, hs_lookat_fov);
+		);
+
+		<!-- Load new scene and keep lookat value (switch offseth) -->
+		<!-- Action from ModSkinActions.xml -->
+		ot_skin_loadscene_keepview(get(linkedscene));
+		);
+	</action>
+	<!-- End Minimap Point -->
+
+	<!-- Local Events -->
+	<events name="ot_minimap_events" keep="true"
+			onnewscene="ot_minimap_event_onnewscene();"
+			onresize="ot_minimap_event_onresize();"
+			onviewchange="ot_minimap_event_onviewchange();"
+	/>
+
+	<action name="ot_minimap_event_onnewscene" >
+		<!-- Prevent running before minimap is loaded -->
+		if(ot.minimap,
+
+		<!-- Clear the activePoint ref -->
+		delete(ot.minimap.activePoint);
+
+		for(set(i,0), i LT layer.count, inc(i),
+		if(layer[get(i)].parent === ot.minimap.container.name AND xml.scene === layer[get(i)].linkedscene,
+		<!-- Register the active point layer -->
+		copy(ot.minimap.activePoint, layer[get(i)]);
+		);
+		);
+		);
+	</action>
+
+	<action name="ot_minimap_event_onresize" >
+		ot_minimap_point_action_resize();
+	</action>
+
+	<action name="ot_minimap_event_onviewchange" >
+	</action>
+	<!-- End Local Events -->
+</krpano>

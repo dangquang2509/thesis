@@ -1,0 +1,79 @@
+
+<krpano version="1.18" title="tour title" onstart="startup();">
+		<include url="https://theta-biz-statics.s3-ap-northeast-1.amazonaws.com/tour/skin/vtourskin.xml" />
+		<include url="https://theta-biz-statics.s3-ap-northeast-1.amazonaws.com/tour/plugins/tooltips.xml" />
+		<layer name="anno_cover" type="container" style="annotation_cover_style" />
+		<layer name="map" url="https://theta-biz-public-lite.s3.amazonaws.com/3a31e138-aa6e-11e7-ab74-06b35f615bf5-1/plane" keep="true" align="lefttop" scale="1" handcursor="false" scalechildren="true" maskchildren="true" onclick="closemap();">
+				<layer style="mappoint_skin" name="spot00_bWn8" x="136.32" y="279.95732421875" onclick="loadscene(scene00_bWn8,null,MERGE,BLEND(1));" />
+				<layer style="mappoint_skin" name="spot01_bWnD" x="196.48" y="127.63732421875" onclick="loadscene(scene01_bWnD,null,MERGE,BLEND(1));" />
+				<layer style="mappoint_skin" name="spot02_bWnE" x="366.72" y="134.03732421875" onclick="loadscene(scene02_bWnE,null,MERGE,BLEND(1));" />
+				<layer style="mappoint_skin" name="spot03_bWn9" x="379.52" y="272.27732421875" onclick="loadscene(scene03_bWn9,null,MERGE,BLEND(1));" />
+				<layer style="mappoint_skin" name="spot04_bWnB" x="252.8" y="354.19732421875" onclick="loadscene(scene04_bWnB,null,MERGE,BLEND(1));" />
+		</layer>
+		<scene name="scene00_bWn8" title="point 1" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/4111d4cc-aa6e-11e7-ab74-06b35f615bf5-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/4111d4cc-aa6e-11e7-ab74-06b35f615bf5-1" onstart="settelop(caption 1,-117);activatespot(spot00_bWn8,360);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/4111d4cc-aa6e-11e7-ab74-06b35f615bf5-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/4111d4cc-aa6e-11e7-ab74-06b35f615bf5-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<hotspot name="scene00_bWn8_0" style="skin_hotspotstyle" ath="21.551937422042215" atv="15" linkedscene="scene01_bWnD" loadvars="view.hlookat=21.551937422042272" />
+				<hotspot name="scene00_bWn8_1" style="skin_hotspotstyle" ath="-237.4880857689485" atv="15" linkedscene="scene04_bWnB" loadvars="view.hlookat=-237.48808576894862" />
+				<view hlookat="-0.00144" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scene>
+		<scene name="scene01_bWnD" title="point 2" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/41e19fb8-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/41e19fb8-aa6e-11e7-92f6-0a4f4743bc83-1" onstart="settelop(caption 2,-117);activatespot(spot01_bWnD,359.99999999999994);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/41e19fb8-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/41e19fb8-aa6e-11e7-92f6-0a4f4743bc83-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<hotspot name="scene01_bWnD_0" style="skin_hotspotstyle" ath="-158.44806257795773" atv="15" linkedscene="scene00_bWn8" loadvars="view.hlookat=-158.44806257795778" />
+				<hotspot name="scene01_bWnD_1" style="skin_hotspotstyle" ath="-267.8470372108995" atv="15" linkedscene="scene02_bWnE" loadvars="view.hlookat=-267.84703721089954" />
+				<view hlookat="-0.00288" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scene>
+		<scene name="scene02_bWnE" title="point 3" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/41f15e8a-aa6e-11e7-82f3-0a2a55e894ef-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/41f15e8a-aa6e-11e7-82f3-0a2a55e894ef-1" onstart="settelop(caption 3,-117);activatespot(spot02_bWnE,360);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/41f15e8a-aa6e-11e7-82f3-0a2a55e894ef-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/41f15e8a-aa6e-11e7-82f3-0a2a55e894ef-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<hotspot name="scene02_bWnE_0" style="skin_hotspotstyle" ath="-87.84703721089957" atv="15" linkedscene="scene01_bWnD" loadvars="view.hlookat=-87.84703721089952" />
+				<hotspot name="scene02_bWnE_1" style="skin_hotspotstyle" ath="-185.29008120537128" atv="15" linkedscene="scene03_bWn9" loadvars="view.hlookat=-185.288641984371" />
+				<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scene>
+		<scene name="scene03_bWn9" title="point 4" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/4196b7e6-aa6e-11e7-804e-06a0de727cf7-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/4196b7e6-aa6e-11e7-804e-06a0de727cf7-1" onstart="settelop(caption 4,-117);activatespot(spot03_bWn9,359.9985607789997);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/4196b7e6-aa6e-11e7-804e-06a0de727cf7-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/4196b7e6-aa6e-11e7-804e-06a0de727cf7-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<hotspot name="scene03_bWn9_0" style="skin_hotspotstyle" ath="-5.288641984370997" atv="15" linkedscene="scene02_bWnE" loadvars="view.hlookat=-5.29008120537128" />
+				<hotspot name="scene03_bWn9_1" style="skin_hotspotstyle" ath="-122.87980044427454" atv="15" linkedscene="scene04_bWnB" loadvars="view.hlookat=-122.88123966527493" />
+				<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scene>
+		<scene name="scene04_bWnB" title="point 5" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/41c12fe4-aa6e-11e7-804e-06a0de727cf7-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/41c12fe4-aa6e-11e7-804e-06a0de727cf7-1" onstart="settelop(caption 5,-117);activatespot(spot04_bWnB,360.0000000000001);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/41c12fe4-aa6e-11e7-804e-06a0de727cf7-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/41c12fe4-aa6e-11e7-804e-06a0de727cf7-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<hotspot name="scene04_bWnB_0" style="skin_hotspotstyle" ath="57.118760334725096" atv="15" linkedscene="scene03_bWn9" loadvars="view.hlookat=57.12019955572549" />
+				<hotspot name="scene04_bWnB_1" style="skin_hotspotstyle" ath="-57.48808576894865" atv="15" linkedscene="scene00_bWn8" loadvars="view.hlookat=-57.48808576894854" />
+				<view hlookat="-5.51729" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scene>
+		<scenedraft name="scene04_bWnA" title="point 6" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/41b2a35c-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/41b2a35c-aa6e-11e7-92f6-0a4f4743bc83-1" onstart="settelop(caption 6,-117);activatespot(spot04_bWnA,360.0000000000001);setbottomurl();">
+			<preview url="https://theta-biz-public-lite.s3.amazonaws.com/41b2a35c-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" />
+			<image>
+				<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/41b2a35c-aa6e-11e7-92f6-0a4f4743bc83-1/equirectangular" />
+			</image>
+			<hotspot name="bottom" style="cover_tripod_logo" />
+			<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scenedraft>
+		<scenedraft name="scene04_bWnF" title="point 7" thumburl="https://theta-biz-public-lite.s3.amazonaws.com/45e95ede-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" toursphereurl="https://onetech.theta360.biz/ts/45e95ede-aa6e-11e7-92f6-0a4f4743bc83-1" onstart="settelop(caption 7,-117);activatespot(spot04_bWnF,360.0000000000001);setbottomurl();">
+				<preview url="https://theta-biz-public-lite.s3.amazonaws.com/45e95ede-aa6e-11e7-92f6-0a4f4743bc83-1/equiThumbnail" />
+				<image>
+					<sphere url="https://theta-biz-public-lite.s3.amazonaws.com/45e95ede-aa6e-11e7-92f6-0a4f4743bc83-1/equirectangular" />
+				</image>
+				<hotspot name="bottom" style="cover_tripod_logo" />
+				<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+		</scenedraft>
+</krpano>

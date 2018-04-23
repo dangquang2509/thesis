@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<krpano version="1.19" title="tour title v1" onstart="startup();">
+	<include url="/vtour/plugins.xml" />
+	<layer name="map" style="ot_style_minimap_container" url="/uploads/plans/1507851656-minimap.png" keep="1" align="lefttop" scale="1" handcursor="" scalechildren="1" maskchildren="1">
+		<layer style="ot_style_minimap_point" name="spot00_1507851669-1" x="85.213032581454" y="136.67503108357" onclick="loadscene(scene00_1507851669-1,null,MERGE,BLEND(1));" />
+		<layer style="ot_style_minimap_point" name="spot01_1507851669-2" x="281.70426065163" y="315.12114637179" onclick="loadscene(scene01_1507851669-2,null,MERGE,BLEND(1));" />
+		<layer style="ot_style_minimap_point" name="spot02_1507851669-3" x="606.51629072682" y="138.6800436149" onclick="loadscene(scene02_1507851669-3,null,MERGE,BLEND(1));" />
+	</layer>
+	<scene name="scene00_1507851669-1" title="title sence 1" thumburl="/uploads/images/thumb/1507851669-1-sample1.jpg" toursphereurl="/image/1507851669-1" onstart="settelop(caption 1,-117);activatespot(spot00_1507851669-1,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851669-1-sample1.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851669-1-sample1.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<hotspot name="scene00_1507851669-1_0" style="skin_hotspotstyle" ath="-227.7554247005" atv="15" linkedscene="scene01_1507851669-2" loadvars="view.hlookat=-227.75542470050277" />
+		<view hlookat="-221.9234" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scene>
+	<scene name="scene01_1507851669-2" title="title sence 2" thumburl="/uploads/images/thumb/1507851669-2-sample4.jpg" toursphereurl="/image/1507851669-2" onstart="settelop(caption 2,-117);activatespot(spot01_1507851669-2,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851669-2-sample4.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851669-2-sample4.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<hotspot name="scene01_1507851669-2_0" style="skin_hotspotstyle" ath="-47.755424700503" atv="15" linkedscene="scene00_1507851669-1" loadvars="view.hlookat=-47.75542470050277" />
+		<hotspot name="scene01_1507851669-2_1" style="skin_hotspotstyle" ath="61.488753705891" atv="15" linkedscene="scene02_1507851669-3" loadvars="view.hlookat=61.48875370589127" />
+		<view hlookat="-0.00145" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scene>
+	<scene name="scene02_1507851669-3" title="title sence 3" thumburl="/uploads/images/thumb/1507851669-3-sample2.jpg" toursphereurl="/image/1507851669-3" onstart="settelop(caption 3,-117);activatespot(spot02_1507851669-3,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851669-3-sample2.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851669-3-sample2.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<hotspot name="scene02_1507851669-3_0" style="skin_hotspotstyle" ath="-118.51124629411" atv="15" linkedscene="scene01_1507851669-2" loadvars="view.hlookat=-118.51124629410873" />
+		<view hlookat="-0.00145" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scene>
+	<scenedraft name="scene02_1507851670-4" title="title sence 4" thumburl="/uploads/images/thumb/1507851670-4-sample3.jpg" toursphereurl="/image/1507851670-4" onstart="settelop(caption 4,-117);activatespot(spot02_1507851670-4,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851670-4-sample3.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851670-4-sample3.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scenedraft>
+	<scenedraft name="scene02_1507851670-5" title="title sence 5" thumburl="/uploads/images/thumb/1507851670-5-sample6.jpg" toursphereurl="/image/1507851670-5" onstart="settelop(caption 5,-117);activatespot(spot02_1507851670-5,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851670-5-sample6.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851670-5-sample6.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scenedraft>
+	<scenedraft name="scene02_1507851670-6" title="title sence 6" thumburl="/uploads/images/thumb/1507851670-6-sample5.jpg" toursphereurl="/image/1507851670-6" onstart="settelop(caption 6,-117);activatespot(spot02_1507851670-6,360);setbottomurl();">
+		<preview url="/uploads/images/thumb/1507851670-6-sample5.jpg" />
+		<image>
+			<sphere url="/uploads/images/1507851670-6-sample5.jpg" />
+		</image>
+		<hotspot name="bottom" style="cover_tripod_logo" />
+		<view hlookat="0.0" vlookat="0.0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	</scenedraft>
+</krpano>

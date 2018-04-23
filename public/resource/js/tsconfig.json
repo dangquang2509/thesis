@@ -1,0 +1,213 @@
+{
+  "krpano": {
+    "version": "1.19",
+    "title": "tour title",
+    "onstart": "startup();",
+    "include": [
+      {
+        "url": "/vtour/plugins.xml"
+      }
+    ],
+    "layer": [
+      {
+        "name": "map",
+        "style": "ot_style_minimap_container",
+        "url": "/uploads/plans/1510632528-minimap.png",
+        "keep": true,
+        "align": "lefttop",
+        "scale": 1,
+        "handcursor": false,
+        "scalechildren": true,
+        "maskchildren": true,
+        "layer": [
+          {
+            "style": "ot_style_minimap_point",
+            "name": "spot00_1510632542-2",
+            "x": 221.55388471177943,
+            "y": 437.42694137687965,
+            "onclick": "loadscene(scene00_1510632542-2,null,MERGE,BLEND(1));",
+            "linkedscene": "scene00_1510632542-2"
+          },
+          {
+            "style": "ot_style_minimap_point",
+            "name": "spot01_1510632542-3",
+            "x": 317.7944862155388,
+            "y": 353.21641506109023,
+            "onclick": "loadscene(scene01_1510632542-3,null,MERGE,BLEND(1));",
+            "linkedscene": "scene01_1510632542-3"
+          },
+          {
+            "style": "ot_style_minimap_point",
+            "name": "spot02_1510632542-4",
+            "x": 542.3558897243107,
+            "y": 389.306640625,
+            "onclick": "loadscene(scene02_1510632542-4,null,MERGE,BLEND(1));",
+            "linkedscene": "scene02_1510632542-4"
+          }
+        ]
+      }
+    ],
+    "scene": [
+      {
+        "name": "scene00_1510632542-2",
+        "title": "image 1",
+        "thumburl": "/uploads/images/thumb/1510632542-2-sample1.jpg",
+        "toursphereurl": "/image/1510632542-2",
+        "onstart": "settelop(caption 1,-117);activatespot(spot00_1510632542-2,699.4423765078805);setbottomurl();",
+        "preview": {
+          "url": "/uploads/images/thumb/1510632542-2-sample1.jpg"
+        },
+        "image": {
+          "sphere": {
+            "url": "/uploads/images/1510632542-2-sample1.jpg"
+          }
+        },
+        "hotspot": [
+          {
+            "name": "scene00_1510632542-2_0",
+            "style": "skin_hotspotstyle",
+            "ath": "52.01",
+            "atv": "15.79",
+            "linkedscene": "scene01_1510632542-3",
+            "loadvars": "view.hlookat=48.81407483429001"
+          }
+        ],
+        "view": {
+          "hlookat": "404.44601",
+          "vlookat": "0.0",
+          "fov": "60",
+          "fovmin": "30",
+          "fovmax": "80",
+          "fisheye": "1.0"
+        }
+      },
+      {
+        "name": "scene01_1510632542-3",
+        "title": "image 2",
+        "thumburl": "/uploads/images/thumb/1510632542-3-sample2.jpg",
+        "toursphereurl": "/image/1510632542-3",
+        "onstart": "settelop(caption 2,-117);activatespot(spot01_1510632542-3,360.00000000000034);setbottomurl();",
+        "preview": {
+          "url": "/uploads/images/thumb/1510632542-3-sample2.jpg"
+        },
+        "image": {
+          "sphere": {
+            "url": "/uploads/images/1510632542-3-sample2.jpg"
+          }
+        },
+        "hotspot": [
+          {
+            "name": "scene01_1510632542-3_0",
+            "style": "skin_hotspotstyle",
+            "ath": -131.18592516571,
+            "atv": 15,
+            "linkedscene": "scene00_1510632542-2",
+            "loadvars": "view.hlookat=-470.6283016735901"
+          },
+          {
+            "name": "scene01_1510632542-3_1",
+            "style": "skin_hotspotstyle",
+            "ath": "112.52",
+            "atv": "14.53",
+            "linkedscene": "scene02_1510632542-4",
+            "loadvars": "view.hlookat=-188.55778225488135"
+          }
+        ],
+        "view": {
+          "hlookat": "112.24062",
+          "vlookat": "0.0",
+          "fov": "60",
+          "fovmin": "30",
+          "fovmax": "80",
+          "fisheye": "1.0"
+        }
+      },
+      {
+        "name": "scene02_1510632542-4",
+        "title": "image 3",
+        "thumburl": "/uploads/images/thumb/1510632542-4-sample3.jpg",
+        "toursphereurl": "/image/1510632542-4",
+        "onstart": "settelop(caption 3,-117);activatespot(spot02_1510632542-4,287.68795873716005);setbottomurl();",
+        "preview": {
+          "url": "/uploads/images/thumb/1510632542-4-sample3.jpg"
+        },
+        "image": {
+          "sphere": {
+            "url": "/uploads/images/1510632542-4-sample3.jpg"
+          }
+        },
+        "hotspot": [
+          {
+            "name": "scene02_1510632542-4_0",
+            "style": "skin_hotspotstyle",
+            "ath": "-33.14",
+            "atv": "8.21",
+            "linkedscene": "scene01_1510632542-3",
+            "loadvars": "view.hlookat=-80.86982351772164"
+          }
+        ],
+        "view": {
+          "hlookat": "-0.0029",
+          "vlookat": "0.0",
+          "fov": "60",
+          "fovmin": "30",
+          "fovmax": "80",
+          "fisheye": "1.0"
+        }
+      }
+    ],
+    "scenedraft": [
+      {
+        "name": "scene02_1510632541-1",
+        "title": "image 4",
+        "thumburl": "/uploads/images/thumb/1510632541-1-sample4.jpg",
+        "toursphereurl": "/image/1510632541-1",
+        "onstart": "settelop(caption 4,-117);activatespot(spot02_1510632541-1,287.68795873716005);setbottomurl();",
+        "preview": {
+          "url": "/uploads/images/thumb/1510632541-1-sample4.jpg"
+        },
+        "image": {
+          "sphere": {
+            "url": "/uploads/images/1510632541-1-sample4.jpg"
+          }
+        },
+        "hotspot": [],
+        "view": {
+          "hlookat": "0.0",
+          "vlookat": "0.0",
+          "fov": "60",
+          "fovmin": "30",
+          "fovmax": "80",
+          "fisheye": "1.0"
+        }
+      }
+    ]
+  },
+  "spheres": [
+    {
+      "id": "1510632542-2",
+      "title": "image 1",
+      "used": "true"
+    },
+    {
+      "id": "1510632542-3",
+      "title": "image 2",
+      "used": "true"
+    },
+    {
+      "id": "1510632542-4",
+      "title": "image 3",
+      "used": "true"
+    },
+    {
+      "id": "1510632541-1",
+      "title": "image 4",
+      "used": "false"
+    }
+  ],
+  "metadata": {
+    "custom_key": "",
+    "note": ""
+  },
+  "published": "true"
+}

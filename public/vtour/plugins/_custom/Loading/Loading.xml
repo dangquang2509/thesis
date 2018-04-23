@@ -1,0 +1,5 @@
+<krpano>
+	<plugin name="preview_image" url="/vtour/plugins/_custom/Loading/loading.gif" align="center" bgalpha="1" keep="true" preload="true" />
+	<events onloadcomplete="set(plugin[preview_image].visible,false);" />
+	<plugin name="text_loading" url="plugins/textfield.swf" align="center" background="false" children="true" css="font-family:Arial; color:#ffffff;" html="Photo is loading... please wait a moment" autosize="center" keep="true" visible="false" />
+</krpano>

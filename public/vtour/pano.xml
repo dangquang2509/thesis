@@ -1,0 +1,31 @@
+<krpano version="1.19" syncother="true" loadcomplete="false">
+	<!-- <include url="/vtour/plugins.xml" /> -->
+	<layer name="cover_viewer" type="container" bgcolor="0xFFFFFF" bgalpha="0.0" bgcapture="true" visible="false" width="100%" height="100%" handcursor="false" align="lefttop" onhover="ifnot(get(movinghotspot)==none, screentosphere(mouse.x, mouse.y, mouseath, mouseatv); set(hotspot[get(movinghotspot)].ath,get(mouseath)); set(hotspot[get(movinghotspot)].atv,get(mouseatv));));" />
+	<view limitview="lookat" vlookatmin="0" vlookatmax="0" fov="60" fovmin="30" fovmax="80" fisheye="1.0" />
+	<contextmenu versioninfo="false" fullscreen="false" />
+	<control touchzoom="false" touchfriction="0.0" fovfriction="0.0" fovspeed="3.0" mousefovchange="0.0" mousefriction="0.0" mousespeed="10.0" mouseaccelerate="1.0" zoomoutcursor="false" zoomtocursor="false" touchtype="drag2d" mousetype="drag2d" />
+	<image type="SPHERE">
+		<sphere url="%$url%" />
+	</image>
+	<events onloadcomplete="set(loadcomplete,true); js(setHlookatBefore()); js(addHotSpotTo360View()); js(showKrpanoView());" onmousedown="js(setHlookatBefore());" onviewchange="if(get(loadcomplete),js(sync_360viewToArc()); set(beforehlookat,get(view.hlookat)));" />
+	<style name="hotspot_notselected" url="/vtour/skin/360view_hotspot_arrow.png" crop="0|0|73|38" alpha="1.0" onclick="" ondown="set(hotspot[get(name)].alpha,1.0);mousedown_selectedhotspot(get(name));" onup="mouseup_selectedhotspot(get(nextplotnumber));" onover="show_tooltips(get(nextplotnumber));set(hotspot[get(name)].crop,'0|38|73|38');" onout="clear_tooltips();ifnot(hotspot[get(name)].pressed,set(hotspot[get(name)].crop,'0|0|73|38'));"/>
+	<layer name="skin_tooltip" keep="true" url="/vtour/plugins/textfield.swf" parent="STAGE" visible="false" alpha="0" enabled="false" align="lefttop" edge="bottom" oy="-2" width="200" autoheight="true" background="false" backgroundcolor="0xFFFFFF" backgroundalpha="1.0" border="false" bordercolor="0x000000" borderalpha="1.0" borderwidth="1.0" roundedge="0" shadow="0.0" shadowrange="4.0" shadowangle="45" shadowcolor="0x000000" shadowalpha="1.0" textshadow="1" textshadowrange="6.0" textshadowangle="90" textshadowcolor="0x000000" textshadowalpha="1.0" css="text-align:center; color:#FFFFFF; font-weight:bold; font-size:16px;" html=""/>
+	<action name="mousedown_selectedhotspot">
+		set(movinghotspot,%1);
+		set(layer[cover_viewer].visible,true);
+	</action>
+	<action name="mouseup_selectedhotspot">
+		set(movinghotspot,none);
+		set(layer[cover_viewer].visible,false);
+		js(changeHotSpot(%1));
+	</action>
+	<action name="show_tooltips">
+		set(layer[skin_tooltip].html, %1);
+		set(layer[skin_tooltip].visible, true);
+		tween(layer[skin_tooltip].alpha, 1.0, 0.1);
+		asyncloop(hovering, copy(layer[skin_tooltip].x,mouse.stagex); copy(layer[skin_tooltip].y,mouse.stagey); );
+	</action>
+	<action name="clear_tooltips">
+		tween(layer[skin_tooltip].alpha, 0.0, 0.1, default, set(layer[skin_tooltip].visible,false), copy(layer[skin_tooltip].x,mouse.stagex);copy(layer[skin_tooltip].y,mouse.stagey); );
+	</action>
+</krpano>

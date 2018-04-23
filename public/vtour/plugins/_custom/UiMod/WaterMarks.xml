@@ -1,0 +1,68 @@
+<krpano>
+	<layer name="ot_watermark_hud" url="" keep="true" alpha="0.6" zorder="210"
+			align="bottomright" x="10" y="10" widthperstage=".15" heightperstage=".08"
+			onloaded="ot_watermarks_action_onloaded();"
+			onclick="openurl('http://smarthotelvr.com/', _self);"
+			onover="tween(scale|alpha, 1.1|1);"
+			onout="tween(scale|alpha, 1|0.6);"
+			pushup="ot_watermark_hud_action_pushup();"
+			pushdown="ot_watermark_hud_action_pushdown();"
+			/>
+
+	<action name="ot_watermarks_action_onloaded" >
+		<!-- Save original width/height -->
+		copy(layer[get(name)].oriwidth, width);
+		copy(layer[get(name)].oriheight, height);
+
+		<!-- Prevent img from going full-size on load -->
+		set(width, 0);
+		set(height, 0);
+
+		<!-- Save ref -->
+		copy(ot.watermark.hud, layer[get(name)]);
+
+		<!-- Initial resize -->
+		ot_watermarks_event_onresize();
+	</action>
+
+	<action name="ot_watermarks_action_resize">
+		if(ot.watermark,
+			callwith(ot.watermark.hud,
+				<!-- Calc new width/height according to stage percentage -->
+				set(newwidth, calc(stagewidth * widthperstage));
+				set(newheight, calc(stageheight * heightperstage));
+
+				<!-- Resize image -->
+				<!-- Keep the original ratio -->
+				<!-- Take the new value of the smaller ratio side -->
+				if((newwidth/newheight) GT (oriwidth/oriheight),
+					tween(width, get(calc(oriwidth / oriheight * newheight)));
+					tween(height, get(newheight));
+				,
+					tween(width, get(newwidth));
+					tween(height, get(calc(oriheight / oriwidth * newwidth)));
+				);
+			);
+		);
+	</action>
+
+	<action name="ot_watermark_hud_action_pushup" >
+		callwith(ot.watermark.hud,
+			tween(y, 70);
+		);
+	</action>
+
+	<action name="ot_watermark_hud_action_pushdown" >
+		callwith(ot.watermark.hud,
+			tween(y, 10);
+		);
+	</action>
+
+	<events name="ot_watermarks_events" keep="true"
+			onresize="ot_watermarks_event_onresize();"
+			/>
+
+	<action name="ot_watermarks_event_onresize" >
+		ot_watermarks_action_resize();
+	</action>
+</krpano>

@@ -1,0 +1,642 @@
+<krpano>
+	<uimod	logo="/upload/ot_asia_logo.png"
+			logo_paddingleft="50"
+			logo_paddingright="50"
+			logo_paddingtop="0"
+			logo_paddingbottom="0"
+			exlogo_paddingleft="10"
+			headerbar_alpha=".6"
+			headerbar_color="0x000000"
+			headerbar_height="10%"
+			headerbar_minheight="60"
+			headerbar_exheight="50"
+			headerbar_minwidth="600"
+			tab_maxwidth="200"
+			tab_minwidth="180"
+			tab_textsize="15"
+			tab_bordersize="2"
+			tab_fontweight="normal"
+			tab_alpha_nonfocus=".6"
+			tab_bgalpha_normal="0"
+			tab_bgalpha_hover=".3"
+			tab_bgalpha_active=".35"
+			tab_bgalpha_active_hover=".4"
+			thumbnail_width="180"
+			thumbnail_height="120"
+			thumbnail_border="3 0x000000 0.75"
+			thumbnail_roundedge="3"
+			thumbnail_opendelay="0"
+			thumbnail_offsety="10"
+			sidemenu_alpha=".5"
+			sidemenu_color="0x000000"
+			sidemenu_width="200"
+			extab_height="40"
+			extab_bordersize="2"
+			extab_textsize="14"
+			extab_fontweight="normal"
+			/>
+
+	<!-- layout -->
+	<layer name="uimod_header" keep="true" type="container"
+			width="100%" height="get:uimod.headerbar_height"
+			align="lefttop" zorder="200" maskchildren="true"
+			bgcolor="get:uimod.headerbar_color" bgalpha="get:uimod.headerbar_alpha"
+			>
+		<layer name="uimod_logo" url="get:uimod.logo"
+				align="left" x="get:uimod.logo_paddingleft" onloaded="uimod_logo_action_onloaded"
+				/>
+
+		<!-- Header menu's tabs' container -->
+		<layer name="uimod_tab_container" type="container"
+				height="100%" align="lefttop"
+				>
+		</layer>
+		<!-- End Header menu's tabs' container -->
+
+		<!-- Hamburger menu button -->
+		<layer name="uimod_sidemenu_btn" style="skin_glow"
+				url="./HamburgerMenu.png" height="calc: uimod.headerbar_exheight - 20" width="prop"
+				align="right" zorder="1" x="10"
+				onclick="uimod_sidemenu_action_toggle"
+				/>
+	</layer>
+
+	<!-- Side Menu -->
+	<layer name="uimod_sidemenu" keep="true" type="container"
+			width="get:uimod.sidemenu_width" height="100%"
+			align="righttop" x="calc:-uimod.sidemenu_width" y="get:uimod.headerbar_exheight"
+			zorder="200" maskchildren="true"
+			bgcolor="get:uimod.sidemenu_color" bgalpha="get:uimod.sidemenu_alpha"
+			>
+		<!-- Scroll arrow buttons -->
+		<layer name="uimod_extab_arrowup"
+				url="./ScrollButtons.png" crop="0|64|64|64"  
+				align="top" y="5" scale="0.8" zorder="2"
+				ondown="asyncloop(pressed, layer[uimod_extabs].scrollby(0,+2,0));"
+				onover="tween(layer[uimod_extab_scrollup_glow].alpha, .6, .2);"
+				onout="tween(layer[uimod_extab_scrollup_glow].alpha, .1, .2);"
+				>
+			<layer name="uimod_extab_scrollup_glow"  style="skin_base"
+					crop="64|384|64|64" align="center" x="0" y="1" scale="1.0"
+					alpha="0.1" enabled="false" />
+		</layer>
+		<layer name="uimod_extab_arrowdown"
+				url="./ScrollButtons.png" crop="64|64|64|64"
+				align="bottom" y="5" scale="0.8" zorder="2" 
+				ondown="asyncloop(pressed, layer[uimod_extabs].scrollby(0,-2,0));"
+				onover="tween(layer[uimod_tab_scrolldown_glow].alpha, .6, .2);"
+				onout="tween(layer[uimod_tab_scrolldown_glow].alpha, .1, .2);"
+				>
+			<layer name="uimod_tab_scrolldown_glow"  style="skin_base"
+					crop="64|384|64|64" align="center" x="0" y="1" scale="1.0"
+					alpha="0.1" enabled="false" />
+		</layer>
+		<!-- End Scroll arrow buttons -->
+
+		<layer name="uimod_extabs"
+				url.flash="%SWFPATH%/plugins/scrollarea.swf" url.html5="%SWFPATH%/plugins/scrollarea.js"
+				direction="v" align="lefttop" zorder="1" width="100%" height="100%"
+				onscroll="uimod_extab_action_onscroll();"
+				/>
+	</layer>
+	<!-- End Side Menu -->
+
+	<!-- Underliner for current tab -->
+	<layer name="uimod_tab_underline" keep="true" type="container" zorder="201"
+			height="2" align="bottom" y="1px"
+			bgalpha="1" bgcolor="0xffffff" bgroundedge="10"
+			/>
+
+	<!-- Highlight for current extab -->
+	<layer name="uimod_extab_highlight" keep="true" type="container" zorder="201"
+			width="2" height="calc: uimod.extab_height - 2" align="left" x="1"
+			bgalpha="1" bgcolor="0xffffff" bgroundedge="10"
+			/>
+
+
+	<!-- Actions -->
+	<!-- Event Actions -->
+	<events name="uimod_events" keep="true"
+			onnewscene="uimod_action_onnewscene();"
+			onresize="uimod_action_resize();"
+			onxmlcomplete="uimod_action_addtabs();"
+			/>
+
+	
+	<action name="uimod_startup" autorun="onstart" >
+		<!-- Remove the next/previous btn of skin -->
+		removelayer(skin_btn_prev_fs);
+		removelayer(skin_btn_prev_fs_icon);
+		removelayer(skin_btn_next_fs);
+		removelayer(skin_btn_next_fs_icon);
+
+		<!-- Count scenes with 'featured' -->
+		set(uimod.tabCount, 0);
+		for(set(i,0), i LT scene.count, inc(i),
+			<!-- if(true, -->
+			if(scene[get(i)].featured !== null,
+				inc(uimod.tabCount);
+			);
+		);
+
+		<!-- Check if using percentage height for header -->
+		indexoftxt(testvar, get(uimod.headerbar_height), '%');
+		ifnot(testvar === -1,
+			mul(uimod.headerbar_percentHeight, uimod.headerbar_height, .01);
+		);
+	</action>
+
+	<action name="uimod_action_onnewscene" >
+		<!-- Set the underline to current tab if valid -->
+		uimod_tab_highlightcurrent();
+		uimod_extab_action_highlightcurrent();
+	</action>
+
+	<action name="uimod_logo_action_onloaded">
+		<!-- Resize + keep ratio -->
+		copy(layer[uimod_logo].origwidth, layer[uimod_logo].width);
+		copy(layer[uimod_logo].origheight, layer[uimod_logo].height);
+
+		uimod_action_resize();
+	</action>
+
+	<action name="uimod_action_resize">
+		<!-- Prevent resizing until original width/height is defined -->
+		if(layer[uimod_logo].origwidth !== null,
+
+			<!-- Case of large screen -->
+			if(stagewidth GE uimod.headerbar_minwidth,
+				uimod_action_showlargescreenmenu();
+			,
+			<!-- Case of small screen -->
+				uimod_action_showsmallscreenmenu();
+			);
+		);
+	</action>
+
+	<action name="uimod_action_showlargescreenmenu" >
+		<!-- Hide side menu & hamburger button + show top menu's tabs -->
+		set(layer[uimod_sidemenu].visible, false);
+		set(layer[uimod_sidemenu_btn].visible, false);
+		set(layer[uimod_tab_container].visible, true);
+
+		<!-- Set top memu height -->
+		if(uimod.headerbar_percentHeight,
+			set(layer[uimod_header].height, calc(uimod.headerbar_percentHeight * stageheight));
+
+			<!-- Check minheight -->
+			if(layer[uimod_header].height LT uimod.headerbar_minheight,
+				copy(layer[uimod_header].height, uimod.headerbar_minheight);
+			);
+		,
+			copy(layer[uimod_header].height, uimod.headerbar_height);
+		);
+
+		<!-- Pad the logo -->
+		copy(layer[uimod_logo].x, uimod.logo_paddingleft);
+
+		<!-- Scale down logo -->
+		set(layer[uimod_logo].height, calc(layer[uimod_header].height - uimod.tab_textsize - uimod.logo_paddingtop - uimod.logo_paddingbottom));
+		set(layer[uimod_logo].width, calc(layer[uimod_logo].origwidth * layer[uimod_logo].height / layer[uimod_logo].origheight));
+
+		<!-- relocate and resize the tab container -->
+		<!-- add logo padding left and right to the calculation -->
+		set(layer[uimod_tab_container].x, calc(layer[uimod_logo].width + uimod.logo_paddingleft + uimod.logo_paddingright));
+		set(layer[uimod_tab_container].width, calc(stagewidth - layer[uimod_logo].width - layer[uimod_logo].x * 2));
+
+		<!-- Calculate tab width -->
+		<!-- Tab width doesnt include tab border -->
+		set(uimod.tab_width, calc((layer[uimod_tab_container].width - uimod.tab_bordersize) / uimod.tabCount - uimod.tab_bordersize));
+		<!-- Round down tab width -->
+		Math.floor(uimod.tab_width);
+
+		<!-- Check limit -->
+		if(uimod.tab_width GT uimod.tab_maxwidth,
+			copy(uimod.tab_width, uimod.tab_maxwidth);
+		);
+		if(uimod.tab_width LT uimod.tab_minwidth,
+			copy(uimod.tab_width, uimod.tab_minwidth);
+		);
+
+		<!-- Full width = width + border -->
+		set(uimod.tab_fullwidth, calc(uimod.tab_width + uimod.tab_bordersize));
+
+		<!-- relocate and resize the tabs -->
+		for(set(i,0), i LT scene.count, inc(i),
+
+			if(scene[get(i)].uimodtab !== null,
+				copy(layer[get(scene[get(i)].uimodtab)].width, uimod.tab_width);
+				set(layer[get(scene[get(i)].uimodtab)].x, get(calc(layer[get(scene[get(i)].uimodtab)].tabindex * uimod.tab_fullwidth + uimod.tab_bordersize)));
+			);
+		);
+
+		<!-- Have the size of tab container now -->
+		<!-- Now can check if all the contain fit inside tab container -->
+		<!-- If not, switch to small screen menu instead -->
+		set(uimod.tabs_conteinwidth, calc(uimod.tab_fullwidth * uimod.tabCount + uimod.tab_bordersize));
+
+		if(layer[uimod_tab_container].width LT uimod.tabs_conteinwidth,
+			uimod_action_showsmallscreenmenu();
+		);
+
+		<!-- set the underliner's width according to tab's width -->
+		set(layer[uimod_tab_underline].width, calc(uimod.tab_width - 2));
+	</action>
+
+	<action name="uimod_action_showsmallscreenmenu" >
+		<!-- Show side menu & hamburger button+ hide top menu's tabs -->
+		set(layer[uimod_sidemenu].visible, true);
+		set(layer[uimod_sidemenu_btn].visible, true);
+		set(layer[uimod_tab_container].visible, false);
+
+		<!-- Set top memu exheight  -->
+		copy(layer[uimod_header].height, uimod.headerbar_exheight);
+
+		<!-- Set side memu height  -->
+		uimod_sidemenu_action_resize();
+
+		<!-- Pad the logo -->
+		copy(layer[uimod_logo].x, uimod.exlogo_paddingleft);
+
+		<!-- Scale down logo -->
+		set(layer[uimod_logo].height, calc(layer[uimod_header].height - uimod.extab_textsize));
+		set(layer[uimod_logo].width, calc(layer[uimod_logo].origwidth * layer[uimod_logo].height / layer[uimod_logo].origheight));
+	</action>
+
+	<action name="uimod_action_addtabs">
+		<!-- Lock to ensure only run once -->
+		if(!uimod.isTabAdded,
+			set(uimod.isTabAdded, true);
+
+			<!-- Set up tabs -->
+			set(tabIndex, 0);
+			for(set(i,0), i LT scene.count, inc(i),
+
+				<!-- Only process scenes with 'featured' -->
+				<!-- if(true, -->
+				if(scene[get(i)].featured !== null,
+
+					<!-- Create content in normal mode -->
+					<!-- Create new tab -->
+					txtadd(tabName,'uimod_tab_', get(tabIndex));
+					addlayer(get(tabName));
+
+					<!-- Leave ref to this tab on the scene -->
+					copy(scene[get(i)].uimodtab, tabName);
+
+					<!-- Similar Setup of all tabs -->
+					layer[get(tabName)].loadstyle(uimod_style_tab);
+					
+					<!-- Dynamic settings from config or tour.xml -->
+					copy(layer[get(tabName)].tabindex, tabIndex);
+					set(layer[get(tabName)].linkedscene, get(scene[get(i)].name));
+					copy(layer[get(tabName)].thumburl, scene[get(i)].thumburl);
+
+
+					<!-- Text -->
+					txtadd(tabText, 'uimod_tab_text', get(tabIndex));
+					addlayer(get(tabText));
+
+					layer[get(tabText)].loadstyle(uimod_style_tabtext);
+					
+					copy(layer[get(tabText)].parent, tabName);
+
+					copy(tabtextcontent, scene[get(i)].room_title);
+					toupper(tabtextcontent);
+					set(layer[get(tabText)].html, get(tabtextcontent));
+
+					<!-- Icon -->
+					if(scene[get(i)].smartvricon !== null,
+						txtadd(tabIconName, 'uimod_tab_icon', get(tabIndex));
+						addlayer(get(tabIconName));
+						layer[get(tabIconName)].loadstyle(uimod_style_tabicon);
+
+						copy(layer[get(tabIconName)].parent, tabName);
+						txtadd(layer[get(tabIconName)].url, get(scene[get(i)].smartvricon));
+					);
+
+
+					<!-- Thumbnail Displayer container -->
+					txtadd(thumbContainerName, 'uimod_thumbnail_container', get(tabIndex));
+					addlayer(get(thumbContainerName));
+
+					layer[get(thumbContainerName)].loadstyle(uimod_thumbnail_container);
+
+					copy(layer[get(thumbContainerName)].targettab, tabName);
+					copy(layer[get(tabName)].thumbnaildisplayer, thumbContainerName);
+
+					<!-- Thumbnail Displayer image -->
+					txtadd(thumbImageName, 'uimod_thumbnail', get(tabIndex));
+					addlayer(get(thumbImageName));
+
+					layer[get(thumbImageName)].loadstyle(uimod_style_thumbnail);
+					copy(layer[get(thumbImageName)].url, scene[get(i)].thumburl);
+					copy(layer[get(thumbImageName)].parent, thumbContainerName);
+
+					<!-- thumbnail arrow -->
+					txtadd(thumbArrowName, 'uimod_thumbnail_arrow', get(tabIndex));
+					addlayer(get(thumbArrowName));
+
+					layer[get(thumbArrowName)].loadstyle(uimod_thumbnail_arrow);
+					copy(layer[get(thumbArrowName)].parent, thumbContainerName);
+
+					<!-- End create content in normal mode -->
+
+
+					<!-- Create content in small screen mode -->
+					<!-- Add ex-tab on ex-menu -->
+					uimod_extab_action_addtab(get(tabIndex), get(i););
+					<!-- End Create content in small screen mode -->
+
+					inc(tabIndex);
+				);
+			);
+
+			uimod_extab_action_calcsrollareaheight();
+		);
+	</action>
+	<!-- End Event Actions -->
+	
+	<!-- Actions for top menu's tab -->
+
+	<action name="uimod_tab_highlightcurrent" >
+		<!-- Un-highlight all tabs -->
+		for(set(i,0), i LT scene.count, inc(i),
+			if(scene[get(i)].uimodtab,
+				tween(layer[get(scene[get(i)].uimodtab)].alpha, get(uimod.tab_alpha_nonfocus));
+				tween(layer[get(scene[get(i)].uimodtab)].bgalpha, get(uimod.tab_bgalpha_normal));
+			);
+		);
+
+		<!-- Highlight current tab if exist -->
+		if(scene[get(xml.scene)].uimodtab !== null,
+			set(layer[uimod_tab_underline].visible, true);
+			copy(layer[uimod_tab_underline].parent, scene[get(xml.scene)].uimodtab);
+
+			tween(layer[get(scene[get(xml.scene)].uimodtab)].alpha, 1);
+			tween(layer[get(scene[get(xml.scene)].uimodtab)].bgalpha, get(uimod.tab_bgalpha_active_hover));
+		,
+			set(layer[uimod_tab_underline].visible, false);
+		);
+	</action>
+
+	<!-- End Actions for top menu's tab -->
+
+	<!-- Actioncs for side menu -->
+	<action name="uimod_sidemenu_action_resize" >
+		set(layer[uimod_sidemenu].height, calc(stageheight - uimod.headerbar_exheight));
+	</action>
+
+	<action name="uimod_extab_action_calcsrollareaheight" >
+		<!-- Resize the tab scrollarea -->
+		set(layer[uimod_extabs].height, calc((uimod.extab_height + uimod.extab_bordersize) * uimod.tabCount - uimod.extab_bordersize));
+	</action>
+
+	<action name="uimod_extab_action_addtab">
+		txtadd(exTabName, 'uimod_extab_', %1);
+		addlayer(get(exTabName));
+
+		<!-- Leave ref to this ex-tab on the scene -->
+		copy(scene[%2].uimodextab, exTabName);
+
+		<!-- Similar Setup of all ex-tabs -->
+		layer[get(exTabName)].loadstyle(uimod_style_extab);
+		
+		<!-- Dynamic settings from config or tour.xml -->
+		copy(layer[get(exTabName)].tabindex, %1);
+		set(layer[get(exTabName)].linkedscene, get(scene[%2].name));
+
+		<!-- No top borderline for 1st tab -->
+		if(%1 === 0,
+			set(layer[get(exTabName)].bgborder, '');
+		);
+
+		<!-- Set y-offset for tab -->
+		set(layer[get(exTabName)].y, get(calc(%1 * (uimod.extab_height + uimod.extab_bordersize))));
+
+		<!-- Add Text -->
+		txtadd(extabText, 'uimod_extab_text', %1);
+		addlayer(get(extabText));
+
+		layer[get(extabText)].loadstyle(uimod_style_extabtext);
+		
+		copy(layer[get(extabText)].parent, exTabName);
+		set(layer[get(extabText)].html, get(scene[%2].room_title));
+		<!-- End Add Text -->
+
+		<!-- Add Icon -->
+		if(scene[%2].smartvricon !== null,
+			txtadd(extabIconName, 'uimod_extab_icon', %1);
+			addlayer(get(extabIconName));
+
+			layer[get(extabIconName)].loadstyle(uimod_style_extabicon);
+
+			copy(layer[get(extabIconName)].parent, exTabName);
+			txtadd(layer[get(extabIconName)].url, get(scene[%2].smartvricon));
+		);
+		<!-- End Add Icon -->
+	</action>
+
+	<action name="uimod_sidemenu_action_toggle">
+		if(uimod.sidemenu_isopen,
+			set(uimod.sidemenu_isopen, false);
+			tween(layer[uimod_sidemenu].x, calc(-uimod.sidemenu_width));
+			tween(layer[uimod_sidemenu].alpha, 0);
+		,
+			set(uimod.sidemenu_isopen, true);
+			tween(layer[uimod_sidemenu].x
+					| layer[uimod_sidemenu].alpha
+				, 0|1
+			);
+		);		
+	</action>
+
+	<action name="uimod_extab_action_onscroll" >
+		<!-- show/hide arrow button based on overflow -->
+		if(toverflow GT 0,
+			set(layer[uimod_extab_arrowup].visible,true)
+		, 
+			set(layer[uimod_extab_arrowup].visible,false)
+		);
+		if(boverflow GT 0,
+			set(layer[uimod_extab_arrowdown].visible,true)
+		,
+			set(layer[uimod_extab_arrowdown].visible,false)
+		);
+	</action>
+
+	<action name="uimod_extab_action_highlightcurrent" >
+		<!-- Un-highlight all extabs -->
+		for(set(i,0), i LT scene.count, inc(i),
+			if(scene[get(i)].uimodextab,
+				tween(layer[get(scene[get(i)].uimodextab)].alpha, get(uimod.tab_alpha_nonfocus));
+				tween(layer[get(scene[get(i)].uimodextab)].bgalpha, get(uimod.tab_bgalpha_normal));
+			);
+		);
+
+		<!-- Highlight current extab if exist -->
+		if(scene[get(xml.scene)].uimodextab !== null,
+			set(layer[uimod_extab_highlight].visible, true);
+			copy(layer[uimod_extab_highlight].parent, scene[get(xml.scene)].uimodextab);
+
+			tween(layer[get(scene[get(xml.scene)].uimodextab)].alpha, 1);
+			tween(layer[get(scene[get(xml.scene)].uimodextab)].bgalpha, get(uimod.tab_bgalpha_active_hover));
+		,
+			set(layer[uimod_extab_highlight].visible, false);
+		);
+	</action>
+
+	<!-- End Actions for side menu -->
+
+	<!-- End Actions -->
+
+
+	<!-- Util styles -->
+
+	<!-- Style for tab -->
+	<style name="uimod_style_tab" type="container" keep="true" parent="uimod_tab_container"
+			height="100%" align="lefttop" bgborder="calc: '0,0,0,' + uimod.tab_bordersize + ' 0xffffff .4'"
+			bgcapture="true" children="false"
+			onclick="uimod_tab_action_onclick();"
+			onover="uimod_tab_action_onover();"
+			onout="uimod_tab_action_onout();"
+			/>
+
+	<action name="uimod_tab_action_onclick">
+		if(linkedscene !== xml.scene,
+			skin_loadscene(get(linkedscene), get(skin_settings.loadscene_blend));
+		);
+	</action>
+
+	<action name="uimod_tab_action_onover" >
+		tween(alpha, 1);
+		if(linkedscene === xml.scene,
+			tween(bgalpha, get(uimod.tab_bgalpha_active_hover));
+		,
+			tween(bgalpha, get(uimod.tab_bgalpha_hover));
+		);
+
+		uimod_thumbnail_action_open();
+	</action>
+
+	<action name="uimod_tab_action_onout">
+		if(linkedscene === xml.scene,
+			tween(bgalpha, get(uimod.tab_bgalpha_active));
+		,
+			tween(alpha, get(uimod.tab_alpha_nonfocus));
+			tween(bgalpha, get(uimod.tab_bgalpha_normal));
+		);
+
+		uimod_thumbnail_action_close();
+	</action>
+
+
+	<action name="uimod_thumbnail_action_open" >
+		<!-- Change position: x to center of tab, y to below headerbar -->
+		layertoscreen(uimod_tab_container, layer[get(name)].x, layer[get(name)].y, lx, ly);
+		set(layer[get(thumbnaildisplayer)].x, calc(lx + (uimod.tab_width - uimod.thumbnail_width) / 2 ));
+
+		set(layer[get(thumbnaildisplayer)].y, calc(layer[uimod_header].height + uimod.thumbnail_offsety));
+
+		<!-- Show thumbnail -->
+		set(layer[get(thumbnaildisplayer)].visible, true);
+		tween(layer[get(thumbnaildisplayer)].alpha, 1, 0.5);
+	</action>
+
+	<action name="uimod_thumbnail_action_close" >
+		stoptween(layer[get(thumbnaildisplayer)].alpha);
+		tween(layer[get(thumbnaildisplayer)].alpha, 0, 0.5, default,
+			set(layer[get(thumbnaildisplayer)].visible, false);
+		);
+	</action>
+
+	<!-- End Style for tab -->
+
+	<!-- Style for tab's text -->
+	<style name="uimod_style_tabtext" type="text" keep="true"
+			align="bottom" y="60%"
+			bgalpha="0"
+			css="calc:
+				'color: 0xffffff;
+				font-size: ' + uimod.tab_textsize + 'px;
+				font-weight: '+ uimod.tab_fontweight +';'
+			"
+			/>
+
+	<!-- Style for tab's icon -->
+	<style name="uimod_style_tabicon" keep="true"
+			align="bottom" edge="center" y="35%"
+			height="35%" width="prop"
+			url="/upload/Icons/"
+			/>
+
+	<!-- The thumbnail displayer -->
+	<style name="uimod_thumbnail_container" keep="true" type="container" align="lefttop"
+			width="get:uimod.thumbnail_width" height="get:uimod.thumbnail_height"
+			bgalpha="1" bgcolor="0xffffff" bgborder="get:uimod.thumbnail_border"
+			bgroundedge="get:uimod.thumbnail_roundedge"
+			alpha="0" visible="false" zorder="202"
+			/>
+	<style name="uimod_style_thumbnail" keep="true" align="center"
+			width="get:uimod.thumbnail_width" height="get:uimod.thumbnail_height"
+			/>
+	<style name="uimod_thumbnail_arrow" keep="true" align="top"
+			url="./noicearrow.png"
+			scale=".4" y="-21" alpha=".6"
+			/>
+
+	<!-- Style for ex-tab -->
+	<style name="uimod_style_extab" type="container" keep="true" parent="uimod_extabs"
+			height="get:uimod.extab_height" width="100%"
+			align="righttop" bgborder="calc: uimod.extab_bordersize + ',0,0 0xffffff .4'"
+			bgcapture="true" children="false"
+			onclick="uimod_extab_action_onclick();"
+			onover="uimod_extab_action_onover();"
+			onout="uimod_extab_action_onout();"
+			/>
+
+	<action name="uimod_extab_action_onclick">
+		if(linkedscene !== xml.scene,
+			skin_loadscene(get(linkedscene), get(skin_settings.loadscene_blend));
+		);
+	</action>
+
+	<action name="uimod_extab_action_onover" >
+		tween(alpha, 1);
+		if(linkedscene === xml.scene,
+			tween(bgalpha, get(uimod.tab_bgalpha_active_hover));
+		,
+			tween(bgalpha, get(uimod.tab_bgalpha_hover));
+		);
+	</action>
+
+	<action name="uimod_extab_action_onout">
+		if(linkedscene === xml.scene,
+			tween(bgalpha, get(uimod.tab_bgalpha_active));
+		,
+			tween(alpha, get(uimod.tab_alpha_nonfocus));
+			tween(bgalpha, get(uimod.tab_bgalpha_normal));
+		);
+	</action>
+
+	<!-- End Style for ex-tab -->
+
+	<!-- Style for extab's text -->
+	<style name="uimod_style_extabtext" type="text" keep="true"
+			align="left" x="get:uimod.extab_textsize"
+			bgalpha="0"
+			css="calc:
+				'color: 0xffffff;
+				font-size: ' + uimod.extab_textsize + 'px;
+				font-weight: '+ uimod.extab_fontweight +';'
+			"
+			/>
+
+	<!-- Style for extab's icon -->
+	<style name="uimod_style_extabicon" keep="true"
+			align="right" edge="center" x="calc: uimod.extab_textsize * 3"
+			height="calc: uimod.extab_height * 0.5" width="prop"
+			url="/upload/Icons/"
+			/>
+
+</krpano>

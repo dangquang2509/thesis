@@ -1,0 +1,156 @@
+array:4 [▼
+  "krpano" => array:7 [▼
+    "version" => "1.19"
+    "title" => ""
+    "onstart" => "startup();"
+    "include" => array:1 [▼
+      0 => array:1 [▼
+        "url" => "/vtour/plugins.xml"
+      ]
+    ]
+    "layer" => array:1 [▼
+      0 => array:10 [▼
+        "name" => "map"
+        "url" => "/uploads/plans/1507774588-1.jpg"
+        "keep" => true
+        "align" => "lefttop"
+        "scale" => 1
+        "handcursor" => false
+        "scalechildren" => true
+        "maskchildren" => true
+        "onclick" => "closemap();"
+        "layer" => array:2 [▼
+          0 => array:5 [▼
+            "style" => "mappoint_skin"
+            "name" => "spot00_1507774593-1"
+            "x" => 456.78391959799
+            "y" => 464.3216080402
+            "onclick" => "loadscene(scene00_1507774593-1,null,MERGE,BLEND(1));"
+          ]
+          1 => array:5 [▼
+            "style" => "mappoint_skin"
+            "name" => "spot01_1507774593-2"
+            "x" => 839.69849246231
+            "y" => 491.45728643216
+            "onclick" => "loadscene(scene01_1507774593-2,null,MERGE,BLEND(1));"
+          ]
+        ]
+      ]
+    ]
+    "scene" => array:2 [▼
+      0 => array:9 [▼
+        "name" => "scene00_1507774593-1"
+        "title" => ""
+        "thumburl" => "/uploads/images/thumb/1507774593-1-3.jpeg"
+        "toursphereurl" => "/image/1507774593-1"
+        "onstart" => "settelop(,-0);activatespot(spot00_1507774593-1,360);setbottomurl();"
+        "preview" => array:1 [▼
+          "url" => "/uploads/images/thumb/1507774593-1-3.jpeg"
+        ]
+        "image" => array:1 [▼
+          "sphere" => array:1 [▶]
+        ]
+        "hotspot" => array:2 [▼
+          0 => array:2 [▼
+            "name" => "bottom"
+            "style" => "cover_tripod_logo"
+          ]
+          1 => array:6 [▼
+            "name" => "scene00_1507774593-1_0"
+            "style" => "skin_hotspotstyle"
+            "ath" => -265.94644576817
+            "atv" => 15
+            "linkedscene" => "scene01_1507774593-2"
+            "loadvars" => "view.hlookat=-265.9464457681686"
+          ]
+        ]
+        "view" => array:6 [▼
+          "hlookat" => "0.0"
+          "vlookat" => "0.0"
+          "fov" => "60"
+          "fovmin" => "30"
+          "fovmax" => "80"
+          "fisheye" => "1.0"
+        ]
+      ]
+      1 => array:9 [▼
+        "name" => "scene01_1507774593-2"
+        "title" => ""
+        "thumburl" => "/uploads/images/thumb/1507774593-2-5.jpg"
+        "toursphereurl" => "/image/1507774593-2"
+        "onstart" => "settelop(,-0);activatespot(spot01_1507774593-2,360);setbottomurl();"
+        "preview" => array:1 [▼
+          "url" => "/uploads/images/thumb/1507774593-2-5.jpg"
+        ]
+        "image" => array:1 [▼
+          "sphere" => array:1 [▶]
+        ]
+        "hotspot" => array:2 [▼
+          0 => array:2 [▶]
+          1 => array:6 [▶]
+        ]
+        "view" => array:6 [▼
+          "hlookat" => "0.0"
+          "vlookat" => "0.0"
+          "fov" => "60"
+          "fovmin" => "30"
+          "fovmax" => "80"
+          "fisheye" => "1.0"
+        ]
+      ]
+    ]
+    "scenedraft" => array:1 [▼
+      0 => array:9 [▼
+        "name" => "scene01_1507774593-3"
+        "title" => ""
+        "thumburl" => "/uploads/images/thumb/1507774593-3-4.jpg"
+        "toursphereurl" => "/image/1507774593-3"
+        "onstart" => "settelop(,-0);activatespot(spot01_1507774593-3,360);setbottomurl();"
+        "preview" => array:1 [▼
+          "url" => "/uploads/images/thumb/1507774593-3-4.jpg"
+        ]
+        "image" => array:1 [▼
+          "sphere" => array:1 [▼
+            "url" => "/uploads/images/1507774593-3-4.jpg"
+          ]
+        ]
+        "hotspot" => array:1 [▼
+          0 => array:2 [▼
+            "name" => "bottom"
+            "style" => "cover_tripod_logo"
+          ]
+        ]
+        "view" => array:6 [▼
+          "hlookat" => "0.0"
+          "vlookat" => "0.0"
+          "fov" => "60"
+          "fovmin" => "30"
+          "fovmax" => "80"
+          "fisheye" => "1.0"
+        ]
+      ]
+    ]
+  ]
+  "spheres" => array:3 [▼
+    0 => array:3 [▼
+      "id" => "1507774593-1"
+      "title" => ""
+      "used" => "true"
+    ]
+    1 => array:3 [▼
+      "id" => "1507774593-2"
+      "title" => ""
+      "used" => "true"
+    ]
+    2 => array:3 [▼
+      "id" => "1507774593-3"
+      "title" => ""
+      "used" => "false"
+    ]
+  ]
+  "metadata" => array:2 [▼
+    "custom_key" => ""
+    "note" => ""
+  ]
+  "published" => "true"
+]
