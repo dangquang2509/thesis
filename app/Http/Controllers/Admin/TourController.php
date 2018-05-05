@@ -34,11 +34,26 @@ class TourController extends Controller
 			if($request->tour_key != "") {
 				$objTour->tour_key = $request->tour_key;
 			}
+
 			$objTour->plan_image_id = $request->tour_map;
 			$objTour->title 		= $request->tour_title;
 			$objTour->description 	= $request->tour_description;
 			$objTour->category_id 	= $request->tour_category;
 			$objTour->config 		= $request->tour_param;
+			$objTour->amenities 		= $request->house_amenities;
+			$objTour->project_facility 	= $request->house_project_facility;
+			$objTour->traffic 			= $request->house_traffic;
+			$objTour->notice 			= $request->house_notice;
+
+			$objTour->address 			= $request->house_address;
+			$objTour->latitude 			= $request->house_latitude;
+			$objTour->longitude 		= $request->house_longitude;
+
+
+			$objTour->price 			= $request->house_price;
+			$objTour->area 				= $request->house_area;
+			$objTour->num_bedrooms 		= $request->house_num_bedroom;
+			$objTour->num_toilets 		= $request->house_num_toilet;
 
 			if ($request->tour_published) {
 				$objTour->is_public = 1;
@@ -102,6 +117,20 @@ class TourController extends Controller
 			$config 		= $request->tour_param;
 			$xmlUrl 		= $request->xml_url;
 
+			$amenities 			= $request->house_amenities;
+			$project_facility 	= $request->house_project_facility;
+			$traffic 			= $request->house_traffic;
+			$notice 			= $request->house_notice;
+
+			$address 	= $request->house_address;
+			$latitude 	= $request->house_latitude;
+			$longitude 	= $request->house_longitude; 
+
+			$price 			= $request->house_price;
+			$area 			= $request->house_area;
+			$num_bedroom 	= $request->house_num_bedroom;
+			$num_toilet 	= $request->house_num_toilet;
+
 			$now 	= Carbon::now();
 			$jSON 	= json_decode($request->tour_param, true);
 			$xml 	= new SimpleXMLElement("<krpano/>");
@@ -140,7 +169,18 @@ class TourController extends Controller
 					'config' 		=> $config,
 					'updated_by'    => Auth::user()->name,
 					'updated_at'	=> $now,
-					'category_id'	=> $category_id]);
+					'category_id'	=> $category_id,
+					'amenities'				=> $amenities ,
+					'project_facility'		=> $project_facility,
+					'traffic'				=> $traffic,
+					'notice'				=> $notice,
+					'address'				=> $address,
+					'latitude'				=> $latitude,
+					'longitude'				=> $longitude,
+					'price'					=> $price,
+					'area'					=> $area,
+					'num_bedrooms'			=> $num_bedroom,
+					'num_toilets'			=> $num_toilet]);
 
 			return Redirect::to('admincp/house/detail/'. $id);
 		}

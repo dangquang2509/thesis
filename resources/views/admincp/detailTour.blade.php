@@ -57,6 +57,22 @@
 						<div class="ot-image-detail-value">{{ $tour->description }}</div>
 					</div>
 					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Amenities</div>
+						<div class="ot-image-detail-value">{{ $tour->amenities }}</div>
+					</div>
+					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Project Facility</div>
+						<div class="ot-image-detail-value">{{ $tour->project_facility }}</div>
+					</div>
+					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Traffic</div>
+						<div class="ot-image-detail-value">{{ $tour->traffic }}</div>
+					</div>
+					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Notice</div>
+						<div class="ot-image-detail-value">{{ $tour->notice }}</div>
+					</div>
+					<div class="ot-image-detail-row">
 						<!-- <div class="ot-image-detail-label"><a href="javascript:void(0)" class="embed-code js-embed-code ot-embed-link">Embeded</a></div> -->
 						<div class="ot-image-detail-label">Iframe</div>
 						<div class="ot-image-detail-value">

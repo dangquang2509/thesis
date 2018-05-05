@@ -1,0 +1,12 @@
+public/uploads/
+node_modules
+storage/
+vendor/
+tests
+composer.lock
+VR-Tool.sublime-project
+VR-Tool.sublime-workspace
+/.idea
+Homestead.json
+Homestead.yaml
+.env

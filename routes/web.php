@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/', function () {
+// 	return view('welcome');
+// });
 
 Route::get('/image/{id}', 'WebController@showSpherical');
 Route::get('/tour/{id}', 'WebController@showTour');
@@ -21,17 +21,25 @@ Route::get('/tour/{id}', 'WebController@showTour');
 Route::get('/house/full/{id}', 'Fontend\WebController@getFullTourDetail');
 
 
-Route::get('/', 'Fontend\WebController@home');
+// Route::get('/', 'Fontend\WebController@home');
 
 Route::get('/login', 'Admin\UserController@getLogin');
 Route::post('/login', 'Admin\UserController@postLogin');
 Route::get('/logout', 'Admin\UserController@getLogout');
 Route::get('/register', 'Admin\UserController@showRegister');
 
-Route::get('/admincp',  [
+Route::get('/admincp/top',  [
     'middleware' => 'auth',
     'uses' => 'Admin\TourController@showRecentTour'
 ]);
+
+Route::group(['namespace' => "User"], function(){
+	Route::get('/', 'UserController@index');
+	Route::get('/contact', 'UserController@contact');
+	Route::get('/all', 'UserController@allHouse');
+	Route::get('/detail/{id}', 'UserController@getHouseDetail');
+});
+
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admincp/image', 'namespace' => 'Admin'], function () {
 	Route::get('/list', 'ImageController@showList');
@@ -71,9 +79,3 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/user', 'namespace' =>
 	Route::delete('/deleteAll', 'UserController@deleteAllUser');
 });
 
-Route::group(['prefix' => 'user', 'namespace' => "User"], function(){
-	Route::get('/home', 'UserController@index');
-	Route::get('/contact', 'UserController@contact');
-	Route::get('/all', 'UserController@allHouse');
-	Route::get('/detail/{id}', 'UserController@getHouseDetail');
-});

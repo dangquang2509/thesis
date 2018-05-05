@@ -42,7 +42,7 @@ class UserController extends Controller
             $house->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house', ['houses' => $houses]);
+        return view('user.house', ['houses' => $houses, 'allHouse' => json_encode($houses)]);
     }
 
     public function getHouseDetail(Request $request) {

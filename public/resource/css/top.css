@@ -22,6 +22,11 @@ body {
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: table;
+}
 .noselect {
   -webkit-touch-callout: none;
   /* iOS Safari */
@@ -114,41 +119,57 @@ form {
   margin-left: 32px;
 }
 .ot-form-row {
-  display: table;
-  table-layout: fixed;
   margin-bottom: 12px;
   margin-top: 4px;
 }
+.ot-form-row:after {
+  content: "";
+  clear: both;
+  display: table;
+}
 .ot-form-row .ot-form-row-label {
-  display: table-cell;
-  width: 25%;
+  /*display: table-cell;*/
+  width: 20%;
+  float: left;
   vertical-align: middle;
   padding-left: 12px;
+  padding-top: 8px;
 }
-.ot-form-row .ot-form-require-label {
-  background-color: #FF5252;
-  color: white;
-  padding: 4px 6px;
-  border-radius: 4px;
+.ot-form-row span {
+  margin-left: 4px;
+  font-size: 16px;
   font-weight: bold;
 }
 .ot-form-row .ot-form-row-input {
-  display: table-cell;
-  width: 320px;
-  margin-left: 40px;
+  /*display: table-cell;*/
+  float: left;
+  width: 60%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
 }
 .ot-form-row .ot-form-row-input:focus {
   outline: none;
   border: 1px solid grey;
   border-radius: 4px;
 }
+.ot-form-row .ot-form-row-input-number {
+  float: left;
+  width: 6%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 16px;
+}
+.ot-form-row .ot-form-row-input-number:focus {
+  outline: none;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
 .ot-form-row .ot-input-category {
-  display: table-cell;
+  float: left;
+  width: 12%;
   height: 28px;
-  margin-left: 95px;
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;

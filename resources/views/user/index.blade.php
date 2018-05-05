@@ -22,8 +22,8 @@
 	            <div class="collapse navbar-collapse pull-right" id="myNavbar">
 	                <ul class="nav navbar-nav navbar-right">
 	                    <li class="active"><a href="#">Home</a></li>
-	                    <li><a href="/user/all">Rent</a></li>
-	                    <li><a href="/user/contact">Contact</a></li>
+	                    <li><a href="/all">Rent</a></li>
+	                    <li><a href="/contact">Contact</a></li>
 	                    <li><a href="#">Log In</a></li>
 	                </ul>
 	            </div>
@@ -135,7 +135,7 @@
 							<div class="description">
 								<p>{{ $house->description }}</p>
 							</div>
-							<a href="/user/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
+							<a href="/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
 						</div>
 					</div>
 				</div>

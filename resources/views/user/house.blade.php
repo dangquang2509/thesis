@@ -21,9 +21,9 @@
 	            </div>
 	            <div class="collapse navbar-collapse pull-right" id="myNavbar">
 	                <ul class="nav navbar-nav navbar-right">
-	                    <li><a href="/user/home">Home</a></li>
+	                    <li><a href="/">Home</a></li>
 	                    <li class="active"><a href="#">Rent</a></li>
-	                    <li><a href="/user/contact">Contact</a></li>
+	                    <li><a href="/contact">Contact</a></li>
 	                    <li><a href="#">Log In</a></li>
 	                </ul>
 	            </div>
@@ -102,7 +102,7 @@
 							<div class="description">
 								<p>{{ $house->description }}</p>
 							</div>
-							<a href="/user/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
+							<a href="/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
 						</div>
 					</div>
 				</div>
@@ -142,6 +142,7 @@
 			</div>
 		</section>
 	</main>
+	<input type="hidden" value="{{ $allHouse }}" class="js-all-house">
 @stop
 
 @section('js')
@@ -151,23 +152,35 @@
 	
 	<script>
 		$(document).ready(function() {
-			var propertyDefault = {
-				url: "",
-				thumb: "images/bg-form-home.jpg",
-				title: "Dự án bac",
-				price: "124 Triệu/m<sup>2</sup>"
-			};
-			var locations = [
-				{lat: -31.563910, lng: 147.154312, property: propertyDefault},
-				{lat: -33.718234, lng: 150.363181, property: propertyDefault},
-				{lat: -33.727111, lng: 150.371124, property: propertyDefault},
-				{lat: -33.848588, lng: 151.209834, property: propertyDefault},
-				{lat: -33.851702, lng: 151.216968, property: propertyDefault},
-				{lat: -34.671264, lng: 150.863657, property: propertyDefault},
-				{lat: -35.304724, lng: 148.662905, property: propertyDefault}
-			]
+			var locations = [];
+			var houses = JSON.parse($(".js-all-house").val());
+			for (var i = 0; i <  houses.length; i++) {
+				var location = {};
+				location.lat = houses[i].latitude;
+				location.lng = houses[i].longitude;
+				
+				var property = {};
+				property.url = "/detail/" + houses[i].id;
+				// property.thumb = "images/bg-form-home.jpg";
+				property.thumb = "/uploads/images/" + houses[i].image_thumbnail;
+				property.title = houses[i].title;
+				property.price = "$600"
+				
+				location.property = property;
+				
+				locations.push(location);
+			}
+			// var locations = [
+			// 	{lat: -31.563910, lng: 147.154312, property: propertyDefault},
+			// 	{lat: -33.718234, lng: 150.363181, property: propertyDefault},
+			// 	{lat: -33.727111, lng: 150.371124, property: propertyDefault},
+			// 	{lat: -33.848588, lng: 151.209834, property: propertyDefault},
+			// 	{lat: -33.851702, lng: 151.216968, property: propertyDefault},
+			// 	{lat: -34.671264, lng: 150.863657, property: propertyDefault},
+			// 	{lat: -35.304724, lng: 148.662905, property: propertyDefault}
+			// ];
 			var setupMap = {
-				zoom: 6,
+				zoom: 10,
 				icon_marker: "images/map-marker.png",
 				icon_cluster: "images/cluster-icon.png"
 			}

@@ -8,7 +8,7 @@
 <ul class="ot-navbar">
 	<div class="ot-navbar-wrapper">
 		<li class="dropdown">
-			<a href="/" class="dropbtn">Top</a>
+			<a href="/admincp/top" class="dropbtn">Top</a>
 		</li>
 		<li class="dropdown">
 			<a href="javascript:void(0)" class="dropbtn">360°Images</a>

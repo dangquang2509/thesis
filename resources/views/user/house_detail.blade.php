@@ -6,82 +6,124 @@
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/jquery-ui.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/bootstrap.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/ionicons.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/jquery.fancybox.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/jquery.bxslider.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.carousel.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.theme.default.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/select2.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/style.css') !!}">
-    <style>
-    	.ot-footer {
-    		display: none;
-    	}
-    	footer {
-    		margin-top: 24px;
-    	}
-    	body {
-    		background-color: #edf2f5;
-    	}
-    	#main-menu {
-    		background-color: #0c244c;
-    	}
-    	.ot-container {
-    		margin-top: 72px;
-    		width: 100%;
-    	}
-    	.menu-padding {
-    		margin-top: 0;
-    		padding-top: 0;
-    	}
-    	.section-title {
-    		margin-left: 134px;
-    		font-weight: bold;
-    		padding: 8px 0;
-    	}
-    	.property, .properties , .property-content, .ot-content {
-    		margin: 0 auto;
-    		width: 80%;
-    	}
-    	section.property .base-infos-container .base-infos {
-    		width: 100%;
-    		background: white;
-    	}
-    	section.property .base-infos .list-info {
-    		color: black;
-    	}
-    	.description {
-    		color: black;
-    	}
-    </style>
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/ionicons.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/jquery.fancybox.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/jquery.bxslider.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.carousel.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.theme.default.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/select2.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/style.css') !!}">
+	<style>
+		.ot-footer {
+			display: none;
+		}
+		footer {
+			margin-top: 24px;
+		}
+		body {
+			background-color: #edf2f5;
+		}
+		#main-menu {
+			background-color: #0c244c;
+		}
+		.ot-container {
+			margin-top: 72px;
+			width: 100%;
+		}
+		.menu-padding {
+			margin-top: 0;
+			padding-top: 0;
+		}
+		.section-title {
+			margin-left: 134px;
+			font-weight: bold;
+			padding: 8px 0;
+		}
+		.property, .properties , .property-content, .ot-content {
+			margin: 0 auto;
+			width: 80%;
+		}
+		section.property .base-infos-container .base-infos {
+			width: 100%;
+			background: white;
+		}
+		section.property .base-infos .list-info {
+			color: black;
+		}
+		.description {
+			color: black;
+		}
+
+		.pac-card {
+			margin: 10px 10px 0 0;
+			border-radius: 2px 0 0 2px;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			outline: none;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+			background-color: #fff;
+			font-family: Roboto;
+		}
+
+		#pac-container {
+			padding-bottom: 12px;
+			margin-right: 12px;
+		}
+
+		.pac-controls {
+			display: inline-block;
+			padding: 5px 11px;
+		}
+
+		.pac-controls label {
+			font-family: Roboto;
+			font-size: 13px;
+			font-weight: 300;
+		}
+
+		#pac-input {
+			background-color: #fff;
+			font-family: Roboto;
+			font-size: 15px;
+			font-weight: 300;
+			margin-left: 12px;
+			padding: 0 11px 0 13px;
+			text-overflow: ellipsis;
+			width: 400px;
+		}
+
+		#pac-input:focus {
+			border-color: #4d90fe;
+		}
+	</style>
 @stop
 
 @section('header')
 	<header>
-	    <nav class="navbar navbar-inverse" id="main-menu">
-	        <div class="container">
-	            <a class="navbar-brand" href="#">
-	            </a>
-	            <div class="navbar-header pull-right">
-	                <a class="phone-number" href="tel:0922 11 39 30">
-	                    <i class="icon ion-ios-telephone-outline"></i> <span>0908 41 64 84</span>
-	                </a>
-	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span> 
-	                </button>
-	            </div>
-	            <div class="collapse navbar-collapse pull-right" id="myNavbar">
-	                <ul class="nav navbar-nav navbar-right">
-	                    <li><a href="/user/home">Home</a></li>
-	                    <li><a href="/user/all">Rent</a></li>
-	                    <li><a href="/user/contact">Contact</a></li>
-	                    <li><a href="#">Log In</a></li>
-	                </ul>
-	            </div>
-	        </div>
-	    </nav>
+		<nav class="navbar navbar-inverse" id="main-menu">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+				</a>
+				<div class="navbar-header pull-right">
+					<a class="phone-number" href="tel:0922 11 39 30">
+						<i class="icon ion-ios-telephone-outline"></i> <span>0908 41 64 84</span>
+					</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+					</button>
+				</div>
+				<div class="collapse navbar-collapse pull-right" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/">Home</a></li>
+						<li><a href="/all">Rent</a></li>
+						<li><a href="/contact">Contact</a></li>
+						<li><a href="#">Log In</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 	</header>
 @stop
 
@@ -118,11 +160,11 @@
 						</div>
 						<div class="list-info">
 							<div class="property-type">{{ $house->category_name }}</div>
-							<div class="property-price"><big>$600</big> / month</div>
+							<div class="property-price"><big>${{ $house->price }}</big> / month</div>
 							<ul class="more-info">
-								<li><big>3</big> Bedrooms</li>
-								<li><big>3</big> Toilets</li>
-								<li><big>108</big> m<sup>2</sup></li>
+								<li><big>{{ $house->num_bedrooms }}</big> Bedrooms</li>
+								<li><big>{{ $house->num_toilets }}</big> Toilets</li>
+								<li><big>{{ $house->area }}</big> m<sup>2</sup></li>
 							</ul>
 						</div>
 						<div class="text-right"><a href="#" class="btn-yellow">Contact Agent</a></div>
@@ -145,19 +187,19 @@
 			</div>
 			<div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Amenities</div>
-				<div class="ot-image-detail-value">large double beds, big wardrobes, microwave, chimney, big refrigerator, washing machine</div>
+				<div class="ot-image-detail-value">{{ $house->amenities }}</div>
 			</div>
 			<div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Project Facility</div>
-				<div class="ot-image-detail-value">parking lot, Vincom Center, Vinmec, Vinschool, fitness centers, resort-style pool, children's playground, convenient stores</div>
+				<div class="ot-image-detail-value">{{ $house->project_facility }}</div>
 			</div>
 			<div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Traffic</div>
-				<div class="ot-image-detail-value">located in the Tan Cang area, stretches over 1km on the banks of the Saigon River and is one of the stops of the Ben Thanh - Suoi Tien subway system</div>
+				<div class="ot-image-detail-value">{{ $house->traffic }}</div>
 			</div>
 			<div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Notice</div>
-				<div class="ot-image-detail-value">The rental price excludes management fee</div>
+				<div class="ot-image-detail-value">{{ $house->notice }}</div>
 			</div>
 			<input type="text" name="tour_id" value="{{ $house->id }}" style="display:none">
 		</div>
@@ -169,11 +211,10 @@
 				<div class="container">
 					<div class="content">
 						<h2>Location</h2>
-						<p>Masteri Thao Dien, District 2</p>
+						<p class="js-address">{{ $house->address }}</p>
 					</div>
 				</div>
 				<div id="map-1" class="ggmap"></div>
-				
 			</div>
 		</div>
 	</section>
@@ -189,69 +230,69 @@
 					<div class="description">
 						<p>{{ $house->description }}</p>
 					</div>
-					<a href="/user/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
+					<a href="/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
 				</div>
 			</div>
 		</div>
 		@endforeach
 	</section>
 	<footer>
-	    <div class="top-footer">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-3 col-sm-6 col-xs-12">
-	                    <div class="box-item">
-	                        <div class="title-footer title-footer-1">
-	                            <h3 class="yellow-text-gradient">Address</h3>
-	                        </div>
-	                        <div class="box-info">
-	                            <p>18/11 Phu Dong Thien Vuong Street, District 5, Ho Chi Minh City</p>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="col-md-3 col-sm-6 col-xs-12">
-	                    <div class="box-item">
-	                        <div class="title-footer title-footer-2">
-	                            <h3 class="yellow-text-gradient">Customer Service</h3>
-	                        </div>
-	                        <div class="box-info">
-	                            <p><a href="tel:0908.41.64.84">0908.41.64.84</a></p>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="col-md-3 col-sm-6 col-xs-12">
-	                    <div class="box-item">
-	                        <div class="title-footer title-footer-3">
-	                            <h3 class="yellow-text-gradient">Email</h3>
-	                        </div>
-	                        <div class="box-info">
-	                            <p><a href="mailto:hello@munkas.com">hello@gmail.com</a></p>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="col-md-3 col-sm-6 col-xs-12">
-	                    <div class="box-item">
-	                        <div class="title-footer title-footer-4">
-	                            <h3 class="yellow-text-gradient">Connect with us</h3>
-	                        </div>
-	                        <div class="box-info">
-	                            <ul class="list-social">
-	                                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-	                                <li><a href="#"><i class="icon ion-social-youtube"></i></a></li>
-	                                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-	                            </ul>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	    <div class="bot-footer">
-	        <p>Copyright © 2018. All Rights Reserved.</p>
-	    </div>
+		<div class="top-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="box-item">
+							<div class="title-footer title-footer-1">
+								<h3 class="yellow-text-gradient">Address</h3>
+							</div>
+							<div class="box-info">
+								<p>18/11 Phu Dong Thien Vuong Street, District 5, Ho Chi Minh City</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="box-item">
+							<div class="title-footer title-footer-2">
+								<h3 class="yellow-text-gradient">Customer Service</h3>
+							</div>
+							<div class="box-info">
+								<p><a href="tel:0908.41.64.84">0908.41.64.84</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="box-item">
+							<div class="title-footer title-footer-3">
+								<h3 class="yellow-text-gradient">Email</h3>
+							</div>
+							<div class="box-info">
+								<p><a href="mailto:hello@munkas.com">hello@gmail.com</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="box-item">
+							<div class="title-footer title-footer-4">
+								<h3 class="yellow-text-gradient">Connect with us</h3>
+							</div>
+							<div class="box-info">
+								<ul class="list-social">
+									<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+									<li><a href="#"><i class="icon ion-social-youtube"></i></a></li>
+									<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bot-footer">
+			<p>Copyright © 2018. All Rights Reserved.</p>
+		</div>
 	</footer>
 	<div id="scroll-top">
-	    <i class="icon ion-ios-arrow-up"></i>
+		<i class="icon ion-ios-arrow-up"></i>
 	</div>
 @stop
 @section('js')
@@ -259,35 +300,39 @@
 	<script type="text/javascript" src="{!! asset('resource/js/lib/jquery-ui.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/lib/toastr/toastr.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.SmoothScroll.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/select2.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/bootbox.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/bootstrap.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/jquery.fancybox.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/jquery.bxslider.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('resource/js/user/owl.carousel.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/select2.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/bootbox.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/bootstrap.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.fancybox.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.bxslider.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/user/owl.carousel.min.js') !!}"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmPq7GJGWrVXertDiV_JZcUUpAXp1cb5c"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/infobox/1.1.13/src/infobox.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmPq7GJGWrVXertDiV_JZcUUpAXp1cb5c&libraries=places"></script>
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/infobox/1.1.13/src/infobox.js"></script>
 
 	<script type="text/javascript">
 
-	 	$(document).ready(function() {
-			var locationCompany = {lat: -31.563910, lng: 147.154312};
-			if ($("#map-1").length > 0){
+		$(document).ready(function() {
+			var lat = parseFloat('{{ $house->latitude }}');
+			var lng = parseFloat('{{ $house->longitude }}');
+			
+			var locationHouse = {lat: lat, lng: lng};
+			
+			if ($("#map-1").length > 0) {
 				var map = new google.maps.Map(document.getElementById('map-1'), {
-					zoom: 10,
-					center: locationCompany
+					zoom: 15,
+					center: locationHouse
 				});
 				var marker = new google.maps.Marker({
 					map: map,
-					draggable: true,
-					position: new google.maps.LatLng(locationCompany.lat, locationCompany.lng),
+					draggable: false,
+					position: new google.maps.LatLng(locationHouse.lat, locationHouse.lng),
 					visible: true,
 					icon: "images/map-marker.png"
 				});
 			}
-			
+
 			embedpano({swf:"/vtour/tour.swf", xml:"/{{ $house->xml_url }}", target:"pano", consolelog: "false"});
 			var width = 600;
 			var height = 400;
