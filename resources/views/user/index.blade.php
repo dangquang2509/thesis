@@ -49,7 +49,7 @@
 								<div class="description">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 								</div>
-								<a class="btn-yellow viewmore" href="#">View Details</a>
+								<a class="btn-yellow viewmore" href="/all">View Details</a>
 							</div>
 							<div class="control text-center">
 								<div class="prev"></div>
@@ -76,13 +76,10 @@
 			</div>
 			<div class="filter-form">
 				<div class="right-container">
-					<form class="" action="" method="get">
-						<h3 class="blue-text-gradient cta line-bottom">Find your perfect home</h3>
+					<form class="" action="/search" method="POST">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<h3 class="blue-text-gradient cta line-bottom">Find your perfect house</h3>
 						<div class="gutter-30">
-							<div class="col-sm-6 group-input">
-								<label for="input-key">Keyword</label>
-								<input type="text" name="key" id="input-key" placeholder="Input keyword">
-							</div>
 							<div class="col-sm-6 group-input">
 								<label for="input-location">Area</label>
 								<select name="location" class="select2" id="input-location">
@@ -93,28 +90,22 @@
 							</div>
 							<div class="col-sm-6 group-input">
 								<label for="input-type">Type</label>
-								<select name="type" class="select2" id="input-type">
-									<option value="quan-1">All Properties</option>
-									<option value="quan-1">Apartment</option>
-									<option value="quan-1">Villa</option>
-									<option value="quan-1">Other</option>
+								<select name="category" class="select2">
+									<option value="1">Apartment</option>
+									<option value="2">Villa</option>
 								</select>
 							</div>
 							<div class="col-sm-6 group-input">
-								<label for="input-price">Price</label>
-								<select name="price" class="select2" id="input-price">
-									<option value="quan-1"> < $500</option>
-									<option value="quan-1">$500 - $1,000</option>
-									<option value="quan-1"> > $1,000</option>
-								</select>
+								<label for="input-price">Price Min</label>
+								<input type="number" value="100" min="100" max="4000" step="10" name="price_min">
 							</div>
 							<div class="col-sm-6 group-input">
-								<label for="input-badroom">Number of Bedrooms</label>
-								<select name="badroom" class="select2" id="input-badroom">
-									<option value="quan-1">1</option>
-									<option value="quan-1">2</option>
-									<option value="quan-1">3+</option>
-								</select>
+								<label for="input-price">Price Max</label>
+								<input type="number" value="1000" min="100" max="4000" step="10" name="price_max">
+							</div>
+							<div class="col-sm-6 group-input">
+								<label for="input-bedroom">Number of Bedrooms</label>
+								<input type="number" value="1" min="1" max="10" step="1" name="num_bedrooms">
 							</div>
 							<div class="col-sm-6 group-input">
 								<button type="submit" class="btn-yellow submit">SEARCH</button>

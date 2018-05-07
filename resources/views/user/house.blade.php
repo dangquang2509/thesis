@@ -2,6 +2,17 @@
 
 @section('title', 'All Houses')
 
+@section('css')
+	<style>
+		section.map .filter-map .input {
+			color: #fff;
+		}
+		section.map .filter-map .input input {
+			color: #000;
+		}
+	</style>
+@stop
+
 @section('header') 
 	<header>
 	    <nav class="navbar navbar-inverse" id="main-menu">
@@ -22,7 +33,7 @@
 	            <div class="collapse navbar-collapse pull-right" id="myNavbar">
 	                <ul class="nav navbar-nav navbar-right">
 	                    <li><a href="/">Home</a></li>
-	                    <li class="active"><a href="#">Rent</a></li>
+	                    <li class="active"><a href="/all">Rent</a></li>
 	                    <li><a href="/contact">Contact</a></li>
 	                    <li><a href="#">Log In</a></li>
 	                </ul>
@@ -35,13 +46,12 @@
 	<main id="products">
 		<section class="map">
 			<div id="map"></div>
-			<form class="filter-map" method="get" action="">
+			<form class="filter-map" method="post" action="/search">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="container">
 					<div class="gutter-10">
 						<div class="col-lg-2 col-sm-4 input">
-							<input type="text" name="q" placeholder="Input keyword">
-						</div>
-						<div class="col-lg-2 col-sm-4 input">
+							Area :
 							<select class="select2" name="location">
 								<option value="*">Area</option>
 								<option value="AL">District 1</option>
@@ -52,32 +62,23 @@
 							</select>
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
-							<select class="select2" name="product_type">
-								<option value="*">Type</option>
-								<option value="AL">All Properties</option>
-								<option value="1">Villa</option>
-								<option value="2">Apartment</option>
-								<option value="3">Townhouse</option>
-								<option value="WY">Other</option>
+							Type :
+							<select class="select2" name="category">
+								<!-- <option value="0">All Properties</option> -->
+								<option value="1">Apartment</option>
+								<option value="2">Villa</option>
+								<!-- <option value="3">Townhouse</option> -->
+								<!-- <option value="3">Other</option> -->
 							</select>
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
-							<select class="select2" name="bad_room">
-								<option value="*">Number of Bedrooms</option>
-								<option value="AL">1</option>
-								<option value="1">2</option>
-								<option value="2">3</option>
-								<option value="3">4+</option>
-							</select>
+							Number of bedroom(s) : <input type="number" value="1" min="1" max="10" step="1" name="num_bedrooms">
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
-							<select class="select2" name="price">
-								<option value="*">Price</option>
-								<option value="AL"> < $500</option>
-								<option value="1">$500 - $1000</option>
-								<option value="2">$1000 - $2000</option>
-								<option value="3"> > $2000</option>
-							</select>
+							Price Min ($) : <input type="number" value="100" min="100" max="4000" step="10" name="price_min">
+						</div>
+						<div class="col-lg-2 col-sm-4 input">
+							Price Max ($) : <input type="number" value="1000" min="100" max="4000" step="10" name="price_max">
 						</div>
 						<div class="col-lg-2 col-sm-4 input text-right">
 							<button class="btn-yellow submit">SEARCH</button>
@@ -89,7 +90,11 @@
 		<section class="properties bg-smooth">
 			<div class="page-title">
 				<div class="container">
-					<h1>All Properties</h1>
+					@if($search)
+						<h1>Search Result</h1>
+					@else
+						<h1>All Properties</h1>
+					@endif
 				</div>
 			</div>
 			@foreach ($houses as $house)
@@ -98,7 +103,7 @@
 					<div class="center-position">
 						<div class="property-container">
 							<h2 class="title">{{ $house->title }}</h2>
-							<div class="price-tag"><span class="price">$1,000</span> <span class="tag">- 2 Bedrooms</span></div>
+							<div class="price-tag"><span class="price">$ {{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedrooms</span></div>
 							<div class="description">
 								<p>{{ $house->description }}</p>
 							</div>

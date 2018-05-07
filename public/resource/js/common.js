@@ -41,7 +41,7 @@ var TimeoutSaveTourdraft = "Failed to create the temporarily saved data. Create 
 
 var Plot = "marker";
 var exist_plot = "既にマーカーが存在します。";
-var title_not_set = "タイトル未設定";
+var title_not_set = "Image title";
 var JAICO0002 = "（間取り図を削除するとマーカーやリンクを含め全ての情報が削除されます）";
 var JAPEE0001 = "三脚以外の画像を掲示している間は更新できません。";
 

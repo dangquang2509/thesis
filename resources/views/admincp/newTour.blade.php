@@ -162,7 +162,7 @@
 		</div>
 		<div class="ot-view-label" style="margin-top: 0;">
 			<span>360 View</span>
-			<input id="scene-telop" class="scene-telop ot-form-row-input" type="text" maxlength="255" name="scene[telop]" placeholder="キャプションの詳細">
+			<input id="scene-telop" class="scene-telop ot-form-row-input" type="text" maxlength="255" name="scene[telop]" placeholder="Detail of caption">
 		</div>
 		<div class="js-round-floor-plan ot-drop-floormap">
 			<div class="floormap-overlay"></div>

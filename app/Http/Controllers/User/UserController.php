@@ -42,7 +42,7 @@ class UserController extends Controller
             $house->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house', ['houses' => $houses, 'allHouse' => json_encode($houses)]);
+        return view('user.house', ['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => false]);
     }
 
     public function getHouseDetail(Request $request) {
@@ -75,5 +75,22 @@ class UserController extends Controller
         }
 
         return view('user.house_detail', ['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title]);
+    }
+
+    public function search(Request $request){
+        // dd($request->all());
+        $houses = Ot_Tours::where('is_public', true)
+                            ->where('category_id', '=', $request->category)
+                            ->where('num_bedrooms', '=', $request->num_bedrooms)
+                            ->where('price', '>=', $request->price_min)
+                            ->where('price', '<=', $request->price_max)
+                            ->get();
+        foreach ($houses as $house) {
+            $id = $house->id;
+            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $house->image_thumbnail = $image_thumb;
+        }
+        
+        return view('user.house')->with(['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => true]);
     }
 }
