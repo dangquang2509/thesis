@@ -10,7 +10,7 @@ use App\Http\Requests\CheckFormContact;
 use Carbon\Carbon;
 use Image;
 use File;
-use DB;
+use Mail;
 use App\Models\Ot_Images;
 use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
@@ -31,7 +31,13 @@ class UserController extends Controller
     }
 
     public function contact(){
-        return view('user.contact');
+        $houses = Ot_Tours::where('is_public', true)->get();
+        foreach ($houses as $house) {
+            $id = $house->id;
+            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $house->image_thumbnail = $image_thumb;
+        }
+        return view('user.contact')->with(['houses' => json_encode($houses)]);
     }
 
     public function allHouse(){
@@ -74,7 +80,7 @@ class UserController extends Controller
             $hs->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house_detail', ['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title]);
+        return view('user.house_detail')->with(['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title]);
     }
 
     public function search(Request $request){
@@ -92,5 +98,40 @@ class UserController extends Controller
         }
         
         return view('user.house')->with(['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => true]);
+    }
+
+    public function sendRequest(Request $request){
+        $name           = $request->get("name");
+        $email          = $request->get("email");
+        $phone          = $request->get("phone");
+        $address        = $request->get("address");
+        $content        = $request->get("content");
+
+        $mailTo     = config("mail.username");
+        $mailType   = '';
+        $params     = [ 'name'  => $name,
+                        'email' => $email,
+                        'phone' => $phone,
+                        'address'=> $address,
+                        'content'=> $content
+        ];
+
+        try {
+            $mailData =array_merge(array('mail' => $mailTo), $params);
+            Mail::send('emails.request', array('name'       =>$mailData['name'], 
+                                                'email'     =>$mailData['email'],
+                                                'address'   =>$mailData['address'],
+                                                'phone'     =>$mailData['phone'],
+                                                'content'   =>$mailData['content']), 
+                function ($m) use ($mailData) {
+                    $m->from($mailData['email']);
+                    $m->to($mailData['mail'])->subject('There is a request from guest');
+            });
+
+            return Redirect('/contact');
+        } catch(Exception $e) {
+
+            return array("flag" => 'error');
+        }
     }
 }

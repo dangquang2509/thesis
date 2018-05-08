@@ -122,7 +122,7 @@
 					<div class="center-position">
 						<div class="property-container">
 							<h2 class="title">{{ $house->title }}</h2>
-							<div class="price-tag"><span class="price">$1,000</span> <span class="tag">- 2 Bedrooms</span></div>
+							<div class="price-tag"><span class="price">${{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedroom(s)</span></div>
 							<div class="description">
 								<p>{{ $house->description }}</p>
 							</div>

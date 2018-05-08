@@ -36,6 +36,7 @@ Route::get('/admincp/top',  [
 Route::group(['namespace' => "User"], function(){
 	Route::get('/', 'UserController@index');
 	Route::get('/contact', 'UserController@contact');
+	Route::post('/sendRequest', 'UserController@sendRequest');
 	Route::get('/all', 'UserController@allHouse');
 	Route::get('/detail/{id}', 'UserController@getHouseDetail');
 	Route::post('/search', 'UserController@search');

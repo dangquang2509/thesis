@@ -103,7 +103,7 @@
 					<div class="center-position">
 						<div class="property-container">
 							<h2 class="title">{{ $house->title }}</h2>
-							<div class="price-tag"><span class="price">$ {{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedrooms</span></div>
+							<div class="price-tag"><span class="price">${{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedrooms</span></div>
 							<div class="description">
 								<p>{{ $house->description }}</p>
 							</div>
@@ -175,15 +175,6 @@
 				
 				locations.push(location);
 			}
-			// var locations = [
-			// 	{lat: -31.563910, lng: 147.154312, property: propertyDefault},
-			// 	{lat: -33.718234, lng: 150.363181, property: propertyDefault},
-			// 	{lat: -33.727111, lng: 150.371124, property: propertyDefault},
-			// 	{lat: -33.848588, lng: 151.209834, property: propertyDefault},
-			// 	{lat: -33.851702, lng: 151.216968, property: propertyDefault},
-			// 	{lat: -34.671264, lng: 150.863657, property: propertyDefault},
-			// 	{lat: -35.304724, lng: 148.662905, property: propertyDefault}
-			// ];
 			var setupMap = {
 				zoom: 10,
 				icon_marker: "images/map-marker.png",

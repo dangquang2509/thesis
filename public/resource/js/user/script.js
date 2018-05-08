@@ -237,47 +237,71 @@ jQuery(document).ready(function($) {
 			nUrl: "",
 			nFormName: ""
 		};
-		$(".form-submit").each(function(index, el) {
-			var form = $(this);
-			form.find('.submit').click(function(event) {
-				var name = form.find("[name=name]").val();
-				var email = form.find("[name=email]").val();
-				var phone = form.find("[name=phone]").val();
-				var content = form.find("[name=content]").val();
-				content = (content) ? content : "";
-				var url = form.find("[name=url]").val();
-				var form_name = form.find("[name=form_name]").val();
-				var redirect = form.find("[name=redirect]").val();
-				redirect = (redirect) ? redirect : "/thank-you";
+		// $(".form-submit").each(function(index, el) {
+		// 	var form = $(this);
+		// 	form.find('.submit').click(function(event) {
+		// 		var name = form.find("[name=name]").val();
+		// 		var email = form.find("[name=email]").val();
+		// 		var phone = form.find("[name=phone]").val();
+		// 		var content = form.find("[name=content]").val();
+		// 		content = (content) ? content : "";
+		// 		var url = form.find("[name=url]").val();
+		// 		var form_name = form.find("[name=form_name]").val();
+		// 		var redirect = form.find("[name=redirect]").val();
+		// 		redirect = (redirect) ? redirect : "/thank-you";
 
-				var result = "";
-				var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-				var regPhone = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
-				if (name == "")
-					result += "<p>Vui lòng nhập Họ và Tên</p>";
-				if (email == ""){
-					result += "<p>Vui lòng nhập Email</p>";
-				} else if (!reg.test(email)){
-					result += "<p>Vui lòng nhập đúng định dạng Email</p>";
-				}
-				if (phone == "")
-					result += "<p>Vui lòng nhập số điện thoại</p>";
+		// 		var result = "";
+		// 		var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-				if (result.length > 0) { bootbox.alert(result); return false; }
+		// 		var regPhone = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
+		// 		if (name == "")
+		// 			result = "<p>Please input your name</p>";
+		// 		if (email == "") 
+		// 			result = "<p>Please input your email</p>";
+		// 		if (phone == "")
+		// 			result = "<p>Please input your phone number</p>";
+		// 		if (result.length > 0) { 
+		// 			bootbox.alert(result); 
+		// 			return false; 
+		// 		}
 
-				bootbox.alert("Đang nhận thông tin. Vui lòng đợi trong giây lát...");
-				sendData({
-					name: name,
-					email: email,
-					phone: phone,
-					content: content,
-					url: url,
-					form_name: form_name
-				}, function(){
-					bootbox.hideAll();
-					window.location = redirect;
-				})
-			});
+		// 		bootbox.alert("Please wait a moment ...");
+		// 		sendData({
+		// 			name: name,
+		// 			email: email,
+		// 			phone: phone,
+		// 			content: content,
+		// 			url: url,
+		// 			form_name: form_name
+		// 		}, function(){
+		// 			bootbox.hideAll();
+		// 			window.location = redirect;
+		// 		})
+		// 	});
+		// });
+		$(".js-send-request").click(function(){
+			var form = $(".form-submit");
+			var name = form.find("[name=name]").val();
+			var email = form.find("[name=email]").val();
+			var phone = form.find("[name=phone]").val();
+			var address = form.find("[name=address]").val();
+			var content = form.find("[name=content]").val();
+
+			var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+			if (name == "")
+				result = "<p>Please input your name</p>";
+			if (email == "") 
+				result = "<p>Please input your email</p>";
+			if (phone == "")
+				result = "<p>Please input your phone number</p>";
+			if (content == "")
+				result = "<p>Please input your content</p>";
+			if (result.length > 0) { 
+				bootbox.alert(result); 
+				return false; 
+			}
+
 		});
 		function sendData(data, callback=false){
 			var dataPost = {};
