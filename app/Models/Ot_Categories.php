@@ -8,6 +8,6 @@ use Validator;
 
 class Ot_Categories extends Model
 {
-    protected $table='ot_category';
+    protected $table='category';
 
 }

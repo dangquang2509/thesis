@@ -8,5 +8,5 @@ use Validator;
 
 class Ot_Plan_Images extends Model
 {
-	protected $table='ot_plan_images';
+	protected $table='plan_images';
 }

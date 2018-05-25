@@ -24,7 +24,7 @@
 	                    <li><a href="/">Home</a></li>
 	                    <li><a href="/all">Rent</a></li>
 	                    <li class="active"><a href="#">Contact</a></li>
-	                    <li><a href="#">Log In</a></li>
+	                    <!-- <li><a href="#">Log In</a></li> -->
 	                </ul>
 	            </div>
 	        </div>

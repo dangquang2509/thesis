@@ -9,13 +9,13 @@ var FileSizeError = "File size available for posting is 10MB or less.";
 var NotJpeg = "This file cannot be posted";
 var NotImage = "This file cannot be posted.";
 var ZeroByte = "This file cannot be posted.";
-var CanNotPost = "] ファイルの形式は正しくありません。jpgファイルを挿入してください。";
+var CanNotPost = "The format of the file is incorrect. Please insert jpg file.";
 var NoTourTitle = "Input of house title is required.";
 var NoFloorMap = "Input of floor plan is required.";
 var NoSpheres = "Input of Spherical image is required.";
 var NoPlot = "To register a house, it is necessary to plot one or more spherical images on the floor plan.";
 var TourTitleToLong = "Input house title within 255 characters.";
-var TourCustomkeyToLong = "カスタムキーを100文字以内で入力";
+var TourCustomkeyToLong = "Enter custom key within 100 characters";
 var DuringAjaxWhenRelease = "Register is not allowed during posting of the floor plan, spherical image, non-tripod image and annotation image.";
 var DuringAjaxWhenPreview = "Preview is not allowed during posting of the floor plan, spherical image, non-tripod image and annotation image.";
 var DuringAjaxWhenSave = "Temporary save is not allowed during posting of the floor plan, spherical image, non-tripod image and annotation image.";
@@ -40,9 +40,9 @@ var TimeoutSetTemplete = "Template settings failed. Set it again.";
 var TimeoutSaveTourdraft = "Failed to create the temporarily saved data. Create it again.";
 
 var Plot = "marker";
-var exist_plot = "既にマーカーが存在します。";
+var exist_plot = "A marker already exists.";
 var title_not_set = "Image title";
-var JAICO0002 = "（間取り図を削除するとマーカーやリンクを含め全ての情報が削除されます）";
+var JAICO0002 = "(If you delete the floor plan, all information including markers and links will be deleted)";
 var JAPEE0001 = "三脚以外の画像を掲示している間は更新できません。";
 
 ///////////////////////////////////////////////////////////////

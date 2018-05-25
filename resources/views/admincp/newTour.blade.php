@@ -109,6 +109,17 @@
 			</select>
 		</div>
 		<div class="ot-form-row">
+			<label class="ot-form-row-label">District</label>
+			<select class="ot-input-category" name="house_district">
+				<option value="1">1</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="7">7</option>
+				<option value="Tan Binh">Tan Binh</option>
+			</select>
+		</div>
+		<div class="ot-form-row">
 			<label class="ot-form-row-label">Amenities</label>
 			<input type="text" class="ot-form-row-input" name="house_amenities" value="">
 		</div>
@@ -161,7 +172,7 @@
 			<button class="btn-create-tour js-remove-mode">Remove Link</button>
 		</div>
 		<div class="ot-view-label" style="margin-top: 0;">
-			<span>360 View</span>
+			<span>360°view</span>
 			<input id="scene-telop" class="scene-telop ot-form-row-input" type="text" maxlength="255" name="scene[telop]" placeholder="Detail of caption">
 		</div>
 		<div class="js-round-floor-plan ot-drop-floormap">

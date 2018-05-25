@@ -24,7 +24,7 @@
 	                    <li class="active"><a href="#">Home</a></li>
 	                    <li><a href="/all">Rent</a></li>
 	                    <li><a href="/contact">Contact</a></li>
-	                    <li><a href="#">Log In</a></li>
+	                    <!-- <li><a href="/login">Log In</a></li> -->
 	                </ul>
 	            </div>
 	        </div>
@@ -44,11 +44,8 @@
 				<div class="table-cell">
 					<div class="container">
 						<div class="row">
-							<div class="col-lg-6 col-md-9 col-sm-11 col-xs-12 centered text-center">
+							<div class="col-lg-12 col-md-9 col-sm-11 col-xs-12 centered text-center">
 								<h1 class="yellow-text-gradient title">Find apartment for rent in Ho Chi Minh City</h1>
-								<div class="description">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-								</div>
 								<a class="btn-yellow viewmore" href="/all">View Details</a>
 							</div>
 							<div class="control text-center">
@@ -82,10 +79,13 @@
 						<div class="gutter-30">
 							<div class="col-sm-6 group-input">
 								<label for="input-location">Area</label>
-								<select name="location" class="select2" id="input-location">
-									<option value="quan-1">District 1</option>
-									<option value="quan-1">District 2</option>
-									<option value="quan-1">District 7</option>
+								<select name="district" class="select2" id="input-location">
+									<option value="1">District 1</option>
+									<option value="3">District 3</option>
+									<option value="4">District 4</option>
+									<option value="5">District 5</option>
+									<option value="7">District 7</option>
+									<option value="Tan Binh">Tan Binh District</option>
 								</select>
 							</div>
 							<div class="col-sm-6 group-input">
@@ -116,6 +116,11 @@
 			</div>
 		</section>
 		<section class="properties">
+			<div class="page-title">
+				<div class="container">
+					<h1>Recently Listed Properties</h1>
+				</div>
+			</div>
 			@foreach($houses as $house)
 				<div class="col-md-4 col-xs-6 property-info" style="background-image: url(/uploads/images/{{ $house->image_thumbnail }});">
 					<div class="overlay"></div>

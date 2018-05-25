@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'ユーザー 編集')
+@section('title', 'Edit User')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -13,51 +13,39 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		<h2 class="ot-page-title">ユーザー 編集</h2>
+		<h2 class="ot-page-title">Edit User</h2>
 	</div>
 	@foreach($user as $user)
 	<div class="ot-image-detail-content">
 		<form class="form-content clearfix" action="{{ url('/admincp/user/update') }}" name="form_edit_user" onsubmit="return validateFormEditUser()" method="POST" role="form">
 			<div class="ot-content-left">
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">ユーザー名</div>
+					<div class="ot-image-detail-label">Username</div>
 					<div class="ot-image-detail-value">{{ $user->name }}</div>
 				</div>
 				{{ csrf_field()}}
 				<input type="hidden" value="{{ $user->id}}" name="id">
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">新パスワード</div>
+					<div class="ot-image-detail-label">New password</div>
 					<div class="ot-image-detail-value">
 						<input type="password" name="password" required=""
-							oninvalid="this.setCustomValidity('パスワードを入力してください。')" oninput="setCustomValidity('')">
+							oninvalid="this.setCustomValidity('Please enter your password.')" oninput="setCustomValidity('')">
 					</div>
 				</div>
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label"></div>
-					<div class="ot-image-detail-value">
-						半角英数8文字以上
-					</div>
-				</div>
-				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">新パスワード確認</div>
+					<div class="ot-image-detail-label">Confirm password</div>
 					<div class="ot-image-detail-value">
 						<input type="password" name="password_confirm" required=""
-							oninvalid="this.setCustomValidity('パスワードをもう一度入力してください。')" oninput="setCustomValidity('')">
-					</div>
-				</div>
-				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label"></div>
-					<div class="ot-image-detail-value">
-						確認のため、再度パスワードの入力をお願いします。
+							oninvalid="this.setCustomValidity('Please re-enter your password.')" oninput="setCustomValidity('')">
 					</div>
 				</div>
 			</div>
 			<div class="ot-content-right">
 				<div class="ot-btn-edit-image">
-					<button type="submit">更新</button>
+					<button type="submit">Update</button>
 				</div>
 				<div class="ot-btn-cancel">
-					<a href="/admincp/user/detail/{{ $user->id}}">キャンセル</a>
+					<a href="/admincp/user/detail/{{ $user->id}}">Cancel</a>
 				</div>
 			</div>
 		</form>

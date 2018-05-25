@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Image;
 use File;
 use Mail;
+use DB;
 use App\Models\Ot_Images;
 use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
@@ -131,6 +132,42 @@ class UserController extends Controller
             return Redirect('/contact');
         } catch(Exception $e) {
 
+            return array("flag" => 'error');
+        }
+    }
+
+    public function contactAgent(Request $request){
+        $name           = $request->get("name");
+        $email          = $request->get("email");
+        $phone          = $request->get("phone");
+        $message        = $request->get("message");
+        $id             = $request->get("id");
+
+        // $mailTo = DB::table('houses')
+        //         ->join('users', 'houses.created_by', '=', 'users.name')
+        //         ->where('houses.id', '=', $id)
+        //         ->pluck('users.email');
+        $mailTo = "lidaqua@gmail.com";
+        $mailType   = '';
+        $params     = [ 'name'  => $name,
+                        'email' => $email,
+                        'phone' => $phone,
+                        'message'=> $message
+        ];
+
+        try {
+            $mailData =array_merge(array('mail' => $mailTo), $params);
+            Mail::send('emails.request', array('name'       =>$mailData['name'], 
+                                                'email'     =>$mailData['email'],
+                                                'phone'     =>$mailData['phone'],
+                                                'content'   =>$mailData['message']), 
+                function ($m) use ($mailData) {
+                    $m->from($mailData['email']);
+                    $m->to($mailData['mail'])->subject('There is a request from guest');
+            });
+
+            return response()->json(['success' => 'success']);
+        } catch(Exception $e) {
             return array("flag" => 'error');
         }
     }

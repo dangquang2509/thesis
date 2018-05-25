@@ -24,7 +24,7 @@
 	</form> -->
 	<div class="ot-image-list-table-area">
 		<div class="ot-list-table-headline">
-			<span>一Operation  </span><button data-url="{{ url('/admincp/user/deleteAll') }}" class="ot-btn-delete js-delete-all">Delete</button>
+			<span>Batch operation  </span><button data-url="{{ url('/admincp/user/deleteAll') }}" class="ot-btn-delete js-delete-all">Delete</button>
 			@if ($users->count() > 0)
 				<span class="ot-list-row-quantity">Total {{ $users->count() }} users</span>
 			@endif
@@ -68,10 +68,10 @@
 					allVals.push($(this).attr('data-id'));
 				});
 				if(allVals.length <= 0) {
-					toastr.info('行を選択してください');
+					toastr.info('Please select a row');
 				}
 				else {
-					var check = confirm("選択されたユーザーを削除しますか？");
+					var check = confirm("You want to delete these users？");
 					if (check == true) {
 						var join_selected_values = allVals.join(",");
 						$.ajax({
@@ -85,7 +85,7 @@
 										$(this).parents("tr").remove();
 									});
 									if (data['userCount'] > 0) {
-										$(".ot-list-row-quantity").text(data['userCount'] + " 件中 " + "1-" + data['userCount'] + " 件目");
+										$(".ot-list-row-quantity").text('Total ' + data['userCount'] + " users");
 									}
 									else {
 										$(".ot-list-row-quantity").text("");
@@ -94,7 +94,7 @@
 								} else if (data['error']) {
 									toastr.error(data['error']);
 								} else {
-									toastr.error('エラーが発生しました。もう一度お試しください。');
+									toastr.error('An error occurred. Please try again.');
 								}
 							},
 							error: function (data) {

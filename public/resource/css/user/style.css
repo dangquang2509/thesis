@@ -183,7 +183,7 @@ section.filter .select2-container--default .select2-selection--single .select2-s
 .property-info .price-tag { margin-bottom: 30px; }
 .property-info .description { margin-bottom: 0px; display: none; }
 .property-info .viewmore { margin-top: 20px; }
-.property-info .overlay { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); transition: all ease .4s; -webkit-transition: all ease .4s }
+.property-info .overlay { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); width: 100%; height: 100%; background-color: rgba(0,0,0,0.3); transition: all ease .4s; -webkit-transition: all ease .4s }
 .property-info.open .overlay { width: 100% !important; height: 100% !important; }
 .property-info .overlay:before { position: absolute; left: 50%; right: 50%; top: 50%; bottom: 50%; display: block; content: ""; border: 1px solid #fff; transition: all ease .4s; -webkit-transition: all ease .4s; opacity: 0; }
 .property-info.open .overlay:before { opacity: 1; left: 20px; right: 20px; top: 20px; bottom: 20px;  }
@@ -439,8 +439,8 @@ section.property-content .block .map .content { width: 45%; padding: 25px; backg
     #main-menu .phone-number .icon { font-size: 32px; }
     #main-menu .navbar-nav>li>a { padding: 13px 18px; }
     #main-menu .navbar-nav { font-size: 15px; }
-    section.slider .caption .title { font-size: 28px; margin-bottom: 25px; }
-    section.slider .caption .description { font-size: 15px; margin-bottom: 40px; }
+    section.slider .caption .title { font-size: 40px; margin-bottom: 95px; font-weight: bold }
+    section.slider .caption .description { font-size: 18px; margin-bottom: 40px; }
     section.slider .caption .viewmore { margin-bottom: 60px; }
     section.slider .control a .icon:before { font-size: 45px; line-height: 15px; }
     section.slider .caption > .table-cell { padding-top: 110px; padding-bottom: 100px; }

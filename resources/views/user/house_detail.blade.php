@@ -43,9 +43,13 @@
 			margin: 0 auto;
 			width: 80%;
 		}
+		.ot-content {
+			padding: 12px;
+		}
 		section.property .base-infos-container .base-infos {
 			width: 100%;
 			background: white;
+			padding: 32px;
 		}
 		section.property .base-infos .list-info {
 			color: black;
@@ -119,7 +123,7 @@
 						<li><a href="/">Home</a></li>
 						<li><a href="/all">Rent</a></li>
 						<li><a href="/contact">Contact</a></li>
-						<li><a href="#">Log In</a></li>
+						<!-- <li><a href="#">Log In</a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -153,7 +157,7 @@
 		<section class="property menu-padding sub-menu-padding">
 			<div class="base-infos-container">
 				<div class="base-infos">
-					<div class="left-container">
+					<div class="">
 						<h1 class="title yellow-text-gradient line-bottom">{{ $house->title }}</h1>
 						<div class="description">
 							<p>{{ $house->description }}</p>
@@ -167,7 +171,26 @@
 								<li><big>{{ $house->area }}</big> m<sup>2</sup></li>
 							</ul>
 						</div>
-						<div class="text-right"><a href="#" class="btn-yellow">Contact Agent</a></div>
+						<div class="text-right"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn-yellow">Contact Agent</a></div>
+						<div class="collapse" id="collapseExample">
+							<!-- <form class="form-contact-agent" method="POST" action="/contactAgent"> -->
+								<div class="form-group">
+									<input type="text" class="form-control js-input-name" name="name" placeholder="Name">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control js-input-phone" name="phone" placeholder="Phone">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control js-input-email" name="email" placeholder="Email">
+								</div>
+								<div class="form-group">
+									<textarea class="form-control js-input-message" name="message" placeholder="Message" rows="3"></textarea>
+								</div>
+								<input type="hidden" class="js-house-id" value="{{ $house->id }}">
+								<input type="hidden" class="js-house-xml" value="{{ $house->xml_url }}">
+							<button type="submit" class="btn-yellow js-contact-agent">Submit</button>
+							<!-- </form> -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -226,10 +249,10 @@
 			<div class="center-position">
 				<div class="property-container">
 					<h2 class="title">{{ $house->title }}</h2>
-					<div class="price-tag"><span class="price">$1,000</span> <span class="tag">- 2 Bedrooms</span></div>
-					<div class="description">
+					<div class="price-tag"><span class="price">${{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedrooms</span></div>
+					<!-- <div class="description">
 						<p>{{ $house->description }}</p>
-					</div>
+					</div> -->
 					<a href="/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
 				</div>
 			</div>
@@ -310,7 +333,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmPq7GJGWrVXertDiV_JZcUUpAXp1cb5c&libraries=places"></script>
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
 	<script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/infobox/1.1.13/src/infobox.js"></script>
-
+	<script type="text/javascript" src="{!! asset('resource/js/user/script.js') !!}"></script>
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -332,14 +355,15 @@
 					icon: "images/map-marker.png"
 				});
 			}
-
-			embedpano({swf:"/vtour/tour.swf", xml:"/{{ $house->xml_url }}", target:"pano", consolelog: "false"});
+			var house_xml = $(".js-house-xml").val();
+			var house_id = $(".tour_id").val();
+			embedpano({swf:"/vtour/tour.swf", xml:"/" + house_xml, target:"pano", consolelog: "false"});
 			var width = 600;
 			var height = 400;
 			var krpano = document.getElementById("krpanoSWFObject");
 			var scene = krpano.get("xml.scene");
 			var link = "&start_scene=" + scene;
-			link = window.location.href.replace("admincp/house", "house/full").replace("detail/", "") + link;
+			link = window.location.origin + "/house/full/" + house_id + link;
 			var leftPosition, topPosition;
 			leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
 			topPosition = (window.screen.height / 2) - ((height / 2) + 50);
@@ -349,7 +373,6 @@
 			var embed_code = '<iframe src="' + link + '" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>';
 			$(".js-embed-code").text(embed_code);
 			$(".js-view-url").text(link);
-
 		});
 
 	</script>

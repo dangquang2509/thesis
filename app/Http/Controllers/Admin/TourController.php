@@ -13,6 +13,7 @@ use DB;
 use App\Models\Ot_Images;
 use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
+use App\Models\Ot_Categories;
 use SimpleXMLElement;
 
 class TourController extends Controller
@@ -21,7 +22,7 @@ class TourController extends Controller
 	 * Show view create tour VR
 	 */
 	public function newTour() {
-		$categories = DB::table('ot_categories')->get();
+		$categories = Ot_Categories::all();
 		return view('admincp.newTour', ['categories' => $categories]);
 	}
 
@@ -54,6 +55,7 @@ class TourController extends Controller
 			$objTour->area 				= $request->house_area;
 			$objTour->num_bedrooms 		= $request->house_num_bedroom;
 			$objTour->num_toilets 		= $request->house_num_toilet;
+			$objTour->district 			= $request->house_district;
 
 			if ($request->tour_published) {
 				$objTour->is_public = 1;
@@ -130,6 +132,7 @@ class TourController extends Controller
 			$area 			= $request->house_area;
 			$num_bedroom 	= $request->house_num_bedroom;
 			$num_toilet 	= $request->house_num_toilet;
+			$district 		= $request->house_district;
 
 			$now 	= Carbon::now();
 			$jSON 	= json_decode($request->tour_param, true);
@@ -160,7 +163,7 @@ class TourController extends Controller
 				}
 			}
 
-			DB::table('ot_tours')
+			DB::table('houses')
 			->where('id', $id)
 			->update([
 					'title' 		=> $title,
@@ -180,7 +183,8 @@ class TourController extends Controller
 					'price'					=> $price,
 					'area'					=> $area,
 					'num_bedrooms'			=> $num_bedroom,
-					'num_toilets'			=> $num_toilet]);
+					'num_toilets'			=> $num_toilet,
+					'district'				=> $district]);
 
 			return Redirect::to('admincp/house/detail/'. $id);
 		}
@@ -317,9 +321,9 @@ class TourController extends Controller
 	public function deletePlan(Request $request) {
 		$ret['data'] = false;
 		if($request->has('id')) {
-			$imagePlan = DB::table('ot_plan_images')->where('id', $request->id)->first();
+			$imagePlan = DB::table('plan_images')->where('id', $request->id)->first();
 			if($imagePlan != null) {
-				DB::table('ot_plan_images')->where('id', $request->id)->delete();
+				DB::table('plan_images')->where('id', $request->id)->delete();
 				$ret['data'] = true;
 			}
 		}
@@ -333,7 +337,7 @@ class TourController extends Controller
 	public function checkTourKey(Request $request) {
 		$ret['data'] = false;
 		if($request->has('key')) {
-			$tourByKey = DB::table('ot_tours')->where('tour_key', $request->key)->first();
+			$tourByKey = DB::table('houses')->where('tour_key', $request->key)->first();
 			if($tourByKey != null) {
 				$ret['data'] = true;
 			}
@@ -349,9 +353,9 @@ class TourController extends Controller
 	public function getTourDetail(Request $request) {
 		$tour = array();
 		if(Auth::user()->name == "admin") {
-			$tour = DB::table('ot_tours')->where('id', $request->id)->get();
+			$tour = DB::table('houses')->where('id', $request->id)->get();
 		} else {
-			$tour = DB::table('ot_tours')
+			$tour = DB::table('houses')
 						->where('created_by', '=', Auth::user()->name)
 						->where('id', $request->id)->get();
 		}
@@ -371,10 +375,10 @@ class TourController extends Controller
 	public function showList() {
 		$tours = array();
 		if(Auth::user()->name == "admin") {
-			$tours = DB::table('ot_tours')
+			$tours = DB::table('houses')
 				->get();
 		} else {
-			$tours = DB::table('ot_tours')
+			$tours = DB::table('houses')
 				->where('created_by', '=', Auth::user()->name)
 				->get();
 		}
@@ -392,17 +396,17 @@ class TourController extends Controller
 	public function editTour(Request $request) {
 		$tour = array();
 		if(Auth::user()->name == "admin") {
-			$tour 		= DB::table('ot_tours')
+			$tour 		= DB::table('houses')
 							->where('id', $request->id)->get();
 		} else {
-			$tour 		= DB::table('ot_tours')
+			$tour 		= DB::table('houses')
 							->where('created_by', '=', Auth::user()->name)
 							->where('id', $request->id)->get();
 		}
 		if(count($tour) > 0) {
-			$floorMapId = DB::table('ot_tours')->where('id', $request->id)->pluck('plan_image_id');
-			$floorMap 	= DB::table('ot_plan_images')->where('id', $floorMapId)->pluck('image_url');
-			$categories = DB::table('ot_categories')->get();
+			$floorMapId = DB::table('houses')->where('id', $request->id)->pluck('plan_image_id');
+			$floorMap 	= DB::table('plan_images')->where('id', $floorMapId)->pluck('image_url');
+			$categories = DB::table('category')->get();
 			return view('admincp.editTour', ['tour' => $tour, 'floorMapUrl' => $floorMap, 'categories' => $categories]);
 		} else {
 			return redirect()->intended('/admincp');
@@ -416,22 +420,22 @@ class TourController extends Controller
 	public function destroy(Request $request) {
 		$id = $request->id;
 
-		$xmlPath = DB::table('ot_tours')->where('id', $id)->pluck('xml_url');
+		$xmlPath = DB::table('houses')->where('id', $id)->pluck('xml_url');
 		$fullXmlPath = public_path($xmlPath);
 		$fullXmlPath = str_replace(array("\"","[","]","/"), "", $fullXmlPath);
 		if (File::exists($fullXmlPath)) {
 			File::delete($fullXmlPath);
 		}
 
-		$imageFloorId 	= DB::table('ot_tours')->where('id', $id)->pluck('plan_image_id');
-		$imageFloorUrl 	= DB::table('ot_plan_images')->where('id', $imageFloorId)->pluck('image_url');
+		$imageFloorId 	= DB::table('houses')->where('id', $id)->pluck('plan_image_id');
+		$imageFloorUrl 	= DB::table('plan_images')->where('id', $imageFloorId)->pluck('image_url');
 
 		$fullFloorMapPath = 'uploads/plans/'. $imageFloorUrl;
 		$fullFloorMapPath = str_replace(array("\"","[","]"), "", $fullFloorMapPath);
 		if (File::exists($fullFloorMapPath)) {
 			File::delete($fullFloorMapPath);
 		}
-		DB::table('ot_plan_images')->where('id', $imageFloorId)->delete();
+		DB::table('plan_images')->where('id', $imageFloorId)->delete();
 
 		$imageList = Ot_Images::where('tour_id', $id)->get();
 		foreach ($imageList as $img) {
@@ -448,12 +452,12 @@ class TourController extends Controller
 			$img->delete();
 		}
 
-		$row = DB::table("ot_tours")
+		$row = DB::table("houses")
 			->where('id', $id)
 			->where('created_by', '=', Auth::user()->name)
 			->delete();
 
-		return response()->json(['success' => "コンテンツを削除しました。", 'row' => $row, 'id' => $id]);
+		return response()->json(['success' => "House deleted", 'row' => $row, 'id' => $id]);
 	}
 
 	/**
@@ -464,22 +468,22 @@ class TourController extends Controller
 		$ids = $request->ids;
 		$idArray =  explode(',', $ids);
 		for ($i = 0; $i < count($idArray); $i++) {
-			$xmlPath = DB::table('ot_tours')->where('id', $idArray[$i])->pluck('xml_url');
+			$xmlPath = DB::table('houses')->where('id', $idArray[$i])->pluck('xml_url');
 			$fullXmlPath = public_path($xmlPath);
 			$fullXmlPath = str_replace(array("\"","[","]","/"), "", $fullXmlPath);
 			if (File::exists($fullXmlPath)) {
 				File::delete($fullXmlPath);
 			}
 
-			$imageFloorId = DB::table('ot_tours')->where('id', $idArray[$i])->pluck('plan_image_id');
-			$imageFloorUrl = DB::table('ot_plan_images')->where('id', $imageFloorId)->pluck('image_url');
+			$imageFloorId = DB::table('houses')->where('id', $idArray[$i])->pluck('plan_image_id');
+			$imageFloorUrl = DB::table('plan_images')->where('id', $imageFloorId)->pluck('image_url');
 
 			$fullFloorMapPath = 'uploads/plans/'. $imageFloorUrl;
 			$fullFloorMapPath = str_replace(array("\"","[","]"), "", $fullFloorMapPath);
 			if (File::exists($fullFloorMapPath)) {
 				File::delete($fullFloorMapPath);
 			}
-			DB::table('ot_plan_images')->where('id', $imageFloorId)->delete();
+			DB::table('plan_images')->where('id', $imageFloorId)->delete();
 
 			$imageList = Ot_Images::where('tour_id', $idArray[$i])->get();
 			foreach ($imageList as $img) {
@@ -495,11 +499,11 @@ class TourController extends Controller
 				}
 				$img->delete();
 			}
-			DB::table('ot_tours')->where('id', $idArray[$i])->delete();
+			DB::table('houses')->where('id', $idArray[$i])->delete();
 		}
-		$tourCount = DB::table('ot_tours')->count();
+		$tourCount = DB::table('houses')->count();
 
-		return response()->json(['success' => "コンテンツを削除しました。", 'tourCount' => $tourCount]);
+		return response()->json(['success' => "House deleted", 'tourCount' => $tourCount]);
 	}
 
 	/**
@@ -510,36 +514,36 @@ class TourController extends Controller
 	public function showRecentTour() {
 		$tours_model_house = array();
 		if(Auth::user()->name == "admin") {
-			$tours_model_house 	= DB::table('ot_tours')
+			$tours_model_house 	= DB::table('houses')
 				->where('category_id', 1)->orderBy('created_at','desc')->take(6)->get();
 		} else {
-			$tours_model_house 	= DB::table('ot_tours')
+			$tours_model_house 	= DB::table('houses')
 				->where('created_by', '=', Auth::user()->name)
 				->where('category_id', 1)->orderBy('created_at','desc')->take(6)->get();
 		}
 
 		$tours_property = array();
 		if(Auth::user()->name == "admin") {
-			$tours_property 	= DB::table('ot_tours')->where('category_id', 2)->orderBy('created_at','desc')->take(6)->get();
+			$tours_property 	= DB::table('houses')->where('category_id', 2)->orderBy('created_at','desc')->take(6)->get();
 		} else {
-			$tours_property 	= DB::table('ot_tours')
+			$tours_property 	= DB::table('houses')
 				->where('created_by', '=', Auth::user()->name)
 				->where('category_id', 2)->orderBy('created_at','desc')->take(6)->get();
 		}
 		$countResult 		= $tours_model_house->count();
 
 		$imageListModelHouse 	= array();
-		$tourModelHouseIdList 	= DB::table('ot_tours')->where('category_id', 1)->orderBy('created_at','desc')->take(6)->pluck('id');
+		$tourModelHouseIdList 	= DB::table('houses')->where('category_id', 1)->orderBy('created_at','desc')->take(6)->pluck('id');
 		for ($i = 0; $i < $countResult; $i++) {
-			$image = DB::table('ot_images')->where('tour_id', $tourModelHouseIdList[$i])->pluck('image_url')->first();
+			$image = DB::table('images')->where('tour_id', $tourModelHouseIdList[$i])->pluck('image_url')->first();
 			array_push($imageListModelHouse, $image);
 		}
 
 		$countResult 	= $tours_property->count();
 		$imageListProperty 		= array();
-		$tourPropertyIdList 	= DB::table('ot_tours')->where('category_id', 2)->orderBy('created_at','desc')->take(6)->pluck('id');
+		$tourPropertyIdList 	= DB::table('houses')->where('category_id', 2)->orderBy('created_at','desc')->take(6)->pluck('id');
 		for ($i = 0; $i < $countResult; $i++) {
-			$image = DB::table('ot_images')->where('tour_id', $tourPropertyIdList[$i])->pluck('image_url')->first();
+			$image = DB::table('images')->where('tour_id', $tourPropertyIdList[$i])->pluck('image_url')->first();
 			array_push($imageListProperty, $image);
 		}
 

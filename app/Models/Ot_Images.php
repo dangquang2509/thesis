@@ -8,7 +8,7 @@ use Validator;
 
 class Ot_Images extends Model
 {
-	protected $table='ot_images';
+	protected $table='images';
 
 	public static $rules = array(
 		'spherical_id'	=> 'required|unique',

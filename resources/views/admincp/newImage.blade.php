@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', '360画像新規登録')
+@section('title', 'Spherical image posting')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -33,30 +33,30 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		<h2 class="ot-page-title">360画像新規登録</h2>
+		<h2 class="ot-page-title">Spherical image posting</h2>
 	</div>
 {!! Form::open(['url' => 'admincp/image/create', 'files' => true, 'class' => 'form-horizontal']) !!}
 	{!! csrf_field() !!}
 
 	<div class="ot-form-row">
-		<label class="ot-form-row-label">登録画像選択</label>
+		<label class="ot-form-row-label">Select posting file</label>
 		{!! Form::file('image_url', array('id' => 'image_url', 'class' => 'ot-form-row-input')) !!}
 	</div>
 	<div class="ot-form-row">
-		<label class="ot-form-row-label">タイトル</label>
+		<label class="ot-form-row-label">Title</label>
 		<input name="title" type="text" class="ot-form-row-input" value="{{ old('title') }}">
 	</div>
 	<div class="ot-form-row">
-		<label class="ot-form-row-label">備考</label>
+		<label class="ot-form-row-label">Description</label>
 		<textarea name="description" rows="3" class="ot-form-row-input">{{ old('description') }}</textarea>
 	</div>
 	<div class="checkbox ot-upload-checkbox">
 		<label>
-			<input name="is_public" type="checkbox" checked> 公開
+			<input name="is_public" type="checkbox" checked> Public
 		</label>
 	</div>
 	<div class="ot-btn-submit-area">
-		<button type="submit" class="ot-form-btn-submit">登録</button>
+		<button type="submit" class="ot-form-btn-submit">Post</button>
 	</div>
 {!! Form::close() !!}
 @stop
@@ -70,7 +70,7 @@
 			$('.ot-form-btn-submit').on('click', function(){
 				var imgFile = $('#image_url').val(); 
 				if (imgFile === '') {
-					toastr.error('ファイルを選択してください');
+					toastr.error('Please select file');
 					return false;
 				}
 			});

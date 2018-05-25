@@ -128,7 +128,7 @@
 			// delete tour
 
 			$('.js-delete-tour').on('click', function() {
-				var check = confirm("このコンテンツを削除します。よろしいですか？");
+				var check = confirm("You want to delete this house?");
 				if (check == true) {
 					$.ajax({
 						url: "/admincp/house/delete/" + $('.tour_id').val(),
@@ -139,11 +139,11 @@
 							if (data['row'] > 0) {
 								toastr.success(data['success']);
 							} else if (data['row'] == 0) {
-								toastr.error('このコンテンツが削除されません。');
+								toastr.error('This house will not be deleted.');
 							}
 						},
 						error: function (data) {
-							toastr.error('エラーが発生しました。もう一度お試しください。');
+							toastr.error('An error occurred. Please try again.');
 						}
 					});
 				} else {

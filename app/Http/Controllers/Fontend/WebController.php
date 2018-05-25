@@ -21,7 +21,7 @@ class WebController extends Controller
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function getFullTourDetail(Request $request) {
-		$tour = DB::table('ot_tours')->where('id', $request->id)->get();
+		$tour = DB::table('houses')->where('id', $request->id)->get();
 		return view('admincp.detailTourFull', ['tour' => $tour]);
 	}
 }

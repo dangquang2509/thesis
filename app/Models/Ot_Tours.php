@@ -8,5 +8,5 @@ use Validator;
 
 class Ot_Tours extends Model
 {
-	protected $table='ot_tours';
+	protected $table='houses';
 }

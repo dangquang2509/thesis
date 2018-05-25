@@ -180,7 +180,7 @@ class UserController extends Controller
 				'password' => $request->password,
 			];
 			if (Auth::attempt($data)) {
-				return redirect()->intended('/admincp');
+				return redirect('/admincp/house/list');
 			} else {
 				$errors = new MessageBag(['errorlogin' => 'ユーザーIDまたはパスワードが正しくありません。']);
 

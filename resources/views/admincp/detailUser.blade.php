@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'ユーザー 詳細')
+@section('title', 'User Detail')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -13,20 +13,20 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		 <h2 class="ot-page-title">ユーザー 詳細</h2>
-		 <a class="ot-page-title-btn" href="/admincp/user/list">一覧に戻る</a>
+		 <h2 class="ot-page-title">User Detail</h2>
+		 <a class="ot-page-title-btn" href="/admincp/user/list">Back to list</a>
 	</div>
 	<div class="ot-image-detail-content">
 		@foreach($user as $user)
 			<form class="form-content clearfix" action="{{ url('/admincp/user/delete') }}" method="POST" role="form">
 				<div class="ot-content-left">
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">ユーザー名</div>
+						<div class="ot-image-detail-label">Username</div>
 						<div class="ot-image-detail-value">{{ $user->name }}</div>
 					</div>
 					{{ csrf_field()}}
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">メールアドレス</div>
+						<div class="ot-image-detail-label">Email</div>
 						<div class="ot-image-detail-value">{{ $user->email }}</div>
 					</div>
 					<input type="hidden" value="{{ $user->id}}" class="user_id" name="user_id">
@@ -37,10 +37,10 @@
 				</div>
 				<div class="ot-content-right">
 					<div class="ot-btn-edit-image">
-						<a href="/admincp/user/edit/{{ $user->id }}">編集</a>
+						<a href="/admincp/user/edit/{{ $user->id }}">Edit</a>
 					</div>
 					<div> 
-						<a class="ot-link-delete js-delete-user">このユーザーを削除</a>
+						<a class="ot-link-delete js-delete-user">Delete this user</a>
 					</div>
 				</div>
 			</form>
@@ -54,7 +54,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.js-delete-user').on('click', function() {
-				var check = confirm("このユーザーを削除します。よろしいですか？");
+				var check = confirm("You want to delete this user?");
 				if (check == true) {
 					$.ajax({
 						url: "/admincp/user/delete/" + $('.user_id').val(),
@@ -65,11 +65,11 @@
 							if (data['row'] > 0) {
 								toastr.success(data['success']);
 							} else if (data['row'] == 0) {
-								toastr.error('このユーザーが削除されません。');
+								toastr.error('This user will not be deleted');
 							}
 						},
 						error: function (data) {
-							toastr.error('エラーが発生しました。もう一度お試しください。');
+							toastr.error('An error occurred. Please try again.');
 						}
 					});
 				} else {

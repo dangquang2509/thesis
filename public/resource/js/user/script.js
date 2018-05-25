@@ -279,6 +279,7 @@ jQuery(document).ready(function($) {
 		// 		})
 		// 	});
 		// });
+		// contact agent
 		$(".js-send-request").click(function(){
 			var form = $(".form-submit");
 			var name = form.find("[name=name]").val();
@@ -302,6 +303,58 @@ jQuery(document).ready(function($) {
 				return false; 
 			}
 
+		});
+
+		$(".js-contact-agent").click(function(){
+			var name = $(".js-input-name").val();
+			var email = $(".js-input-email").val();
+			var phone = $(".js-input-phone").val();
+			var message = $(".js-input-message").val();
+			var id 		= $(".js-house-id").val();
+			
+			var result = "";
+			if (name == "")
+				result = "<p>Please input your name</p>";
+			if (email == "") 
+				result = "<p>Please input your email</p>";
+			if (phone == "")
+				result = "<p>Please input your phone number</p>";
+			if (message == "")
+				result = "<p>Please input your message</p>";
+			if (result.length > 0) { 
+				bootbox.alert(result); 
+				return false; 
+			}
+
+			$.ajax({
+				url: '/contactAgent',
+				type: 'POST',
+				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+				data: { 
+					name : name,
+					email : email,
+					phone : phone,
+					message : message,
+					id 		: id
+				},
+				success: function(data){
+					if (data['success']) {
+						toastr.info('Message was sent successfully');
+						$(".js-input-name").val("");
+						$(".js-input-email").val("");
+						$(".js-input-phone").val("");
+						$(".js-input-message").val("");
+					} else {
+						toastr.error("There was an error. Please try again");
+					}
+				},
+				error: function(data){
+					toastr.error("There was an error. Please try again");
+				}
+			});
+			// $.post( "/contactAgent", function( data ) {
+			// 	alert("aaadf");
+			// });
 		});
 		function sendData(data, callback=false){
 			var dataPost = {};

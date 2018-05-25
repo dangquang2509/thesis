@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', '360画像 詳細')
+@section('title', 'Spherical image details')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -14,9 +14,9 @@
 @section('content')
 	@foreach($image as $image)
 	<div class="ot-page-title-area">
-		<h2 class="ot-page-title">360画像 詳細</h2>
-		<span><a class="ot-page-title-btn" href="/admincp/image/list">一覧に戻る</a></span>
-		<span><a class="ot-page-title-btn ot-page-title-btn-right" href="/admincp/image/edit/{{ $image->id}}">編集</a></span>
+		<h2 class="ot-page-title">Spherical image details</h2>
+		<span><a class="ot-page-title-btn" href="/admincp/image/list">Back to list</a></span>
+		<span><a class="ot-page-title-btn ot-page-title-btn-right" href="/admincp/image/edit/{{ $image->id}}">Edit</a></span>
 	</div>
 	<div class="ot-image-detail-content">
 		<form class="form-content clearfix" action="{{ url('/admincp/image/delete') }}" method="POST" role="form">
@@ -51,15 +51,15 @@
 					</div> -->
 					<input type="hidden" value="{{ $image->id}}" name="id" class="image_id">
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">360画像ID</div>
+						<div class="ot-image-detail-label">Spherical ID</div>
 						<div class="ot-image-detail-value">{{ $image->spherical_id }}</div>
 					</div>
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">タイトル</div>
+						<div class="ot-image-detail-label">Title</div>
 						<div class="ot-image-detail-value">{{ $image->title }}</div>
 					</div>
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">サムネイル</div>
+						<div class="ot-image-detail-label">Thumbnail</div>
 						<div class="ot-image-detail-value">
 							<img src="{{URL::asset('uploads/images/thumb/' . $image->image_url)}}" alt="image_thumbnail">
 						</div>
@@ -70,19 +70,19 @@
 						<div class="ot-image-detail-value">uploads/images/{{ $image->image_url }}</div>
 					</div>
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">サムネイルURL</div>
+						<div class="ot-image-detail-label">Thumbnail URL</div>
 						<div class="ot-image-detail-value">{{ $image->view_url }}</div>
 					</div>
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">備考</div>
+						<div class="ot-image-detail-label">Description</div>
 						<div class="ot-image-detail-value">{{ $image->description }}</div>
 					</div>
 					<div class="ot-btn-area clearfix">
 					<div class="ot-btn-edit">
-						<a href="/admincp/image/edit/{{ $image->id}}">編集</a>
+						<a href="/admincp/image/edit/{{ $image->id}}">Edit</a>
 					</div>
 					<div class="ot-btn-delete">
-						<a class="ot-link-delete js-delete-image">この360画像を削除</a>
+						<a class="ot-link-delete js-delete-image">Delete this image</a>
 					</div>
 				</div>
 			</div>

@@ -35,7 +35,7 @@
 	                    <li><a href="/">Home</a></li>
 	                    <li class="active"><a href="/all">Rent</a></li>
 	                    <li><a href="/contact">Contact</a></li>
-	                    <li><a href="#">Log In</a></li>
+	                    <!-- <li><a href="/login">Log In</a></li> -->
 	                </ul>
 	            </div>
 	        </div>
@@ -52,23 +52,20 @@
 					<div class="gutter-10">
 						<div class="col-lg-2 col-sm-4 input">
 							Area :
-							<select class="select2" name="location">
-								<option value="*">Area</option>
-								<option value="AL">District 1</option>
-								<option value="1">District 3</option>
-								<option value="2">District 5</option>
-								<option value="3">District 7</option>
-								<option value="WY">District 8</option>
+							<select class="select2" name="district">
+								<option value="1">District 1</option>
+								<option value="3">District 3</option>
+								<option value="4">District 4</option>
+								<option value="5">District 5</option>
+								<option value="7">District 7</option>
+								<option value="Tan Binh">Tan Binh District</option>
 							</select>
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
 							Type :
 							<select class="select2" name="category">
-								<!-- <option value="0">All Properties</option> -->
 								<option value="1">Apartment</option>
 								<option value="2">Villa</option>
-								<!-- <option value="3">Townhouse</option> -->
-								<!-- <option value="3">Other</option> -->
 							</select>
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
@@ -112,7 +109,7 @@
 					</div>
 				</div>
 			@endforeach
-			<nav class="navigation pagination" role="navigation">
+			<!-- <nav class="navigation pagination" role="navigation">
 				<div class="nav-links">
 					<a class="next page-numbers" href="#"><i class="icon ion-chevron-left" aria-hidden="true"></i></a>
 					<span class="page-numbers current"><span class="meta-nav screen-reader-text"> </span>1</span>
@@ -121,7 +118,7 @@
 					<a class="page-numbers" href="#"><span class="meta-nav screen-reader-text"> </span>20</a>
 					<a class="next page-numbers" href="#"><i class="icon ion-chevron-right" aria-hidden="true"></i></a>
 				</div>
-			</nav>
+			</nav> -->
 		</section>
 		<section class="form-submit form-hasBg submit-type-1">
 			<div class="bg-form">
@@ -169,7 +166,7 @@
 				// property.thumb = "images/bg-form-home.jpg";
 				property.thumb = "/uploads/images/" + houses[i].image_thumbnail;
 				property.title = houses[i].title;
-				property.price = "$600"
+				property.price = '$' + houses[i].price;
 				
 				location.property = property;
 				

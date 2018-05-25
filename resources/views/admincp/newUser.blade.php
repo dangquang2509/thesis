@@ -22,8 +22,7 @@
 					<div class="ot-image-detail-label">Username</div>
 					<span class="ot-form-require-label">required</span>
 					<div class="ot-image-detail-value">
-						<input type="text" name="username" required="" 
-							oninvalid="this.setCustomValidity('ユーザー名を入力してください。')" oninput="setCustomValidity('')">
+						<input type="text" name="username" required="">
 					</div>
 				</div>
 				{{ csrf_field()}}
@@ -37,15 +36,15 @@
 					<div class="ot-image-detail-label">Mail Address</div>
 					<span class="ot-form-require-label">required</span>
 					<div class="ot-image-detail-value">
-						<input type="text" name="email" required=""
-							oninvalid="this.setCustomValidity('メールアドレスを入力してください。')" oninput="setCustomValidity('')">
+						<input type="text" name="email" required="">
 					</div>
 				</div>
 				<div class="ot-image-detail-row">
 					<div class="ot-image-detail-label">Password</div>
 					<span class="ot-form-require-label">required</span>
-					<div class="ot-image-detail-value"><input type="password" name="password" required=""
-							oninvalid="this.setCustomValidity('パスワードを入力してください。')" oninput="setCustomValidity('')"></div>
+					<div class="ot-image-detail-value">
+						<input type="password" name="password" required="">
+					</div>
 				</div>
 				<div class="ot-image-detail-row">
 					<div class="ot-image-detail-label"></div>
@@ -57,8 +56,7 @@
 					<div class="ot-image-detail-label">Reconfirmed Password</div>
 					<span class="ot-form-require-label">required</span>
 					<div class="ot-image-detail-value">
-						<input type="password" name="password_confirm" required=""
-							oninvalid="this.setCustomValidity('パスワードをもう一度入力してください。')" oninput="setCustomValidity('')">
+						<input type="password" name="password_confirm" required="">
 					</div>
 				</div>
 				<div class="ot-image-detail-row">
@@ -99,17 +97,17 @@
 				toastr.error('Please filled in required fields');
 				return false;
 			} else if (username.includes(" ")) {
-				toastr.error('ユーザー名が無効な形式です。');
+				toastr.error('Invalid user name.');
 				return false;
 			} else if (pwd.length < 8) {
-				toastr.error('パスワードは8文字以上で入力してください。');
+				toastr.error('Please enter a password at least 8 characters.');
 				return false;
 			} else if (!email.includes("@")) {
-				toastr.error('メールアドレスが無効な形式です。');
+				toastr.error('Invalid email address.');
 				return false;
 			} else {
 				if (pwd !== pwd_confirm) {
-					toastr.error('パスワードが一致しません。');
+					toastr.error('Passwords do not match.');
 					return false;
 				}
 			}

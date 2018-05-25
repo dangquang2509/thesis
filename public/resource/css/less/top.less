@@ -3,7 +3,7 @@
 @import "tables.less";
 
 body {
-	background-color: #E3F2FD;
+	background-color: #edf2f5;
 	.noselect;
 }
 .clearfix {
@@ -47,8 +47,8 @@ form {
 		margin-left: 32px;
 		background-color: white;
 		padding: 6px 24px;
-		color: @mainColor;
-		border: 1px solid @mainColor;
+		color: #0088BD;
+		border: 1px solid #0088BD;
 		border-radius: 4px;
 		font-size: 16px;
 		text-decoration: none;
@@ -61,12 +61,12 @@ form {
 		&.ot-page-title-btn-right {
 			margin-top: 18px;
 			margin-right: 16px;
-			background-color: @mainColor;
-			color: white;
+			background-color: white;
+			color: #0088BD;
 			vertical-align: middle;
 			float: right;
 			&:hover {
-				background-color: darken(@mainColor, 5%)
+				background-color: #BBDEFB;
 			}
 		}
 	}
@@ -77,8 +77,8 @@ form {
 	.ot-page-title-btn {
 		background-color: white;
 		padding: 6px 24px;
-		color: @mainColor;
-		border: 1px solid @mainColor;
+		color: #029fdc;
+		border: 1px solid #029fdc;
 		border-radius: 4px;
 		font-size: 16px;
 		text-decoration: none;
@@ -177,8 +177,8 @@ form {
 			padding: 4px 10px;
 			color: #0072a0;
 			&.btn-create-tour-active {
-				background-color: @mainColor;
-				border: 1px solid darken(@mainColor, 10%);
+				background-color: #8F969A;
+				border: 1px solid #8F969A;
 				color: #fff;
 				&:hover {
 					color: #0072a0;
@@ -208,7 +208,7 @@ form {
 		height: 400px;
 		left: 12px;
 		padding: 6px;
-		border: 1px solid @mainColor;
+		border: 2px dashed #0086db;
 		display: table;
 		vertical-align: middle;
 		text-align: center;
@@ -237,7 +237,7 @@ form {
 				display: table-cell;
 				vertical-align: middle;
 				text-align: center;
-				color: @mainColor;
+				color: #0086db;
 			}
 		}
 		.img-minimap {
@@ -251,7 +251,7 @@ form {
 	.ot-right-column {
 		position: relative;
 		float: left;
-		border: 1px solid @mainColor;
+		border: 1px solid #0086db;
 		border-radius: 4px;
 		width: 53%;
 		height: 400px;
@@ -298,11 +298,11 @@ form {
 	}
 	.ot-drop-sphere {
 		margin: 12px;
-		border: 1px solid @mainColor;
+		border: 2px dashed #0086db;
 		border-radius: 4px;
 		.ot-message {
 			text-align: center;
-			color: @mainColor;
+			color: #0086db;
 		}
 		.sphere-container {
 			padding-top: 8px;
@@ -372,14 +372,14 @@ form {
 	text-align: center;
 	padding-top: 16px;
 	.ot-form-btn-submit {
-		background-color: @mainColor;
+		background-color: #029fdc;
 		padding: 6px 20px;
 		color: white;
 		border: none;
 		border-radius: 4px;
 		font-size: 16px;
 		&:hover {
-			background: darken(@mainColor, 5%);
+			background: lighten(#029fdc, 10%);
 		}
 	}
 }
@@ -446,7 +446,7 @@ form {
 
 			}
 			&:nth-child(even) {
-				background-color: #E3F2FD;
+				background-color: #f6f8fa;
 			}
 
 		}
@@ -462,6 +462,7 @@ form {
 	}
     input {
         border: 1px solid #ccc;
+        margin-left: 2px;
         border-radius: 4px;
         &:focus {
             border: 1px solid #d9d9d9;
@@ -562,23 +563,23 @@ form {
 		text-align: center;
 		background: white;
 		.ot-btn-edit-image {
-			background-color: @mainColor;
+			background-color: white;
 			border-radius: 4px;
-			border: 1px solid darken(@mainColor, 5%);
+			border: 1px solid #0088BD;
 			padding: 8px;
-			color: #fff;
+			color: #0088BD;
 			font-size: 18px;
 			cursor: pointer;
 			margin: 18px;
 			a {
-				color: white;
+				color: #0088BD;
 				text-decoration: none;
 				padding: 4px 80px;
 			}
 			button {
 				width: 100%;
-				color: white;
-				background-color: @mainColor;
+				color: #0088BD;
+				background-color: white;
 				border: none;
 			}
 		}
@@ -587,9 +588,9 @@ form {
 			padding: 8px;
 			font-size: 18px;
 			border-radius: 4px;
-			border: 1px solid @mainColor;
+			border: 1px solid #029fdc;
 			background-color: white;
-			color: @mainColor;
+			color: #029fdc;
 			margin: 18px;
 			cursor: pointer;
 			&:hover {
@@ -597,7 +598,7 @@ form {
 			}
 			a {
 				text-decoration: none;
-				color: @mainColor;
+				color: #029fdc;
 				padding: 4px 62px;
 			}
 		}
@@ -618,14 +619,14 @@ form {
 		.ot-btn-submit {
 			width: 86%;
 			margin: 18px 4px;
-			color: white;
-			background-color: @mainColor;
-			border: none;
+			color: #0088BD;
+			background-color: white;
+			border: 1px solid #0088BD;
 			padding: 6px;
 			font-size: 18px;
 			border-radius: 4px;
 			&:hover {
-				background: darken(@mainColor, 10%);
+				background: #BBDEFB;
 			}
 		}
 	}
@@ -698,7 +699,7 @@ form {
 }
 .ot-house-panel {
 	width: 30%;
-	display: inline-block;
+	display: inline-grid;
 	margin: 24px 14px;
 	.ot-house-panel-image {
 		position: relative;
@@ -775,7 +776,7 @@ form {
 	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 	outline: 0;
-	background: @mainColor;
+	background: #029fdc;
 	width: 100%;
 	border: 0;
 	padding: 15px;
@@ -788,7 +789,7 @@ form {
 }
 
 .form button:hover,.form button:active,.form button:focus {
-	background: darken(@mainColor, 10%);
+	background: lighten(#029fdc, 10%);
 }
 
 .form .message {
@@ -829,9 +830,9 @@ form {
 }
 
 [class*=ot-title].is-bg {
-	background: linear-gradient(#fff,#f3efef);
-	border: 1px solid #ededed;
-	border-radius: 4px;
+	background: #fff;
+	border: 1px solid #0088BD;
+	border-radius: 8px;
 }
 
 [class*=ot-title].is-left {
@@ -848,12 +849,11 @@ form {
 	top: 20%;
 	height: 60%;
 	width: 6px;
-	background-color: @mainColor;
-	border: 2px solid lighten(@mainColor, 50%);
-	border-radius: 6px;
+	background-color: #0088BD;
+	border-radius: 8px;
 }
 .ot-title-link {
-	color: darken(@mainColor, 30%);
+	color: #0088BD;
 	font-size: 18px;
 }
 .ot-content {
@@ -931,15 +931,15 @@ form {
 			a {
 				padding: 6px 24px;
 				text-decoration: none;
-				background-color: @mainColor;
+				background-color: #14bcfd;
 				color: white;
 				text-align: center;
 				display: inline-block;
 				font-size: 16px;
 				border-radius: 4px;
-				border: 1px solid @mainColor;
+				border: 1px solid #14bcfd;
 				&:hover {
-					background-color: darken(@mainColor, 5%);
+					background-color: lighten(#14bcfd, 5%);
 				}
 			}
 		}
@@ -992,15 +992,21 @@ form {
 	text-align: center !important;
 	padding-top: 14px !important;
 }
+.paginate_button {
+    padding: 4px 12px;
+    cursor: pointer;
+}
 .paginate_button.current {
 	background: @mainColorLight !important;
 	color: white !important;
 	border: 1px solid @mainColorLight !important;
+    padding: 4px 12px;
+    margin: 4px;
 }
 .paginate_button {
 	&:hover {
-		background: lighten(@mainColor,5%) !important;
-		border: 1px solid lighten(@mainColor,5%) !important;
+		background: lighten(@mainColorLight,5%) !important;
+		border: 1px solid lighten(@mainColorLight,5%) !important;
 		color: white !important;
 	}
 	&:active {
@@ -1025,9 +1031,9 @@ form {
 	}
 }
 .ot-primary-bg {
-    background-color: @mainColor !important;
-    color: #fff!important;
+    background-color: white !important;
+    color: #0088BD !important;
     &:hover {
-        background-color: darken(@mainColor, 5%) !important;
+        background-color: #BBDEFB !important;
     }
 }

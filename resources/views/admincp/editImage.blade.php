@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', '360画像 編集')
+@section('title', 'Spherical image edit')
 
 @section('header')
 	@include('layout.header')
@@ -9,9 +9,9 @@
 @section('content')
 	@foreach($image as $image)
 	<div class="ot-page-title-area">
-		<h2 class="ot-page-title">360画像 編集</h2>
-		<a class="ot-page-title-btn" href="/admincp/image/detail/{{ $image->id}}">キャンセル</a>
-		<a class="ot-page-title-btn ot-page-title-btn-right submit" href="#">更新</a>
+		<h2 class="ot-page-title">Spherical image edit</h2>
+		<a class="ot-page-title-btn" href="/admincp/image/detail/{{ $image->id}}">Cancel</a>
+		<a class="ot-page-title-btn ot-page-title-btn-right submit" href="#">Update</a>
 	</div>
 	<div class="ot-image-detail-content">
 		<form class="form-content clearfix form-edit-image" action="{{ url('/admincp/image/update') }}" method="POST" role="form">
@@ -48,18 +48,18 @@
 				</div> -->
 				<input type="hidden" value="{{ $image->id}}" name="id">
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">360画像ID</div>
+					<div class="ot-image-detail-label">Spherical ID	</div>
 					<div class="ot-image-detail-value">{{ $image->spherical_id }}</div>
 				</div>
 				<input type="hidden" value="{{ $image->image_url }}" class="js-image-url">
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">タイトル</div>
+					<div class="ot-image-detail-label">Title</div>
 					<div class="ot-image-detail-value">
 						<input type="text" value="{{ $image->title }}" name="title">
 					</div>
 				</div>
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">サムネイル</div>
+					<div class="ot-image-detail-label">Thumbnail</div>
 					<div class="ot-image-detail-value">
 						<img src="{{URL::asset('uploads/images/thumb/' . $image->image_url)}}" alt="image_thumbnail">
 					</div>
@@ -69,14 +69,14 @@
 					<div class="ot-image-detail-value">uploads/images/{{ $image->image_url }}</div>
 				</div>
 				<div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">備考</div>
+					<div class="ot-image-detail-label">Description</div>
 					<div class="ot-image-detail-value">
 						<input type="text" value="{{ $image->description }}" name="description">
 					</div>
 				</div>
 				<div class="ot-btn-area clearfix">
 					<div class="ot-btn-edit">
-						<a class="submit" href="#">更新</a>
+						<a class="submit" href="#">Update</a>
 					</div>
 				</div>
 			</div>

@@ -27,7 +27,7 @@
 	</form> -->
 	<div class="ot-image-list-table-area">
 		<div class="ot-list-table-headline">
-			<span>一Operation  </span><button class="ot-btn-delete js-delete-all" data-url="{{ url('/admincp/house/deleteAll') }}">Delete</button>
+			<span>Batch operation  </span><button class="ot-btn-delete js-delete-all" data-url="{{ url('/admincp/house/deleteAll') }}">Delete</button>
 			@if ($tours->count() > 0)
 				<span class="ot-list-row-quantity">Total {{ $tours->count() }} houses</span>
 			@endif
@@ -91,7 +91,7 @@
 						{searchable: false, targets: [0,2,3,4,5]}
 					],
 					language: {
-						emptyTable: "House not found",
+						emptyTable: "There is no house",
 						search: "Search",
 						searchPlaceholder: "Input house title",
 						paginate: {
@@ -117,10 +117,10 @@
 					allVals.push($(this).attr('data-id'));
 				});
 				if(allVals.length <= 0) {
-					toastr.info('行を選択してください');
+					toastr.info('Please select a row');
 				}
 				else {
-					var check = confirm("選択されたコンテンツを削除しますか？");
+					var check = confirm("You want to delete these houses？");
 					if (check == true) {
 						var join_selected_values = allVals.join(",");
 						$.ajax({

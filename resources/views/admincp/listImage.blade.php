@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', '360画像一覧')
+@section('title', 'Spherical image list')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -13,7 +13,7 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		<h2 class="ot-page-title">360画像一覧</h2>
+		<h2 class="ot-page-title">Spherical image list</h2>
 	</div>
 	<!-- <form>
 		<select class="ot-input-select">
@@ -26,21 +26,21 @@
 	</form> -->
 	<div class="ot-image-list-table-area">
 		<div class="ot-list-table-headline">
-			<span>一括操作  </span><button data-url="{{ url('/admincp/image/deleteAll') }}" class="ot-btn-delete js-delete-all">削除</button>
+			<span>Batch operation</span><button data-url="{{ url('/admincp/image/deleteAll') }}" class="ot-btn-delete js-delete-all">Delete</button>
 			@if ($images->count() > 0)
-				<span class="ot-list-row-quantity">{{ $images->count() }} 件中 1-{{ $images->count() }} 件目</span>
+				<span class="ot-list-row-quantity">{{ $images->count() }} images in total</span>
 			@endif
 		</div>
 		<table class="ot-image-list-table" id="table_image">
 			<thead>
 				<th class="no-sort"><input type="checkbox" id="chk-master"></th>
 				<!-- <th class="ot-th-private">非公開</th> -->
-				<th class="no-sort">サムネイル</th>
-				<th>360画像ID</th>
-				<th>コンテンツID</th>
+				<th class="no-sort">Thumbnail</th>
+				<th>Spherical ID</th>
+				<th>House ID</th>
 				<th>View URL</th>
-				<th>所有者</th>
-				<th>登録日時</th>
+				<th>Created by</th>
+				<th>Created at</th>
 			</thead>
 			<tbody>
 			@foreach($images as $image)
@@ -61,11 +61,6 @@
 			@endforeach
 			</tbody>
 		</table>
-		<div class="ot-list-table-headline clearfix">
-			@if ($images->count() > 0)
-				<span class="ot-list-row-quantity">{{ $images->count() }} 件中 1-{{ $images->count() }} 件目</span>
-			@endif
-		</div>
 	</div>
 @stop
 @section('js')

@@ -113,6 +113,17 @@
 				</select>
 			</div>
 			<div class="ot-form-row">
+				<label class="ot-form-row-label">District</label>
+				<select class="ot-input-category option-district" name="house_district">
+					<option value="1">1</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="7">7</option>
+					<option value="Tan Binh">Tan Binh</option>
+				</select>
+			</div>
+			<div class="ot-form-row">
 				<label class="ot-form-row-label">Amenities</label>
 				<input type="text" class="ot-form-row-input" name="house_amenities" value="{{ $tour->amenities }}">
 			</div>
@@ -250,6 +261,9 @@
 		var during_restore = true;
 
 		$(document).ready(function(){
+			var district = '{{ $tour->district }}';
+			$(".option-district").val(district);
+
 			var lat = parseFloat('{{ $tour->latitude }}');
 			var lng = parseFloat('{{ $tour->longitude }}');
 			var address = '{{ $tour->address }}';

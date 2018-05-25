@@ -25,9 +25,9 @@ class ImageController extends Controller
 	{
 		$images = array();
 		if (Auth::user()->name == "admin") {
-			$images = DB::table('ot_images')->get();
+			$images = DB::table('images')->get();
 		} else {
-			$images = DB::table('ot_images')
+			$images = DB::table('images')
 				->where('created_by', '=', Auth::user()->name)
 				->get();
 		}
@@ -44,11 +44,11 @@ class ImageController extends Controller
 	{
 		$image = array();
 		if (Auth::user()->name == "admin") {
-			$image = DB::table('ot_images')
+			$image = DB::table('images')
 				->where('id', $request->id)
 				->get();
 		} else {
-			$image = DB::table('ot_images')
+			$image = DB::table('images')
 				->where('id', $request->id)
 				->where('created_by', '=', Auth::user()->name)
 				->get();
@@ -70,11 +70,11 @@ class ImageController extends Controller
 	{
 		$image = array();
 		if (Auth::user()->name == "admin") {
-			$image = DB::table('ot_images')
+			$image = DB::table('images')
 				->where('id', $request->id)
 				->get();
 		} else {
-			$image = DB::table('ot_images')
+			$image = DB::table('images')
 				->where('id', $request->id)
 				->where('created_by', '=', Auth::user()->name)
 				->get();
@@ -134,7 +134,7 @@ class ImageController extends Controller
 	public function updateImage(Request $request)
 	{
 		$now = Carbon::now()->toDateTimeString();
-		DB::table('ot_images')
+		DB::table('images')
 			->where('id', $request->id)
 			->update([
 				'title' => $request->title,
@@ -158,7 +158,7 @@ class ImageController extends Controller
 		$image_path = 'uploads/images/' . $image_url;
 		$image_thumb_path = 'uploads/images/thumb/' . $image_url;
 
-		$row = DB::table("ot_images")
+		$row = DB::table("images")
 			->where('id', $id)
 			->where('created_by', '=', Auth::user()->name)
 			->whereNull('tour_id')->delete();
@@ -182,10 +182,10 @@ class ImageController extends Controller
 	public function deleteAllImage(Request $request)
 	{
 		$ids = $request->ids;
-		$row = DB::table("ot_images")
+		$row = DB::table("images")
 			->where('created_by', '=', Auth::user()->name)
 			->whereIn('id', explode(",", $ids))->whereNull('tour_id')->delete();
-		$imageCount = DB::table('ot_images')->count();
+		$imageCount = DB::table('images')->count();
 
 		return response()->json(['success' => "360画像を削除しました。", 'imageCount' => $imageCount, 'row' => $row]);
 	}
