@@ -38,6 +38,7 @@ Route::group(['namespace' => "User"], function(){
 	Route::get('/contact', 'UserController@contact');
 	Route::post('/sendRequest', 'UserController@sendRequest');
 	Route::get('/all', 'UserController@allHouse');
+	Route::get('/wishlist', 'UserController@wishlist');
 	Route::get('/detail/{id}', 'UserController@getHouseDetail');
 	Route::post('/search', 'UserController@search');
 	Route::post('/contactAgent', 'UserController@contactAgent');

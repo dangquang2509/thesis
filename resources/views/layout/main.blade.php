@@ -47,6 +47,10 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
+		$("#scroll-top").click(function(){
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
 	</script>
 </html>
 

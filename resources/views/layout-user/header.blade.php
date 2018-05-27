@@ -16,10 +16,18 @@
             </div>
             <div class="collapse navbar-collapse pull-right" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/user">Home</a></li>
-                    <li><a href="house.html">Rent</a></li>
-                    <li><a href="/user/contact">Contact</a></li>
-                    <li><a href="#">Log In</a></li>
+                    <li class="{{ Request::is('/') ? 'active' : '' }}">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="{{ Request::is('all') ? 'active' : '' }}">
+                        <a href="/all">Rent</a>
+                    </li>
+                    <li class="{{ Request::is('wishlist') ? 'active' : '' }}">
+                        <a href="/wishlist">Wishlist</a>
+                    </li>
+                    <li class="{{ Request::is('contact') ? 'active' : '' }}">
+                        <a href="/contact">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>

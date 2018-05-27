@@ -23,7 +23,7 @@
     @yield('css')
 </head>
 <body>
-    @yield('header')
+    @include('layout-user.header')
 
     <!-- Content  START -->
     @yield('content')
