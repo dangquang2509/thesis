@@ -17,6 +17,7 @@ use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
 use App\Models\Ot_Categories;
 use SimpleXMLElement;
+use Session;
 
 class UserController extends Controller
 {
@@ -54,7 +55,6 @@ class UserController extends Controller
 
     public function getHouseDetail(Request $request) {
         $house = Ot_Tours::where('id', $request->id)->get();
-
         if (count($house) == 0) {
             return Redirect('/user/home');
         }
@@ -63,12 +63,19 @@ class UserController extends Controller
         $category_id = null;
         $title = null;
 
+        $favorites = Session::get('favorites');
+        if ($favorites == null){
+            $favorites = [];
+        }
+        $fav = in_array($request->id, $favorites);
+
         foreach ($house as $h) {
             $id = $h->id;
             $category_id = $h->category_id;
             $title = $h->title;
             $category_name = Ot_Categories::where('id', $category_id)->pluck('name')->first();
             $h->category_name = $category_name;
+            $h->fav = $fav;
         }
         
         $houseSimilar = Ot_Tours::where('is_public', true)
@@ -81,7 +88,9 @@ class UserController extends Controller
             $hs->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house_detail')->with(['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title]);
+       
+
+        return view('user.house_detail')->with(['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title, 'fav' => $fav]);
     }
 
     public function search(Request $request){
@@ -143,11 +152,10 @@ class UserController extends Controller
         $message        = $request->get("message");
         $id             = $request->get("id");
 
-        // $mailTo = DB::table('houses')
-        //         ->join('users', 'houses.created_by', '=', 'users.name')
-        //         ->where('houses.id', '=', $id)
-        //         ->pluck('users.email');
-        $mailTo = "lidaqua@gmail.com";
+        $mailTo = DB::table('houses')
+                ->join('users', 'houses.created_by', '=', 'users.name')
+                ->where('houses.id', '=', $id)
+                ->pluck('users.email');
         $mailType   = '';
         $params     = [ 'name'  => $name,
                         'email' => $email,
@@ -170,5 +178,45 @@ class UserController extends Controller
         } catch(Exception $e) {
             return array("flag" => 'error');
         }
+    }
+
+    public function wishlist(){
+        // $favorites = [1, 2];
+        // Session::put('favorites', $favorites);
+        $ids = Session::get('favorites');
+        if ($ids !== null) {
+            $houses = Ot_Tours::whereIn('id', $ids)->get();
+            foreach ($houses as $house) {
+                $id = $house->id;
+                $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+                $house->image_thumbnail = $image_thumb;
+            }
+        } else {
+            $houses = [];
+        }
+        
+        return view('user.wishlist')->with(['houses' => $houses]);
+    }
+
+    public function addWishlist(Request $request){
+        $id = $request->get('id');
+        $favorites = Session::get('favorites');
+        if ($favorites == null){
+            $favorites = [];
+        }
+        if (!in_array($id, $favorites)) {
+            array_push($favorites, $id);
+            Session::put('favorites', $favorites);
+        }
+        return response()->json(['success' => $id]);
+    }
+    public function removeWishlist(Request $request) {
+        $id = $request->get('id');
+        $favorites = Session::get('favorites');
+        if (($key = array_search($id, $favorites)) !== false) {
+            unset($favorites[$key]);
+            Session::put('favorites', $favorites);
+        }
+        return response()->json(['success' => $id]);   
     }
 }

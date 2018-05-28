@@ -305,6 +305,54 @@ jQuery(document).ready(function($) {
 
 		});
 
+		$(".js-add-wishlist").click(function() {
+			var fav = false;
+			var id = $(".js-house-id").val();
+			if ($(this).hasClass("glyphicon-heart-empty")) {
+				$(this).removeClass("glyphicon-heart-empty").addClass("glyphicon-heart");
+				fav = true;
+				$.ajax({
+					url: '/addWishlist',
+					type: 'POST',
+					headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+					data: {
+						id : id
+					},
+					success: function(data){
+						if (data['success']) {
+							// toastr.info(data['success']);
+						} else {
+							// toastr.error("Please try again");
+						}
+					},
+					error: function(data){
+						toastr.error("There was an error. Please try again");
+					}
+				});
+			} else {
+				$(this).removeClass("glyphicon-heart").addClass("glyphicon-heart-empty");
+				fav = false;
+				$.ajax({
+					url: '/removeWishlist',
+					type: 'POST',
+					headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+					data: {
+						id : id
+					},
+					success: function(data){
+						if (data['success']) {
+							// toastr.info(data['success']);
+						} else {
+							// toastr.error("There was an error. Please try again");
+						}
+					},
+					error: function(data){
+						toastr.error("There was an error. Please try again");
+					}
+				});
+			}			
+
+		});
 		$(".js-contact-agent").click(function(){
 			var name = $(".js-input-name").val();
 			var email = $(".js-input-email").val();
@@ -352,9 +400,7 @@ jQuery(document).ready(function($) {
 					toastr.error("There was an error. Please try again");
 				}
 			});
-			// $.post( "/contactAgent", function( data ) {
-			// 	alert("aaadf");
-			// });
+
 		});
 		function sendData(data, callback=false){
 			var dataPost = {};

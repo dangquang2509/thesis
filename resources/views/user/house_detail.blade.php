@@ -102,6 +102,44 @@
 	</style>
 @stop
 
+@section('header')
+	<header>
+	    <nav class="navbar navbar-inverse" id="main-menu">
+	        <div class="container">
+	            <a class="navbar-brand" href="#">
+	                <!-- <img src="images/logo-cong-thong-tin-bds.png" alt=""> -->
+	            </a>
+	            <div class="navbar-header pull-right">
+	                <a class="phone-number" href="tel:0922 11 39 30">
+	                    <i class="icon ion-ios-telephone-outline"></i> <span>0908 41 64 84</span>
+	                </a>
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span> 
+	                </button>
+	            </div>
+	            <div class="collapse navbar-collapse pull-right" id="myNavbar">
+	                <ul class="nav navbar-nav navbar-right">
+	                    <li>
+	                        <a href="/">Home</a>
+	                    </li>
+	                    <li>
+	                        <a href="/all">Rent</a>
+	                    </li>
+	                    <li>
+	                        <a href="/wishlist">Wishlist</a>
+	                    </li>
+	                    <li>
+	                        <a href="/contact">Contact</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
+	</header>
+@stop
+
 @section('content')
 	@foreach($house as $house)
 	<div class="ot-image-detail-content">
@@ -142,6 +180,11 @@
 								<li><big>{{ $house->area }}</big> m<sup>2</sup></li>
 							</ul>
 						</div>
+						@if($house->fav)
+							<span class="glyphicon glyphicon-heart js-add-wishlist"></span>
+						@else
+							<span class="glyphicon glyphicon-heart-empty js-add-wishlist"></span>
+						@endif
 						<div class="text-right"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn-yellow">Contact Agent</a></div>
 						<div class="collapse" id="collapseExample">
 							<!-- <form class="form-contact-agent" method="POST" action="/contactAgent"> -->
@@ -304,7 +347,8 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmPq7GJGWrVXertDiV_JZcUUpAXp1cb5c&libraries=places"></script>
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
 	<script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/infobox/1.1.13/src/infobox.js"></script>
-	<script type="text/javascript" src="{!! asset('resource/js/user/script.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('resource/js/user/script.js') !!}"></script>
+
 	<script type="text/javascript">
 
 		$(document).ready(function() {

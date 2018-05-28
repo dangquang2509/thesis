@@ -42,6 +42,8 @@ Route::group(['namespace' => "User"], function(){
 	Route::get('/detail/{id}', 'UserController@getHouseDetail');
 	Route::post('/search', 'UserController@search');
 	Route::post('/contactAgent', 'UserController@contactAgent');
+	Route::post('/addWishlist', 'UserController@addWishlist');
+	Route::post('/removeWishlist', 'UserController@removeWishlist');
 });
 
 

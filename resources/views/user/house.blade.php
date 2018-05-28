@@ -134,7 +134,6 @@
 				
 				var property = {};
 				property.url = "/detail/" + houses[i].id;
-				// property.thumb = "images/bg-form-home.jpg";
 				property.thumb = "/uploads/images/" + houses[i].image_thumbnail;
 				property.title = houses[i].title;
 				property.price = '$' + houses[i].price;
@@ -148,13 +147,21 @@
 				icon_marker: "images/map-marker.png",
 				icon_cluster: "images/cluster-icon.png"
 			}
+			
 
 			function initMap() {
 
-				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom: setupMap['zoom'],
-					center: centerMap()
-				});
+				if (houses.length == 0){
+					var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: setupMap['zoom'],
+						center: {lat: 10.762743, lng: 106.681233}
+					});
+				} else {
+					var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: setupMap['zoom'],
+						center: centerMap()
+					});
+				}
 
 				// var markers = locations.map(function(location, i) {
 				// 	return new google.maps.Marker({
