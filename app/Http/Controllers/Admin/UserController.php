@@ -10,6 +10,8 @@ use Validator;
 use DB;
 use Redirect;
 use Carbon\Carbon;
+use App\Models\Ot_Tours;
+use App\Models\Ot_Images;
 
 class UserController extends Controller
 {
@@ -43,6 +45,19 @@ class UserController extends Controller
 
 		return view('admincp.listUser', ['users' => $users]);
 	}
+	public function showListRequest() {
+		$users = array();
+		if (Auth::user()->name == "admin") {
+			$users = DB::table('users')
+				->where('role_id', 2)
+				->where('is_active', 0)
+				->get();
+		} else {
+			return redirect('/');
+		}
+
+		return view('admincp.listUserRequest', ['users' => $users]);
+	}
 
 	/**
 	 * Show view detail user
@@ -59,9 +74,34 @@ class UserController extends Controller
 				->where('name', '=', Auth::user()->name)
 				->where('id', $request->id)->get();
 		}
+		$user_name = DB::table('users')->where('id', $request->id)->pluck('name')->first();
 
-		return view('admincp.detailUser', ['user' => $user]);
+		$houses = Ot_Tours::where('is_public', true)
+							->where('created_by', $user_name)
+							->get();
+        foreach ($houses as $house) {
+            $id = $house->id;
+            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $house->image_thumbnail = $image_thumb;
+        }
+
+		return view('admincp.detailUser', ['user' => $user, 'houses' => $houses]);
 	}
+
+	public function getUserRequestDetail(Request $request)
+	{
+		$user = array();
+		if (Auth::user()->name == "admin") {
+			$user = DB::table('users')->where('id', $request->id)->get();
+		} else {
+			$user = DB::table('users')
+				->where('name', '=', Auth::user()->name)
+				->where('id', $request->id)->get();
+		}
+
+		return view('admincp.detailUserRequest', ['user' => $user]);
+	}
+
 
 	/**
 	 * Save new user
@@ -92,7 +132,7 @@ class UserController extends Controller
 		$id = $request->id;
 		$row = DB::table("users")->where('id', $id)->update(array('is_active' => 0));
 
-		return response()->json(['success' => "ユーザーを削除しました", 'row' => $row]);
+		return response()->json(['success' => "User deleted", 'row' => $row]);
 	}
 
 	/**
@@ -105,7 +145,7 @@ class UserController extends Controller
 		DB::table("users")->whereIn('id', explode(",", $ids))->update(array('is_active' => 0));
 		$userCount = DB::table('users')->sum('is_active');
 
-		return response()->json(['success' => "ユーザーを削除しました。", 'userCount' => $userCount]);
+		return response()->json(['success' => "User deleted", 'userCount' => $userCount]);
 	}
 
 	/**
@@ -122,6 +162,15 @@ class UserController extends Controller
 		return Redirect::to('admincp/user/detail/' . $request->id);
 	}
 
+	public function acceptUser(Request $request) {
+		$now = Carbon::now()->toDateTimeString();
+		DB::table('users')
+			->where('id', $request->id)
+			->update(['is_active' => 1,
+				'updated_at' => $now]);
+
+		return Redirect::to('admincp/user/listRequest');
+	}
 	/**
 	 * Show view edit user
 	 * If user is admin, can show edit of all users
@@ -166,9 +215,9 @@ class UserController extends Controller
 			'password' => 'required|min:8'
 		];
 		$messages = [
-			'username.required' => 'ユーザーIDを入力してください。',
-			'password.required' => 'パスワードを入力してください。',
-			'password.min' => 'パスワードを8文字以上入力してください。',
+			'username.required' => 'Please enter your username',
+			'password.required' => 'Please enter your password',
+			'password.min' => 'Please enter at least 8 letters.',
 		];
 		$validator = Validator::make($request->all(), $rules, $messages);
 
@@ -182,7 +231,7 @@ class UserController extends Controller
 			if (Auth::attempt($data)) {
 				return redirect('/admincp/house/list');
 			} else {
-				$errors = new MessageBag(['errorlogin' => 'ユーザーIDまたはパスワードが正しくありません。']);
+				$errors = new MessageBag(['errorlogin' => 'The username or password is incorrect.']);
 
 				return redirect()->back()->withInput()->withErrors($errors);
 			}

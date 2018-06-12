@@ -14,6 +14,7 @@ var NoTourTitle = "Input of house title is required.";
 var NoFloorMap = "Input of floor plan is required.";
 var NoSpheres = "Input of Spherical image is required.";
 var NoPlot = "To register a house, it is necessary to plot one or more spherical images on the floor plan.";
+var NoLocation = "Input of location is required";
 var TourTitleToLong = "Input house title within 255 characters.";
 var TourCustomkeyToLong = "Enter custom key within 100 characters";
 var DuringAjaxWhenRelease = "Register is not allowed during posting of the floor plan, spherical image, non-tripod image and annotation image.";
@@ -388,7 +389,7 @@ function checkSphereFile(file) {
 	if (IsZeroByte(file) == false) {
 		return "ZeroByte";
 	}
-	var limit = 10 * 1024 * 1024;
+	var limit = 100 * 1024 * 1024;
 	if (IsFileMaxSize(file, limit) == false) {
 		return "FileSizeError";
 	}
@@ -468,6 +469,9 @@ function get_message(ret, param) {
 	}
 	if (ret === "NoFloorMap") {
 		return NoFloorMap;
+	}
+	if (ret === "NoLocation") {
+		return NoLocation;
 	}
 	if (ret === "NoSpheres") {
 		return NoSpheres;
@@ -644,7 +648,7 @@ function postingSphere(file, indicator_key) {
 		processData: false,
 		data: formData,
 		dataType: 'json',
-		timeout: 120000,
+		timeout: 1200000,
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			var error_message = null;
 			if (textStatus == "timeout") {
@@ -2209,6 +2213,8 @@ function checkTour(kind) {
 		}
 	} else if (!$("#floormap_img")[0]) {
 		messages.push("NoFloorMap");
+	} else if (!$(".input-location").val()) {
+		messages.push("NoLocation");
 	} else if (uploaded_spheres.length < 1 && kind == CHECK_KBN_UPLOAD_TOUR) {
 		messages.push("NoSpheres");
 	} else if (tour_title_check_result != null || scene_title_check_result != null || tour_custom_key_check_result != null) {

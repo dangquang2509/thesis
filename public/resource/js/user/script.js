@@ -305,6 +305,46 @@ jQuery(document).ready(function($) {
 
 		});
 
+		$(".js-register").click(function(){
+			var name = $(".js-register-name").val();
+			var email = $(".js-register-email").val();
+			var phone = $(".js-register-phone").val();
+			var result = "";
+			if (name == "")
+				result = "<p>Please input your name</p>";
+			if (email == "") 
+				result = "<p>Please input your email</p>";
+			if (phone == "")
+				result = "<p>Please input your phone number</p>";
+			if (result.length > 0) { 
+				bootbox.alert(result); 
+				return false; 
+			}
+			$.ajax({
+				url: '/register',
+				type: 'POST',
+				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+				data: { 
+					name : name,
+					email : email,
+					phone : phone
+				},
+				success: function(data){
+					if (data['success']) {
+						bootbox.alert('Thank you for your register. We will contact you soon');
+						$(".js-register-name").val("");
+						$(".js-register-email").val("");
+						$(".js-register-phone").val("");
+					} else {
+						toastr.error("There was an error when register. Please try again");
+					}
+				},
+				error: function(data){
+					toastr.error("There was an error when register. Please try again");
+				}
+			});
+			
+		});
 		$(".js-add-wishlist").click(function() {
 			var fav = false;
 			var id = $(".js-house-id").val();

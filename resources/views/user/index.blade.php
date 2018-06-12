@@ -2,6 +2,11 @@
 
 @section('title', 'Find apartment for rent in Ho Chi Minh City')
 
+@section('css')
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
+
+@stop
+
 @section('content')
 	<main id="homepage">
 		<section class="slider">
@@ -116,23 +121,24 @@
 			</div>
 			<div class="container position-relative">
 				<h2 class="form-title yellow-text-gradient">Register now</h2>
-				<!-- <div class="description"> -->
-					<!-- <p>"An cư lạc nghiệp"</p> -->
-					<!-- <p>Hãy tìm cho gia đình bạn một tổ ấm, bằng cách đơn gian nhất!</p> -->
-				<!-- </div> -->
-				<form action="/user/register" method="POST">
+				<div class="description">
+					<p>Fill in the form and our team will get in touch with you</p>
+				</div>
 					<div class="group-input">
-						<input type="text" name="" placeholder="Name">
+						<input type="text" class="js-register-name" name="name" placeholder="Name">
 					</div>
 					<div class="group-input">
-						<input type="text" name="" placeholder="Email">
+						<input type="text" class="js-register-email" name="email" placeholder="Email">
 					</div>
 					<div class="group-input">
-						<input type="text" name="" placeholder="Phone Number">
+						<input type="text" class="js-register-phone" name="phone" placeholder="Phone Number">
 					</div>
-					<button class="btn-yellow submit">Send</button>
-				</form>
+					<button class="btn-yellow submit js-register">Send</button>
 			</div>
 		</section>
 	</main>
+@stop
+
+@section('js')
+	<script type="text/javascript" src="{!! asset('resource/js/lib/toastr/toastr.min.js') !!}"></script>
 @stop

@@ -99,6 +99,11 @@
 		#pac-input:focus {
 			border-color: #4d90fe;
 		}
+
+		.icon-favorite {
+			font-size: 30px;
+			cursor: pointer;
+		}
 	</style>
 @stop
 
@@ -167,6 +172,13 @@
 			<div class="base-infos-container">
 				<div class="base-infos">
 					<div class="">
+						<div class="text-right">
+							@if($house->fav)
+								<span class="glyphicon glyphicon-heart js-add-wishlist icon-favorite"></span>
+							@else
+								<span class="glyphicon glyphicon-heart-empty js-add-wishlist icon-favorite"></span>
+							@endif
+						</div>
 						<h1 class="title yellow-text-gradient line-bottom">{{ $house->title }}</h1>
 						<div class="description">
 							<p>{{ $house->description }}</p>
@@ -180,11 +192,6 @@
 								<li><big>{{ $house->area }}</big> m<sup>2</sup></li>
 							</ul>
 						</div>
-						@if($house->fav)
-							<span class="glyphicon glyphicon-heart js-add-wishlist"></span>
-						@else
-							<span class="glyphicon glyphicon-heart-empty js-add-wishlist"></span>
-						@endif
 						<div class="text-right"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn-yellow">Contact Agent</a></div>
 						<div class="collapse" id="collapseExample">
 							<!-- <form class="form-contact-agent" method="POST" action="/contactAgent"> -->
@@ -215,13 +222,12 @@
 			<div class="ot-image-detail-row">
 				<div><a href="/house/full/{{ $house->id }}" target="_blank" class="btn-yellow">View house with full screen</a></div>
 			</div>
-			<div class="ot-image-detail-row">
-				<!-- <div class="ot-image-detail-label"><a href="javascript:void(0)" class="embed-code js-embed-code ot-embed-link">Embeded</a></div> -->
+			<!-- <div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Iframe</div>
 				<div class="ot-image-detail-value">
 					<textarea rows="4" readonly class="js-embed-code select"></textarea>
 				</div>
-			</div>
+			</div> -->
 			<div class="ot-image-detail-row">
 				<div class="ot-image-detail-label">Amenities</div>
 				<div class="ot-image-detail-value">{{ $house->amenities }}</div>
@@ -385,8 +391,8 @@
 			var windowFeatures = "status=no,height=" + height + ",width=" + width + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no";
 			u = link;
 			t = document.title;
-			var embed_code = '<iframe src="' + link + '" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>';
-			$(".js-embed-code").text(embed_code);
+			// var embed_code = '<iframe src="' + link + '" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>';
+			// $(".js-embed-code").text(embed_code);
 			$(".js-view-url").text(link);
 		});
 

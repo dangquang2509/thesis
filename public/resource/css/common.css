@@ -334,9 +334,10 @@ a {
   display: block;
   color: black;
   text-align: center;
-  padding: 14px 16px;
+  padding: 16px;
   font-size: 16px;
   text-decoration: none;
+  font-weight: bold;
 }
 .ot-navbar .dropdown {
   display: inline-block;

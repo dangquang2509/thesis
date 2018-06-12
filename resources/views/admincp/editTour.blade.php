@@ -234,7 +234,7 @@
 		</div>
 		<section class="property-content bg-smooth blur">
 			<div class="block">
-				<input id="pac-input" class="controls" type="text" value="{{ $tour->address }}">
+				<input id="pac-input" class="controls input-location" type="text" value="{{ $tour->address }}">
 				<div class="map">
 					<div class="container">
 						<div class="content">

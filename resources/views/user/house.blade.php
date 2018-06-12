@@ -10,6 +10,18 @@
 		section.map .filter-map .input input {
 			color: #000;
 		}
+		.sort-label {
+			color: #042865;
+			font-size: 18px;
+		}
+		.sort-select {
+			padding: 4px;
+			border: 1px solid #042865;
+			border-radius: 12px;
+			color: #042865;
+			margin-left: 6px;
+			outline: none;
+		}
 	</style>
 @stop
 
@@ -62,8 +74,19 @@
 						<h1>Search Result</h1>
 					@else
 						<h1>All Properties</h1>
+						<div class="pull-right">
+							<label class="sort-label">Sort by: </label>
+							<select class="sort-select" onchange="window.location.href = this.value;">
+								<option value="" disabled selected style="display:none;">Highest price</option>
+			                    <option value="" class="js-sort-desc-price">Highest price</option>
+			                    <option value="" class="js-sort-asc-price">Lowest price</option>
+			                    <option value="" class="js-sort-desc-time">Newest</option>
+			                    <option value="" class="js-sort-asc-time">Oldest</option>
+			            	</select>
+						</div>
 					@endif
 				</div>
+				
 			</div>
 			@foreach ($houses as $house)
 				<div class="col-md-4 col-xs-6 property-info" style="background-image: url(/uploads/images/{{ $house->image_thumbnail }});">
@@ -91,29 +114,6 @@
 				</div>
 			</nav> -->
 		</section>
-		<section class="form-submit form-hasBg submit-type-1">
-			<div class="bg-form">
-				<div class="img" style="background-image: url(images/bg-form-home.jpg);"></div>
-				<img src="images/icon-logo.svg" class="icon-logo">
-			</div>
-			<div class="container position-relative">
-				<h2 class="form-title yellow-text-gradient">Register now</h2>
-				<!-- <div class="description"> -->
-					<!-- <p>"An cư lạc nghiệp"</p> -->
-					<!-- <p>Hãy tìm cho gia đình bạn một tổ ấm, bằng cách đơn gian nhất!</p> -->
-				<!-- </div> -->
-				<div class="group-input">
-					<input type="text" name="" placeholder="Name">
-				</div>
-				<div class="group-input">
-					<input type="text" name="" placeholder="Email">
-				</div>
-				<div class="group-input">
-					<input type="text" name="" placeholder="Phone Number">
-				</div>
-				<button class="btn-yellow submit">Send</button>
-			</div>
-		</section>
 	</main>
 	<input type="hidden" value="{{ $allHouse }}" class="js-all-house">
 @stop
@@ -125,6 +125,23 @@
 	
 	<script>
 		$(document).ready(function() {
+			// sort function 
+			$(".js-sort-desc-price").val(window.location.origin + "/all?order=price_desc");
+			$(".js-sort-asc-price").val(window.location.origin + "/all?order=price_asc");
+			$(".js-sort-desc-time").val(window.location.origin + "/all?order=time_desc");
+			$(".js-sort-asc-time").val(window.location.origin + "/all?order=time_asc");
+
+			var order = '{{ $order }}';
+			if (order === 'price_desc') {
+				$('.sort-select').val(window.location.origin + "/all?order=price_desc");
+			} else if (order === 'price_asc') {
+				$('.sort-select').val(window.location.origin + "/all?order=price_asc");
+			} else if (order === 'time_desc') {
+				$('.sort-select').val(window.location.origin + "/all?order=time_desc");
+			} else if (order === 'time_asc') {
+				$('.sort-select').val(window.location.origin + "/all?order=time_asc");
+			}
+
 			var locations = [];
 			var houses = JSON.parse($(".js-all-house").val());
 			for (var i = 0; i <  houses.length; i++) {

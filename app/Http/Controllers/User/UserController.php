@@ -22,14 +22,13 @@ use Session;
 class UserController extends Controller
 {
     public function index() {
-        $houses = Ot_Tours::where('is_public', true)->orderBy('created_at','desc')->take(6)->get();
+        $houses = Ot_Tours::where('is_public', true)->orderBy('created_at','desc')->take(3)->get();
         foreach ($houses as $house) {
             $id = $house->id;
             $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
             $house->image_thumbnail = $image_thumb;
         }
-
-        return view('user.index', ['houses' => $houses]);
+        return view('user.index', ['houses' => $houses, 'message' => '']);
     }
 
     public function contact(){
@@ -42,15 +41,34 @@ class UserController extends Controller
         return view('user.contact')->with(['houses' => json_encode($houses)]);
     }
 
-    public function allHouse(){
-        $houses = Ot_Tours::where('is_public', true)->get();
+    public function allHouse(Request $request){
+        $order = $request->get("order");
+        if ($order === 'price_desc') {
+            $houses = Ot_Tours::where('is_public', true)
+                                ->orderBy('price', 'desc')
+                                ->get();
+        } else if ($order === 'price_asc') {
+            $houses = Ot_Tours::where('is_public', true)
+                                ->orderBy('price', 'asc')
+                                ->get();
+        } else if ($order === 'time_desc') {
+            $houses = Ot_Tours::where('is_public', true)
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        } else if ($order === 'time_asc') {
+            $houses = Ot_Tours::where('is_public', true)
+                                ->orderBy('created_at', 'asc')
+                                ->get();
+        } else {
+            $houses = Ot_Tours::where('is_public', true)->get();
+        }
         foreach ($houses as $house) {
             $id = $house->id;
             $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
             $house->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house', ['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => false]);
+        return view('user.house', ['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => false, 'order' => $order]);
     }
 
     public function getHouseDetail(Request $request) {
@@ -107,7 +125,7 @@ class UserController extends Controller
             $house->image_thumbnail = $image_thumb;
         }
         
-        return view('user.house')->with(['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => true]);
+        return view('user.house')->with(['houses' => $houses, 'allHouse' => json_encode($houses), 'search' => true, 'order' => ""]);
     }
 
     public function sendRequest(Request $request){
@@ -210,6 +228,7 @@ class UserController extends Controller
         }
         return response()->json(['success' => $id]);
     }
+
     public function removeWishlist(Request $request) {
         $id = $request->get('id');
         $favorites = Session::get('favorites');
@@ -218,5 +237,39 @@ class UserController extends Controller
             Session::put('favorites', $favorites);
         }
         return response()->json(['success' => $id]);   
+    }
+
+    public function register(Request $request){
+        $name           = $request->get("name");
+        $email          = $request->get("email");
+        $phone          = $request->get("phone");
+        $now = Carbon::now()->toDateTimeString();
+        
+        DB::table('users')->insert([
+            'name' => $name,
+            'email' => $email,
+            'remember_token' => $request->_token,
+            'created_at' => $now,
+            'updated_at' => $now,
+            'role_id' => 2,
+            'is_active' => 0
+        ]);
+
+        return response()->json(['success' => 'success']);
+        
+    }
+    public function setPublic(Request $request) {
+        $id = $request->get("id");
+        $house = Ot_Tours::where('id','=', $id)
+                            ->first();
+        if ($house->is_public) {
+            $house->is_public = false;
+        } else {
+            $house->is_public = true;
+        }
+        $house->save();
+        return response()->json(['success' => 'success']);
+
+
     }
 }

@@ -462,8 +462,9 @@ form {
 	}
     input {
         border: 1px solid #ccc;
-        margin-left: 2px;
+        margin-left: 4px;
         border-radius: 4px;
+        padding: 4px;
         &:focus {
             border: 1px solid #d9d9d9;
             outline: none;
@@ -990,7 +991,8 @@ form {
 .dataTables_paginate {
 	float: none !important;
 	text-align: center !important;
-	padding-top: 14px !important;
+	padding-top: 18px !important;
+	padding-bottom: 4px;
 }
 .paginate_button {
     padding: 4px 12px;
@@ -1036,4 +1038,46 @@ form {
     &:hover {
         background-color: #BBDEFB !important;
     }
+}
+.ot-image-list-table {
+	border-collapse: collapse;
+	width: 100%;
+	td {
+		padding: 12px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+		.ot-list-link {
+			text-decoration: none;
+			color: #0088BD;
+		}
+	}
+	th {
+		padding: 14px 12px 12px 24px;
+		text-align: left;
+		border-bottom: 1px solid #9e9e9e;
+	}
+	.no-sort {
+		padding-left: 12px;
+	}
+	.ot-th-username {
+		width: 50%;
+	}
+	.ot-th-tour-title {
+		width: 30%;
+	}
+	.ot-th-private {
+		text-align: center;
+	}
+	tr {
+		&:hover {
+
+		}
+		&:nth-child(even) {
+			background-color: #f6f8fa;
+		}
+
+	}
+}
+.dataTables_filter {
+	text-align: right;
 }

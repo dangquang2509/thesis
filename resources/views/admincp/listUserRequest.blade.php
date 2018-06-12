@@ -1,0 +1,102 @@
+@extends('layout.main')
+
+@section('title', 'User Request')
+
+@section('css')
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
+	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/jquery-ui.min.css') !!}">
+@stop
+
+@section('header')
+	@include('layout.header')
+@stop
+
+@section('content')
+	<div class="ot-page-title-area">
+		<h2 class="ot-page-title">User Request</h2>
+		<!-- <a class="ot-page-title-btn" href="/admincp/user/new">新規ユーザーを作成する</a> -->
+	</div>
+	<!-- <form>
+		<select class="ot-input-select">
+			<option value="username">ユーザー名</option>
+		</select>
+		<span><input class="ot-input-search" type="text" placeholder="ユーザー名を入力"></span>
+	</form> -->
+	<div class="ot-image-list-table-area">
+		<table class="ot-image-list-table">
+			<tr>
+				<th class="no-sort ot-th-username">Username</th>
+				<th class="no-sort">Requested At</th>
+			</tr>
+			@foreach($users as $user)
+				<tr>
+					<td><a href="/admincp/user/detailRequest/{{ $user ->id}}" class="ot-list-link">{{ $user->name }}</a></td>
+					<td>{{ $user->created_at }}</td>
+				</tr>
+			@endforeach
+		</table>
+		
+	</div>
+@stop
+@section('js')
+	<script type="text/javascript" src="{!! asset('resource/js/lib/toastr/toastr.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/lib/spin/spin.min.js') !!}"></script>
+	<script type="text/javascript" src="{!! asset('resource/js/lib/jquery-ui.min.js') !!}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#chk-master').on('click', function(e) {
+				if($(this).is(':checked',true))  
+				{
+					$(".sub-chk").prop('checked', true);
+				} else {
+					$(".sub-chk").prop('checked', false);
+				}
+			});
+			$('.js-delete-all').on('click', function(e) {
+				var allVals = [];
+				$(".sub-chk:checked").each(function() {
+					allVals.push($(this).attr('data-id'));
+				});
+				if(allVals.length <= 0) {
+					toastr.info('Please select a row');
+				}
+				else {
+					var check = confirm("You want to delete these users？");
+					if (check == true) {
+						var join_selected_values = allVals.join(",");
+						$.ajax({
+							url: $(this).data('url'),
+							type: 'DELETE',
+							headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+							data: 'ids=' + join_selected_values,
+							success: function (data) {
+								if (data['success']) {
+									$(".sub-chk:checked").each(function() {  
+										$(this).parents("tr").remove();
+									});
+									if (data['userCount'] > 0) {
+										$(".ot-list-row-quantity").text('Total ' + data['userCount'] + " users");
+									}
+									else {
+										$(".ot-list-row-quantity").text("");
+									}
+									toastr.success(data['success']);
+								} else if (data['error']) {
+									toastr.error(data['error']);
+								} else {
+									toastr.error('An error occurred. Please try again.');
+								}
+							},
+							error: function (data) {
+								toastr.error(data.responseText);
+							}
+						});
+						$.each(allVals, function( index, value ) {
+							$('table tr').filter("[data-row-id='" + value + "']").remove();
+						});
+					}
+				}
+			});
+		});
+	</script>
+@stop

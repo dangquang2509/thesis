@@ -1,6 +1,6 @@
 <div class="ot-header">
 	<div class="ot-header-wrapper">
-		<a href="/" class="ot-header-title">House Management</a>
+		<a href="/admincp/top" class="ot-header-title">House Management</a>
 		<a href="/logout" class="ot-header-logout">logout</a>
 		<span class="ot-header-logout">{{ Auth::user()->name  }} | </span>
 	</div>
@@ -11,7 +11,7 @@
 			<a href="/admincp/top" class="dropbtn">Top</a>
 		</li>
 		<li class="dropdown">
-			<a href="javascript:void(0)" class="dropbtn">360°Images</a>
+			<a href="javascript:void(0)" class="dropbtn">Images</a>
 			<div class="dropdown-content">
 				<a class="dropdown-content-link" href="/admincp/image/new">New Image</a>
 				<a class="dropdown-content-link" href="/admincp/image/list">List</a>
@@ -24,12 +24,15 @@
 				<a class="dropdown-content-link" href="/admincp/house/list">List</a>
 			</div>
 		</li>
-		<li class="dropdown">
-			<a href="javascript:void(0)" class="dropbtn">User</a>
-			<div class="dropdown-content">
-				<a class="dropdown-content-link" href="/admincp/user/new">New User</a>
-				<a class="dropdown-content-link" href="/admincp/user/list">List</a>
-			</div>
-		</li>
+		@if(Auth::user()->name == "admin")
+			<li class="dropdown">
+				<a href="javascript:void(0)" class="dropbtn">User</a>
+				<div class="dropdown-content">
+					<a class="dropdown-content-link" href="/admincp/user/new">New User</a>
+					<a class="dropdown-content-link" href="/admincp/user/list">List Active</a>
+					<a class="dropdown-content-link" href="/admincp/user/listRequest">List Request</a>
+				</div>
+			</li>
+		@endif
 	</div>
 </ul>

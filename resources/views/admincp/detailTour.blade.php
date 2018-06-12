@@ -52,7 +52,7 @@
 						<div class="ot-image-detail-label">View URL</div>
 						<a href="/house/full/{{ $tour->id }}" target="_blank" class="ot-image-detail-value js-view-url"></a>
 					</div>
-					<div class="ot-image-detail-row">
+					<!-- <div class="ot-image-detail-row">
 						<div class="ot-image-detail-label">Description</div>
 						<div class="ot-image-detail-value">{{ $tour->description }}</div>
 					</div>
@@ -71,7 +71,7 @@
 					<div class="ot-image-detail-row">
 						<div class="ot-image-detail-label">Notice</div>
 						<div class="ot-image-detail-value">{{ $tour->notice }}</div>
-					</div>
+					</div> -->
 					<div class="ot-image-detail-row">
 						<!-- <div class="ot-image-detail-label"><a href="javascript:void(0)" class="embed-code js-embed-code ot-embed-link">Embeded</a></div> -->
 						<div class="ot-image-detail-label">Iframe</div>
@@ -139,7 +139,7 @@
 							if (data['row'] > 0) {
 								toastr.success(data['success']);
 							} else if (data['row'] == 0) {
-								toastr.error('This house will not be deleted.');
+								toastr.error('This house will not be cancelled.');
 							}
 						},
 						error: function (data) {

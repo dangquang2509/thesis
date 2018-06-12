@@ -5,6 +5,66 @@
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/jquery-ui.min.css') !!}">
+	<style type="text/css">
+		.switch {
+		  position: relative;
+		  display: inline-block;
+		  width: 46px;
+		  height: 24px;
+		}
+
+		.switch input {display:none;}
+
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #ccc;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 16px;
+		  width: 14px;
+		  left: 4px;
+		  bottom: 4px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		input:checked + .slider {
+		  background-color: #2196F3;
+		}
+
+		input:focus + .slider {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+		  border-radius: 34px;
+		}
+
+		.slider.round:before {
+		  border-radius: 50%;
+		}
+		.text-center {
+			text-align: center;
+		}
+	</style>
 @stop
 
 @section('header')
@@ -41,6 +101,7 @@
 				<th>Created By</th>
 				<th>Created At</th>
 				<th>Updated At</th>
+				<th>Public</th>
 			</thead>
 			<tbody>
 			@foreach($tours as $tour)
@@ -68,6 +129,17 @@
 					<td>{{ $tour->created_by }}</td>
 					<td>{{ $tour->created_at }}</td>
 					<td>{{ $tour->updated_at }}</td>
+					<td class="text-center">
+						<label class="switch">
+						  @if ($tour->is_public)
+						  	<input type="checkbox" class="js-set-public" checked>
+						  @else
+						  	<input type="checkbox" class="js-set-public">
+						  @endif
+						  <span class="slider round"></span>
+						  <input type="hidden" value="{{ $tour->id }}" class="house_id">
+						</label>
+					</td>
 				</tr>
 			@endforeach
 			<tbody>
@@ -81,6 +153,30 @@
 	<script>
 		$(document).ready(function() {
 			$(document).ready(function() {
+				// catch event public 
+				$(".js-set-public").on('change', function(){
+					var house_id = $(this).closest(".switch").find(".house_id").val();
+					$.ajax({
+						url: '/setPublic',
+						type: 'POST',
+						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						data: {
+							id : house_id
+						},
+						success: function(data){
+							if (data['success']) {
+								toastr.info(data['success']);
+							} else {
+								// toastr.error("Please try again");
+							}
+						},
+						error: function(data){
+							toastr.error("There was an error. Please try again");
+						}
+					});
+				});
+
+
 				$('#table_tour').DataTable({
 					"ordering": true,
 					"paging": true,

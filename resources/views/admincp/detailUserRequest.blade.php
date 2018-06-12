@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'User Detail')
+@section('title', 'User Request')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
@@ -13,15 +13,15 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		 <h2 class="ot-page-title">User Detail</h2>
-		 <a class="ot-page-title-btn" href="/admincp/user/list">Back to list</a>
+		 <h2 class="ot-page-title">User Request</h2>
+		 <a class="ot-page-title-btn" href="/admincp/user/listRequest">Back to list</a>
 	</div>
 	<div class="ot-image-detail-content">
 		@foreach($user as $user)
-			<form class="form-content clearfix" action="{{ url('/admincp/user/delete') }}" method="POST" role="form">
+			<form class="form-content clearfix" action="{{ url('/admincp/user/accept') }}" method="POST" role="form">
 				<div class="ot-content-left">
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">Username</div>
+						<div class="ot-image-detail-label">Name</div>
 						<div class="ot-image-detail-value">{{ $user->name }}</div>
 					</div>
 					{{ csrf_field()}}
@@ -29,41 +29,15 @@
 						<div class="ot-image-detail-label">Email</div>
 						<div class="ot-image-detail-value">{{ $user->email }}</div>
 					</div>
-					<input type="hidden" value="{{ $user->id}}" class="user_id" name="user_id">
 					<div class="ot-image-detail-row">
-						<div class="ot-image-detail-label">User ID</div>
-						<div class="ot-image-detail-value">{{ $user->id }}</div>
+						<div class="ot-image-detail-label">Requested At</div>
+						<div class="ot-image-detail-value">{{ $user->created_at }}</div>
 					</div>
-					<div class="ot-image-detail-row">
-						<strong>Total house(s) : {{ count($houses) }}</strong>
-					</div>
-					@if(count($houses) > 0)
-						<div class="ot-image-detail-row">
-							<table class="ot-image-list-table" id="table_image">
-								<thead>
-									<th style="width:24%">Thumbnail</th>
-									<th>Title</th>
-									<th>Created At</th>
-								</thead>
-								<tbody>
-									@foreach($houses as $house)
-									<tr>
-										<td><a href="/admincp/house/detail/{{ $house->id }}"><img class="img-responsive ot-img-thumbnail" src="/uploads/images/{{ $house->image_thumbnail }}"></a></td>
-										<td><a href="/admincp/house/detail/{{ $house->id }}" class="ot-list-link">{{ $house->title }}</a></td>
-										<td>{{ $house->created_at }}</td>
-									</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div>
-					@endif
+					<input type="hidden" value="{{ $user->id}}" class="user_id" name="id">
 				</div>
 				<div class="ot-content-right">
 					<div class="ot-btn-edit-image">
-						<a href="/admincp/user/edit/{{ $user->id }}">Edit</a>
-					</div>
-					<div> 
-						<a class="ot-link-delete js-delete-user">Delete this user</a>
+						<button type="submit">Accept</a>
 					</div>
 				</div>
 			</form>

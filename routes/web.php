@@ -26,7 +26,6 @@ Route::get('/house/full/{id}', 'Fontend\WebController@getFullTourDetail');
 Route::get('/login', 'Admin\UserController@getLogin');
 Route::post('/login', 'Admin\UserController@postLogin');
 Route::get('/logout', 'Admin\UserController@getLogout');
-Route::get('/register', 'Admin\UserController@showRegister');
 
 Route::get('/admincp/top',  [
     'middleware' => 'auth',
@@ -44,6 +43,8 @@ Route::group(['namespace' => "User"], function(){
 	Route::post('/contactAgent', 'UserController@contactAgent');
 	Route::post('/addWishlist', 'UserController@addWishlist');
 	Route::post('/removeWishlist', 'UserController@removeWishlist');
+	Route::post('/register', 'UserController@register');
+	Route::post('/setPublic', 'UserController@setPublic');
 });
 
 
@@ -78,9 +79,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/user', 'namespace' =>
 	Route::get('/new', 'UserController@newUser');
 	Route::post('/create', 'UserController@createUser');
 	Route::get('/list', 'UserController@showList');
+	Route::get('/listRequest', 'UserController@showListRequest');
 	Route::get('/detail/{id}', 'UserController@getUserDetail');
+	Route::get('/detailRequest/{id}', 'UserController@getUserRequestDetail');
 	Route::get('/edit/{id}', 'UserController@editUser');
 	Route::post('/update', 'UserController@updateUser');
+	Route::post('/accept', 'UserController@acceptUser');
 	Route::delete('/delete/{id}', 'UserController@destroy');
 	Route::delete('/deleteAll', 'UserController@deleteAllUser');
 });
