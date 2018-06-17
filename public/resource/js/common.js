@@ -2434,7 +2434,7 @@ function combineTourParam() {
 	if (spheres.length > 0) {
 		tour_request_body.spheres = spheres;
 	}
-
+	console.log(tour_request_body);
 	tour_custom_key = $(".js-tour-key").val();
 	var metadata = createTourMetadata(tour_custom_key, "");
 	tour_request_body.metadata = metadata;
@@ -2458,6 +2458,12 @@ function createTourParam() {
 				{
 					url: '/vtour/plugins.xml'
 				}],
+			autorotate: [
+				{
+					enabled: true,
+					speed: "5.0"
+				}
+			],
 			layer: []
 		}
 	};

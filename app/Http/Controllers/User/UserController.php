@@ -55,9 +55,9 @@ class UserController extends Controller
             $houses = Ot_Tours::where('is_public', true)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
-        } else if ($order === 'time_asc') {
+        } else if ($order === 'view_desc') {
             $houses = Ot_Tours::where('is_public', true)
-                                ->orderBy('created_at', 'asc')
+                                ->orderBy('num_views', 'desc')
                                 ->get();
         } else {
             $houses = Ot_Tours::where('is_public', true)->get();
@@ -72,33 +72,27 @@ class UserController extends Controller
     }
 
     public function getHouseDetail(Request $request) {
-        $house = Ot_Tours::where('id', $request->id)->get();
-        if (count($house) == 0) {
-            return Redirect('/user/home');
+        $house = Ot_Tours::find($request->id);
+        if (!$house) {
+            return Redirect('/');
         }
-
-        $id = null;
-        $category_id = null;
-        $title = null;
+        $house->increment('num_views');
+        
+        $title = $house->title;
 
         $favorites = Session::get('favorites');
         if ($favorites == null){
             $favorites = [];
         }
         $fav = in_array($request->id, $favorites);
-
-        foreach ($house as $h) {
-            $id = $h->id;
-            $category_id = $h->category_id;
-            $title = $h->title;
-            $category_name = Ot_Categories::where('id', $category_id)->pluck('name')->first();
-            $h->category_name = $category_name;
-            $h->fav = $fav;
-        }
+        $house->fav = $fav;
+        
+        $category_name = Ot_Categories::where('id', $house->category_id)->pluck('name')->first();
+        $house->category_name = $category_name;
         
         $houseSimilar = Ot_Tours::where('is_public', true)
-                                ->where('category_id', $category_id)
-                                ->where('id', '<>', $id)
+                                ->where('category_id', $house->category_id)
+                                ->where('id', '<>', $house->id)
                                 ->orderBy('created_at','desc')->take(3)->get();
 
         foreach ($houseSimilar as $hs) {
@@ -106,13 +100,10 @@ class UserController extends Controller
             $hs->image_thumbnail = $image_thumb;
         }
 
-       
-
         return view('user.house_detail')->with(['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title, 'fav' => $fav]);
     }
 
     public function search(Request $request){
-        // dd($request->all());
         $houses = Ot_Tours::where('is_public', true)
                             ->where('category_id', '=', $request->category)
                             ->where('num_bedrooms', '=', $request->num_bedrooms)

@@ -13,8 +13,14 @@
 
 @section('content')
 	<div class="ot-page-title-area">
-		 <h2 class="ot-page-title">User Detail</h2>
-		 <a class="ot-page-title-btn" href="/admincp/user/list">Back to list</a>
+		@if(Auth::user()->name === "admin") 
+			<h2 class="ot-page-title">User Detail</h2>
+		@else
+			<h2 class="ot-page-title">My Account</h2>
+		@endif
+		@if(Auth::user()->name === "admin") 
+		 	<a class="ot-page-title-btn" href="/admincp/user/list">Back to list</a>
+		@endif
 	</div>
 	<div class="ot-image-detail-content">
 		@foreach($user as $user)
@@ -35,7 +41,7 @@
 						<div class="ot-image-detail-value">{{ $user->id }}</div>
 					</div>
 					<div class="ot-image-detail-row">
-						<strong>Total house(s) : {{ count($houses) }}</strong>
+						<strong>Total houses : {{ count($houses) }}</strong>
 					</div>
 					@if(count($houses) > 0)
 						<div class="ot-image-detail-row">
@@ -62,9 +68,11 @@
 					<div class="ot-btn-edit-image">
 						<a href="/admincp/user/edit/{{ $user->id }}">Edit</a>
 					</div>
+					@if(Auth::user()->name === "admin")
 					<div> 
 						<a class="ot-link-delete js-delete-user">Delete this user</a>
 					</div>
+					@endif
 				</div>
 			</form>
 		@endforeach

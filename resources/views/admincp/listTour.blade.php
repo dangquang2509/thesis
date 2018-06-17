@@ -165,7 +165,7 @@
 						},
 						success: function(data){
 							if (data['success']) {
-								toastr.info(data['success']);
+								// toastr.info(data['success']);
 							} else {
 								// toastr.error("Please try again");
 							}

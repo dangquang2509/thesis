@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <!-- Metadata -->
     <meta charset="utf-8">
@@ -19,11 +19,13 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.theme.default.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/select2.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/style.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/fontawesome-all.css') !!}">
     <script type="text/javascript" src="{!! asset('resource/js/user/jquery-3.2.1.min.js') !!}"></script>
     @yield('css')
 </head>
 <body>
     @include('layout-user.header')
+    @yield('navbar')
 
     <!-- Content  START -->
     @yield('content')

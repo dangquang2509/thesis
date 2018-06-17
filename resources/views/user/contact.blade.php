@@ -11,11 +11,11 @@
 			<div class="infos">
 				<div class="contact-info bg-smooth">
 					<div class="left-container">
-						<h1 class="yellow-text-gradient title line-bottom line-yellow">Contact Information</h1>
+						<h1 class="title line-bottom line-yellow">Contact Information</h1>
 						<h3>Find apartment for rent in Ho Chi Minh City</h3>
-						<p>Address: 18/11 Phu Dong Thien Vuong, District 5, Ho Chi Minh City</p>
-						<p>Hotline: 0908.41.64.84</p>
-						<p>Email: hello@gmail.com</p>
+						<p><img src="resource/img/icon/location.png"> Address: 18/11 Phu Dong Thien Vuong, District 5, Ho Chi Minh City</p>
+						<p><img src="resource/img/icon/phone-call.png">Hotline: 0908.41.64.84</p>
+						<p><img src="resource/img/icon/envelope.png">Email: hello@gmail.com</p>
 					</div>
 				</div>
 				<div class="contact-form">
@@ -23,7 +23,7 @@
 						<form class="form-submit" action="/sendRequest" method="POST">
 							{{ csrf_field() }}
 							<div class="container-form">
-								<h2 class="title blue-text-gradient line-bottom">Send Request</h2>
+								<h2 class="title line-bottom">Send Request</h2>
 								<div class="submit-type-2">
 									<div class="group-input">
 										<label for="name">Name (*)</label>
@@ -61,110 +61,19 @@
 		</section>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				var locationCompany = {lat: -31.563910, lng: 147.154312};
-				var locations = [];
-				
-				var houses = JSON.parse($(".js-all-houses").val());
-				for (var i = 0; i <  houses.length; i++) {
-					var location = {};
-					location.lat = houses[i].latitude;
-					location.lng = houses[i].longitude;
-					
-					var property = {};
-					property.url = "/detail/" + houses[i].id;
-					// property.thumb = "images/bg-form-home.jpg";
-					property.thumb = "/uploads/images/" + houses[i].image_thumbnail;
-					property.title = houses[i].title;
-					property.price = "$600"
-					
-					location.property = property;
-					
-					locations.push(location);
-				}
-				var setupMap = {
-					zoom: 10,
-					icon_marker: "images/map-marker.png",
-					icon_cluster: "images/cluster-icon.png"
-				}
-
-				if ($("#mapCompany").length > 0) {
+				var locationCompany = {lat: 10.753369, lng: 106.662945}; 
+				if ($("#mapCompany").length > 0){
 					var map = new google.maps.Map(document.getElementById('mapCompany'), {
-						zoom: setupMap['zoom'],
-						center: centerMap()
+						zoom: 12,
+						center: locationCompany
 					});
-					var markers = [];
-					locations.forEach(function(location){
-						var marker = new google.maps.Marker({
-							map: map,
-							draggable: true,
-							position: new google.maps.LatLng(location.lat, location.lng),
-							visible: true,
-							icon: setupMap['icon_marker']
-						});
-						markers.push(marker);
-
-						setEventMarkerInfo(marker, map, location.property);
-					})
-
-					var markerClustererOptions = {
-						ignoreHidden: true,
-						maxZoom: 14,
-						styles: [{
-							textColor: '#ffffff',
-							url: setupMap['icon_cluster'],
-							height: 48,
-							width: 48
-						}]
-					};
-
-					var markerCluster = new MarkerClusterer(map, markers, markerClustererOptions);
-				}
-				function centerMap(){
-					var centerMap = {lat: 0, lng: 0};
-					locations.forEach(function(item){
-						centerMap.lat += item.lat;
-						centerMap.lng += item.lng;
-					})
-					centerMap.lat = centerMap.lat / locations.length;
-					centerMap.lng = centerMap.lng / locations.length;
-					return centerMap;
-				}
-				function setEventMarkerInfo(marker, map, property){
-					var boxText = document.createElement("div");
-					boxText.className = 'map-info-window';
-					var innerHTML = "";
-					if ( property.thumb ) {
-						innerHTML += '<a class="thumb-link" href="' + property.url + '">' +
-						'<img class="prop-thumb" src="' + property.thumb + '" alt="' + property.title + '"/>' +
-						'</a>';
-					}
-					innerHTML += '<h5 class="prop-title"><a class="title-link" href="' + property.url + '">' + property.title + '</a></h5>';
-					if ( property.price ) {
-						innerHTML += '<p><span class="price">' + property.price + '</span></p>';
-					}
-					innerHTML += '<div class="arrow-down"></div>';
-					boxText.innerHTML = innerHTML;
-
-					var myOptions = {
-						content: boxText
-						,disableAutoPan: false
-						,maxWidth: 0
-						,boxStyle: { width: '240px' }
-						,pixelOffset: new google.maps.Size(-120, -45)
-						,zIndex: null
-						,alignBottom: true
-						,closeBoxMargin: "0 0 -16px -16px"
-						,closeBoxURL: "images/close.png"
-						,infoBoxClearance: new google.maps.Size(1, 1)
-						,isHidden: false
-						,pane: "floatPane"
-						,enableEventPropagation: false
-					};
-
-					var ib = new InfoBox(myOptions);
-					marker.addListener("click", function(){
-						ib.open(map, marker);
-					})
+					var marker = new google.maps.Marker({
+						map: map,
+						draggable: true,
+						position: new google.maps.LatLng(locationCompany.lat, locationCompany.lng),
+						visible: true,
+						icon: "images/map-marker.png"
+					});
 				}
 			});
 		</script>

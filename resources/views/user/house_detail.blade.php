@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/owl.theme.default.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/select2.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/style.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/fontawesome-all.css') !!}">
 	<style>
 		.ot-footer {
 			display: none;
@@ -21,7 +22,7 @@
 			margin-top: 24px;
 		}
 		body {
-			background-color: #edf2f5;
+			background-color: #fff;
 		}
 		#main-menu {
 			background-color: #0c244c;
@@ -103,13 +104,117 @@
 		.icon-favorite {
 			font-size: 30px;
 			cursor: pointer;
+			color: #947054;
+		}
+		#collapseExample {
+			margin-top: 12px;
+		}
+		.single-featured-property {
+		    position: relative;
+		    z-index: 1;
+		    -webkit-transition-duration: 500ms;
+		    transition-duration: 500ms;
+		    overflow: hidden;
+		}
+		.single-featured-property .property-thumb {
+			position: relative;
+			z-index: 1;
+		}
+		.single-featured-property .property-content {
+		    padding: 14px;
+    		border: 1px solid #e1dddd;
+    		width: 100%;
+    		background: #fff;
+		}
+		.single-featured-property .property-thumb .tag span {
+			height: 35px;
+		    padding: 0 20px;
+		    background-color: #947054;
+		    color: #ffffff;
+		    text-transform: uppercase;
+		    font-size: 12px;
+		    font-weight: 600;
+		    display: inline-block;
+		    line-height: 35px;
+		    position: absolute;
+		    top: 20px;
+		    left: 20px;
+		    z-index: 10;
+		    -webkit-transition-duration: 500ms;
+		    transition-duration: 500ms;
+		}
+		.single-featured-property .property-thumb .list-price p {
+			background-color: #ffffff;
+		    padding: 10px 20px;
+		    color: #947054;
+		    font-size: 24px;
+		    font-weight: 600;
+		    display: inline-block;
+		    position: absolute;
+		    bottom: 20px;
+		    left: 20px;
+		    z-index: 10;
+		    margin-bottom: 0;
+		    line-height: 1;
+		    -webkit-transition-duration: 500ms;
+		    transition-duration: 500ms;
+		}
+		.single-featured-property .property-content h5 {
+			font-size: 18px;
+			width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.single-featured-property .property-content .location {
+			color: #947054;
+		    margin-bottom: 25px;
+		    font-size: 14px;
+		    font-weight: 600;
+		}
+		.single-featured-property .property-content .location img {
+		    margin-right: 10px;
+		    display: inline-block !important;
+		    width: auto !important;
+		}
+		.single-featured-property .property-content p {
+			margin-bottom: 30px;
+			width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.single-featured-property .property-content .property-meta-data img {
+			margin-right: 0;
+		    display: inline-block !important;
+		    width: auto !important;
+		}
+		.single-featured-property .property-content .property-meta-data span {
+		    font-size: 12px;
+		    font-weight: 600;
+		    margin-left: 5px;
+		    color: #838383;
+		}
+		.justify-content-between {
+		    -webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		    justify-content: space-between;
+		    display: inline-block;
+		}
+		.justify-content-between div {
+			display: inline-block;
+			margin-right: 16px;
+		}
+		.listings-content-wrapper {
+			margin-top: 16px;
+			padding: 0;
 		}
 	</style>
 @stop
 
 @section('header')
 	<header>
-	    <nav class="navbar navbar-inverse" id="main-menu">
+	    <nav class="navbar navbar-inverse sticky" id="main-menu">
 	        <div class="container">
 	            <a class="navbar-brand" href="#">
 	                <!-- <img src="images/logo-cong-thong-tin-bds.png" alt=""> -->
@@ -143,10 +248,10 @@
 	        </div>
 	    </nav>
 	</header>
+
 @stop
 
 @section('content')
-	@foreach($house as $house)
 	<div class="ot-image-detail-content">
 		<div class="pano-area">
 			<!-- <blockquote data-width="1000" data-height="400" class="ricoh-theta-tour-image" ><a href="https://onetech.theta360.biz/t/d15eca62-8895-11e7-bed7-0a4f4743bc83-1"></a></blockquote><script async src="https://onetech.theta360.biz/t_widgets.js" charset="utf-8"></script> -->
@@ -172,6 +277,9 @@
 			<div class="base-infos-container">
 				<div class="base-infos">
 					<div class="">
+						<div>
+							<h5><i class="fa fa-eye"></i> {{ $house->num_views }} views</h5>
+						</div>
 						<div class="text-right">
 							@if($house->fav)
 								<span class="glyphicon glyphicon-heart js-add-wishlist icon-favorite"></span>
@@ -179,7 +287,8 @@
 								<span class="glyphicon glyphicon-heart-empty js-add-wishlist icon-favorite"></span>
 							@endif
 						</div>
-						<h1 class="title yellow-text-gradient line-bottom">{{ $house->title }}</h1>
+						<h1 class="title line-bottom">{{ $house->title }}</h1>
+
 						<div class="description">
 							<p>{{ $house->description }}</p>
 						</div>
@@ -187,9 +296,9 @@
 							<div class="property-type">{{ $house->category_name }}</div>
 							<div class="property-price"><big>${{ $house->price }}</big> / month</div>
 							<ul class="more-info">
-								<li><big>{{ $house->num_bedrooms }}</big> Bedrooms</li>
-								<li><big>{{ $house->num_toilets }}</big> Toilets</li>
-								<li><big>{{ $house->area }}</big> m<sup>2</sup></li>
+								<li><big><i class="fa fa-bed"></i> {{ $house->num_bedrooms }}</big> bedroom(s)</li>
+								<li><big><i class="fa fa-bath"></i> {{ $house->num_toilets }}</big> bathroom(s)</li>
+								<li><big><i class="fa fa-chart-area"></i> {{ $house->area }}</big> m<sup>2</sup></li>
 							</ul>
 						</div>
 						<div class="text-right"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn-yellow">Contact Agent</a></div>
@@ -247,7 +356,6 @@
 			<input type="text" name="tour_id" value="{{ $house->id }}" style="display:none">
 		</div>
 	</div>
-	@endforeach
 	<section class="property-content bg-smooth blur">
 		<div class="block">
 			<div class="map">
@@ -261,23 +369,51 @@
 			</div>
 		</div>
 	</section>
-	<h3 class="section-title">You may also like</h3>
-	<section class="properties">
-		@foreach($houseSimilar as $house)
-		<div class="col-md-4 col-xs-6 property-info" style="background-image: url(/uploads/images/{{ $house->image_thumbnail }});">
-			<div class="overlay"></div>
-			<div class="center-position">
-				<div class="property-container">
-					<h2 class="title">{{ $house->title }}</h2>
-					<div class="price-tag"><span class="price">${{ $house->price }}</span> <span class="tag">- {{ $house->num_bedrooms }} Bedrooms</span></div>
-					<!-- <div class="description">
-						<p>{{ $house->description }}</p>
-					</div> -->
-					<a href="/detail/{{ $house->id }}" class="btn-white viewmore">View Details</a>
-				</div>
+	<h3 class="section-title">Similar Listings</h3>
+	<section class="listings-content-wrapper ot-content">
+		<div class="container">
+			<div class="row">
+				@foreach($houseSimilar as $house)
+				<!-- Single Featured Property -->
+	                <div class="col-md-4 col-sm-12">
+	                    <div class="single-featured-property mb-50">
+	                        <!-- Property Thumbnail -->
+	                        <div class="property-thumb">
+	                            <a href="/detail/{{ $house->id }}">
+	                            	<img class="img-responsive" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
+	                            </a>
+	                            <div class="tag">
+	                                <span>For Rent</span>
+	                            </div>
+	                            <div class="list-price">
+	                                <p>${{ $house->price }}</p>
+	                            </div>
+	                        </div>
+	                        <!-- Property Content -->
+	                        <div class="property-content">
+	                            <h5>{{ $house->title }}</h5>
+	                            <p class="location"><img src="resource/img/icon/location.png" alt="">District {{ $house->district }}</p>
+	                            <p>{{ $house->description }}</p>
+	                            <div class="property-meta-data d-flex align-items-end justify-content-between">
+	                                <div class="bathroom">
+	                                    <img src="resource/img/icon/bathtub.png" alt="">
+	                                    <span>{{ $house->num_toilets }} bath</span>
+	                                </div>
+	                                <div class="garage">
+	                                    <img src="resource/img/icon/garage.png" alt="">
+	                                    <span>{{ $house->num_bedrooms }} bed</span>
+	                                </div>
+	                                <div class="space">
+	                                    <img src="resource/img/icon/space.png" alt="">
+	                                    <span>{{ $house->area }} m<sup>2</sup></span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				@endforeach
 			</div>
 		</div>
-		@endforeach
 	</section>
 	<footer>
 		<div class="top-footer">

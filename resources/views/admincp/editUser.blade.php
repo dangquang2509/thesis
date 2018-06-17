@@ -45,7 +45,11 @@
 					<button type="submit">Update</button>
 				</div>
 				<div class="ot-btn-cancel">
-					<a href="/admincp/user/detail/{{ $user->id}}">Cancel</a>
+					@if(Auth::user()->name === "admin")
+						<a href="/admincp/user/detail/{{ $user->id}}">Cancel</a>
+					@else
+						<a href="/admincp/user/myaccount">Cancel</a>
+					@endif
 				</div>
 			</div>
 		</form>

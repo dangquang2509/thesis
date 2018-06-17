@@ -37,10 +37,7 @@ class UserController extends Controller
 				->where('is_active', 1)
 				->get();
 		} else {
-			$users = DB::table('users')
-				->where('name', '=', Auth::user()->name)
-				->where('is_active', 1)
-				->get();
+			return Redirect('/admincp/top');
 		}
 
 		return view('admincp.listUser', ['users' => $users]);
@@ -53,7 +50,7 @@ class UserController extends Controller
 				->where('is_active', 0)
 				->get();
 		} else {
-			return redirect('/');
+			return redirect('/admincp/top');
 		}
 
 		return view('admincp.listUserRequest', ['users' => $users]);
@@ -158,8 +155,11 @@ class UserController extends Controller
 			->where('id', $request->id)
 			->update(['password' => bcrypt($request->password),
 				'updated_at' => $now]);
-
-		return Redirect::to('admincp/user/detail/' . $request->id);
+		if (Auth::user()->name === 'admin') {
+			return Redirect::to('admincp/user/detail/' . $request->id);
+		} else {
+			return Redirect::to('admincp/user/myaccount');
+		}
 	}
 
 	public function acceptUser(Request $request) {
@@ -254,5 +254,20 @@ class UserController extends Controller
 	public function showRegister()
 	{
 		return view('auth.register');
+	}
+
+	public function myAccount() {
+		$user_name = Auth::user()->name;
+		$user = DB::table('users')->where('name', $user_name)->get();
+		$houses = Ot_Tours::where('is_public', true)
+							->where('created_by', $user_name)
+							->get();
+        foreach ($houses as $house) {
+            $id = $house->id;
+            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $house->image_thumbnail = $image_thumb;
+        }
+
+		return view('admincp.detailUser', ['user' => $user, 'houses' => $houses]);
 	}
 }

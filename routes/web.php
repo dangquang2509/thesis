@@ -87,5 +87,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/user', 'namespace' =>
 	Route::post('/accept', 'UserController@acceptUser');
 	Route::delete('/delete/{id}', 'UserController@destroy');
 	Route::delete('/deleteAll', 'UserController@deleteAllUser');
+	Route::get('/myaccount','UserController@myAccount');
 });
 

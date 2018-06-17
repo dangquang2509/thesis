@@ -5,7 +5,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-item">
                         <div class="title-footer title-footer-1">
-                            <h3 class="yellow-text-gradient">Address</h3>
+                            <h3>Address</h3>
                         </div>
                         <div class="box-info">
                             <p>18/11 Phu Dong Thien Vuong Street, District 5, Ho Chi Minh City</p>
@@ -15,7 +15,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-item">
                         <div class="title-footer title-footer-2">
-                            <h3 class="yellow-text-gradient">Customer Service</h3>
+                            <h3>Customer Service</h3>
                         </div>
                         <div class="box-info">
                             <p><a href="tel:0908.41.64.84">0908.41.64.84</a></p>
@@ -25,17 +25,17 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-item">
                         <div class="title-footer title-footer-3">
-                            <h3 class="yellow-text-gradient">Email</h3>
+                            <h3>Email</h3>
                         </div>
                         <div class="box-info">
-                            <p><a href="mailto:hello@munkas.com">hello@gmail.com</a></p>
+                            <p><a href="mailto:lidaqua@gmail.com">lidaqua@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="box-item">
                         <div class="title-footer title-footer-4">
-                            <h3 class="yellow-text-gradient">Connect with us</h3>
+                            <h3>Connect with us</h3>
                         </div>
                         <div class="box-info">
                             <ul class="list-social">

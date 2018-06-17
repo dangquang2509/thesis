@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 	<!-- Metadata -->
 	<meta charset="utf-8">
@@ -18,7 +18,8 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/top-sphone.css') !!}" media="screen and (max-width: 767px)" />
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/top-tablet.css') !!}" media="screen and (min-width: 768px) and (max-width: 1023px)" />
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/top.css') !!}" media="screen and (min-width: 1024px)" />
-
+    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/fontawesome-all.css') !!}">
+    
 	@yield('css')
 </head>
 <body>

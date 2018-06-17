@@ -164,31 +164,31 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 		});
-		$('.nvh_popup').each(function(index, el) {
-			var popup = $(this);
-			popup.find(".close-popup").click(function(event) {
-				closePopup(popup);
-			});
-			setTimeoutOpenPopup(popup);
+		// $('.nvh_popup').each(function(index, el) {
+		// 	var popup = $(this);
+		// 	popup.find(".close-popup").click(function(event) {
+		// 		closePopup(popup);
+		// 	});
+		// 	setTimeoutOpenPopup(popup);
 
-		});
-		function openPopup(popup){
-			popup.addClass('open');
-			openFix()
-		}
-		function closePopup(popup){
-			popup.removeClass('open');
-			closeFix();
-			setTimeoutOpenPopup(popup);
-		}
-		function setTimeoutOpenPopup(popup){
-			var timeout = popup.data("auto-open");
-			timeout = parseInt(timeout);
-			if (!timeout) return;
-			setTimeout(function(){
-				openPopup(popup)
-			}, timeout);
-		}
+		// });
+		// function openPopup(popup){
+		// 	popup.addClass('open');
+		// 	openFix()
+		// }
+		// function closePopup(popup){
+		// 	popup.removeClass('open');
+		// 	closeFix();
+		// 	setTimeoutOpenPopup(popup);
+		// }
+		// function setTimeoutOpenPopup(popup){
+		// 	var timeout = popup.data("auto-open");
+		// 	timeout = parseInt(timeout);
+		// 	if (!timeout) return;
+		// 	setTimeout(function(){
+		// 		openPopup(popup)
+		// 	}, timeout);
+		// }
 		function openFix(){
 			$("body").css({
 				'overflow': 'hidden',
