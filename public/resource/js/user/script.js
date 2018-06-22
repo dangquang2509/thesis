@@ -393,6 +393,10 @@ jQuery(document).ready(function($) {
 			}			
 
 		});
+		function validateEmail(email) {
+		  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		  return re.test(email);
+		}
 		$(".js-contact-agent").click(function(){
 			var name = $(".js-input-name").val();
 			var email = $(".js-input-email").val();
@@ -405,6 +409,8 @@ jQuery(document).ready(function($) {
 				result = "<p>Please input your name</p>";
 			if (email == "") 
 				result = "<p>Please input your email</p>";
+			if (!validateEmail(email))
+				result = "<p>Please input correct email format</p>";
 			if (phone == "")
 				result = "<p>Please input your phone number</p>";
 			if (message == "")

@@ -42,7 +42,7 @@
 		}
 		.property, .properties , .property-content, .ot-content {
 			margin: 0 auto;
-			width: 80%;
+			width: 85%;
 		}
 		.ot-content {
 			padding: 12px;
@@ -209,6 +209,86 @@
 			margin-top: 16px;
 			padding: 0;
 		}
+
+		/*new layout*/
+		.listings-content {
+			margin-top: 42px;
+		}
+		.listings-content .list-price p {
+			margin-bottom: 0;
+		    font-size: 28px;
+		    font-weight: 600;
+		    color: #947054;
+		}
+		.listings-content h5 {
+			font-size: 30px;
+    		margin-bottom: 10px;
+    		font-weight: bold;
+		}
+		.listings-content .location {
+			margin-bottom: 40px;
+		}
+		.listings-content p {
+			margin-bottom: 30px;
+		}
+		.property-meta-data div {
+			display: inline-block;
+			margin-right: 24px;
+		}
+		.property-meta-data img {
+			margin-right: 6px;
+		}
+		.contact-realtor-wrapper {
+			background-color: #f5f5f5;
+		    margin-top: 42px;
+		    position: relative;
+		    z-index: 1;
+		}
+		.contact-realtor-wrapper .realtor-info > img {
+			width: 100%;
+		}
+		.contact-realtor-wrapper .realtor---info {
+			padding: 20px 36px;
+		}
+		.contact-realtor-wrapper .realtor---info h2 {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 32px;
+		}
+		.contact-realtor-wrapper .realtor---info h6 {
+			font-size: 14px;
+			margin-bottom: 8px;
+		}
+		.contact-realtor-wrapper .realtor--contact-form {
+			padding: 0 36px 32px;
+		}
+		.realtor--contact-form form {
+			background: #f5f5f5;
+		}
+		.realtor--contact-form form textarea {
+			resize: none;
+		}
+		.south-btn {
+			position: relative;
+		    z-index: 1;
+		    min-width: 170px;
+		    height: 50px;
+		    color: #ffffff;
+		    font-size: 14px;
+		    font-weight: 600;
+		    background-color: #947054;
+		    border-radius: 0;
+		    padding: 12px 24px;
+		}
+		.span-view {
+			font-size: 14px;
+		}
+		.listings-btn-groups {
+			margin-top: 18px;
+		}
+		.other-info {
+			margin-top: 36px;
+		}
 	</style>
 @stop
 
@@ -254,7 +334,6 @@
 @section('content')
 	<div class="ot-image-detail-content">
 		<div class="pano-area">
-			<!-- <blockquote data-width="1000" data-height="400" class="ricoh-theta-tour-image" ><a href="https://onetech.theta360.biz/t/d15eca62-8895-11e7-bed7-0a4f4743bc83-1"></a></blockquote><script async src="https://onetech.theta360.biz/t_widgets.js" charset="utf-8"></script> -->
 			<div id="pano" style="width:100%;height:100%;">
 				<noscript>
 					<table style="width:100%;height:100%;">
@@ -273,99 +352,97 @@
 				</noscript>
 			</div>
 		</div>
-		<section class="property menu-padding sub-menu-padding">
-			<div class="base-infos-container">
-				<div class="base-infos">
-					<div class="">
-						<div>
-							<h5><i class="fa fa-eye"></i> {{ $house->num_views }} views</h5>
-						</div>
-						<div class="text-right">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="listings-content">
+							<span class="span-view"><i class="fa fa-eye"></i> {{ $house->num_views }} views</span>
 							@if($house->fav)
-								<span class="glyphicon glyphicon-heart js-add-wishlist icon-favorite"></span>
+								<span class="pull-right glyphicon glyphicon-heart js-add-wishlist icon-favorite"></span>
 							@else
-								<span class="glyphicon glyphicon-heart-empty js-add-wishlist icon-favorite"></span>
+								<span class="pull-right glyphicon glyphicon-heart-empty js-add-wishlist icon-favorite"></span>
 							@endif
-						</div>
-						<h1 class="title line-bottom">{{ $house->title }}</h1>
-
-						<div class="description">
-							<p>{{ $house->description }}</p>
-						</div>
-						<div class="list-info">
-							<div class="property-type">{{ $house->category_name }}</div>
-							<div class="property-price"><big>${{ $house->price }}</big> / month</div>
-							<ul class="more-info">
-								<li><big><i class="fa fa-bed"></i> {{ $house->num_bedrooms }}</big> bedroom(s)</li>
-								<li><big><i class="fa fa-bath"></i> {{ $house->num_toilets }}</big> bathroom(s)</li>
-								<li><big><i class="fa fa-chart-area"></i> {{ $house->area }}</big> m<sup>2</sup></li>
-							</ul>
-						</div>
-						<div class="text-right"><a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn-yellow">Contact Agent</a></div>
-						<div class="collapse" id="collapseExample">
-							<!-- <form class="form-contact-agent" method="POST" action="/contactAgent"> -->
-								<div class="form-group">
-									<input type="text" class="form-control js-input-name" name="name" placeholder="Name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control js-input-phone" name="phone" placeholder="Phone">
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control js-input-email" name="email" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<textarea class="form-control js-input-message" name="message" placeholder="Message" rows="3"></textarea>
-								</div>
+                        <!-- Price -->
+                        <div class="list-price">
+                            <p>${{ $house->price }}</p>
+                        </div>
+                        <h5>{{ $house->title }}</h5>
+                        <p class="location"><img src="resource/img/icon/location.png" style="margin-right: 6px;" alt="">District {{ $house->district }}</p>
+                        <p>{{ $house->description }}</p>
+                        <!-- Meta -->
+                        <div class="property-meta-data d-flex align-items-end">
+                            <div class="bathroom">
+                                <img src="resource/img/icon/bathtub.png" alt="">
+                                <span>{{ $house->num_toilets }} bathroom(s)</span>
+                            </div>
+                            <div class="garage">
+                                <img src="resource/img/icon/garage.png" alt="">
+                                <span>{{ $house->num_bedrooms }} bedroom(s)</span>
+                            </div>
+                            <div class="space">
+                                <img src="resource/img/icon/space.png" alt="">
+                                <span>{{ $house->area }} m<sup>2</sup></span>
+                            </div>
+                        </div>
+                        <div class="other-info">
+                        	<h3>AMENITIES</h3>
+                        	<p>{{ $house->amenities }}</p>
+                        	<h3>FACITLITIES</h3>
+                        	<p>{{ $house->project_facility }}</p>
+                        	<h3>TRAFFIC</h3>
+                        	<p>{{ $house->traffic }}</p>
+                        	<h3>NOTICE</h3>
+                        	<p>{{ $house->notice }}</p>
+                        </div>
+                        <div class="listings-btn-groups">
+                            <a href="/house/full/{{ $house->id }}" target="_blank" class="btn south-btn">View Full Screen</a>
+                        </div>
+                    </div>
+				</div>
+				<div class="col-md-4">
+					<div class="contact-realtor-wrapper">
+                        <div class="realtor-info">
+                            <img src="/{{ $user->avatar }}" alt="">
+                            <div class="realtor---info">
+                                <h2>{{ $user->name }}</h2>
+                                <h6><img src="resource/img/icon/phone-call.png" alt="" style="margin-right: 8px"><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></h6>
+                                <h6><img src="resource/img/icon/envelope.png" alt="" style="margin-right: 8px"><a href="mailto:{{ $user->email }}?Subject=" target="_top" >{{ $user->email }}</a></h6>
+                            </div>
+                            <div class="realtor--contact-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control js-input-name" name="name" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control js-input-phone" name="phone" placeholder="Your Number">
+                                </div>
+                                <div class="form-group">
+                                    <input type="enumber" class="form-control js-input-email" placeholder="Your Email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control js-input-message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                                </div>
 								<input type="hidden" class="js-house-id" value="{{ $house->id }}">
 								<input type="hidden" class="js-house-xml" value="{{ $house->xml_url }}">
-							<button type="submit" class="btn-yellow js-contact-agent">Submit</button>
-							<!-- </form> -->
-						</div>
-					</div>
-				</div>
+                                <button type="submit" class="btn south-btn js-contact-agent">Contact Agent</button>
+                            </div>
+                        </div>
+                    </div>
+				</div>	
 			</div>
-		</section>
-		<h3 class="section-title">About this house</h3>
-		<div class="ot-content">
-			<input type="hidden" value="{{ $house->id }}" class="tour_id" name="tour_key">
-			<div class="ot-image-detail-row">
-				<div><a href="/house/full/{{ $house->id }}" target="_blank" class="btn-yellow">View house with full screen</a></div>
-			</div>
-			<!-- <div class="ot-image-detail-row">
-				<div class="ot-image-detail-label">Iframe</div>
-				<div class="ot-image-detail-value">
-					<textarea rows="4" readonly class="js-embed-code select"></textarea>
-				</div>
-			</div> -->
-			<div class="ot-image-detail-row">
-				<div class="ot-image-detail-label">Amenities</div>
-				<div class="ot-image-detail-value">{{ $house->amenities }}</div>
-			</div>
-			<div class="ot-image-detail-row">
-				<div class="ot-image-detail-label">Project Facility</div>
-				<div class="ot-image-detail-value">{{ $house->project_facility }}</div>
-			</div>
-			<div class="ot-image-detail-row">
-				<div class="ot-image-detail-label">Traffic</div>
-				<div class="ot-image-detail-value">{{ $house->traffic }}</div>
-			</div>
-			<div class="ot-image-detail-row">
-				<div class="ot-image-detail-label">Notice</div>
-				<div class="ot-image-detail-value">{{ $house->notice }}</div>
-			</div>
-			<input type="text" name="tour_id" value="{{ $house->id }}" style="display:none">
 		</div>
 	</div>
 	<section class="property-content bg-smooth blur">
-		<div class="block">
-			<div class="map">
-				<div class="container">
-					<div class="content">
-						<h2>Location</h2>
-						<p class="js-address">{{ $house->address }}</p>
+		<div class="container">
+			<div class="block">
+				<div class="map">
+					<div class="container">
+						<div class="content">
+							<h2>Location</h2>
+							<p class="js-address">{{ $house->address }}</p>
+						</div>
 					</div>
+					<div id="map-1" class="ggmap"></div>
 				</div>
-				<div id="map-1" class="ggmap"></div>
 			</div>
 		</div>
 	</section>
@@ -422,7 +499,7 @@
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="box-item">
 							<div class="title-footer title-footer-1">
-								<h3 class="yellow-text-gradient">Address</h3>
+								<h3>Address</h3>
 							</div>
 							<div class="box-info">
 								<p>18/11 Phu Dong Thien Vuong Street, District 5, Ho Chi Minh City</p>
@@ -432,7 +509,7 @@
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="box-item">
 							<div class="title-footer title-footer-2">
-								<h3 class="yellow-text-gradient">Customer Service</h3>
+								<h3>Customer Service</h3>
 							</div>
 							<div class="box-info">
 								<p><a href="tel:0908.41.64.84">0908.41.64.84</a></p>
@@ -442,7 +519,7 @@
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="box-item">
 							<div class="title-footer title-footer-3">
-								<h3 class="yellow-text-gradient">Email</h3>
+								<h3>Email</h3>
 							</div>
 							<div class="box-info">
 								<p><a href="mailto:hello@munkas.com">hello@gmail.com</a></p>
@@ -452,7 +529,7 @@
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="box-item">
 							<div class="title-footer title-footer-4">
-								<h3 class="yellow-text-gradient">Connect with us</h3>
+								<h3>Connect with us</h3>
 							</div>
 							<div class="box-info">
 								<ul class="list-social">

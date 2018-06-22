@@ -8,7 +8,7 @@
 @section('content')
 	<div class="login-page">
 		<div class="form">
-			<form class="login-form" role="form" method="POST" action="{{ url('/login') }}">
+			<form class="login-form" role="form" method="POST" action="{{ url('/admincp/login') }}">
 				{{ csrf_field() }}
 				<div class="ot-login-title">House Management</div>
 				<input id="username" name="username" type="text" placeholder="Username"/>

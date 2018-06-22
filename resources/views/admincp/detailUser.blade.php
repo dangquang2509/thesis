@@ -27,6 +27,12 @@
 			<form class="form-content clearfix" action="{{ url('/admincp/user/delete') }}" method="POST" role="form">
 				<div class="ot-content-left">
 					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Avatar</div>
+						<div class="ot-image-detail-value">
+							<img class="user-avatar" src="/{{ $user->avatar }}">
+						</div>
+					</div>
+					<div class="ot-image-detail-row">
 						<div class="ot-image-detail-label">Username</div>
 						<div class="ot-image-detail-value">{{ $user->name }}</div>
 					</div>
@@ -34,6 +40,10 @@
 					<div class="ot-image-detail-row">
 						<div class="ot-image-detail-label">Email</div>
 						<div class="ot-image-detail-value">{{ $user->email }}</div>
+					</div>
+					<div class="ot-image-detail-row">
+						<div class="ot-image-detail-label">Phone</div>
+						<div class="ot-image-detail-value">{{ $user->phone }}</div>
 					</div>
 					<input type="hidden" value="{{ $user->id}}" class="user_id" name="user_id">
 					<div class="ot-image-detail-row">

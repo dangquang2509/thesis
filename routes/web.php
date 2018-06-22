@@ -23,9 +23,9 @@ Route::get('/house/full/{id}', 'Fontend\WebController@getFullTourDetail');
 
 // Route::get('/', 'Fontend\WebController@home');
 
-Route::get('/login', 'Admin\UserController@getLogin');
-Route::post('/login', 'Admin\UserController@postLogin');
-Route::get('/logout', 'Admin\UserController@getLogout');
+Route::get('/admincp/login', 'Admin\UserController@getLogin');
+Route::post('/admincp/login', 'Admin\UserController@postLogin');
+Route::get('/admincp/logout', 'Admin\UserController@getLogout');
 
 Route::get('/admincp/top',  [
     'middleware' => 'auth',

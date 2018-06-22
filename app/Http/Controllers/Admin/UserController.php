@@ -9,10 +9,11 @@ use App\Http\Controllers\Controller;
 use Validator;
 use DB;
 use Redirect;
+use Image;
 use Carbon\Carbon;
 use App\Models\Ot_Tours;
 use App\Models\Ot_Images;
-
+use App\Models\User;
 class UserController extends Controller
 {
 	/**
@@ -66,10 +67,9 @@ class UserController extends Controller
 		$user = array();
 		if (Auth::user()->name == "admin") {
 			$user = DB::table('users')->where('id', $request->id)->get();
-		} else {
-			$user = DB::table('users')
-				->where('name', '=', Auth::user()->name)
-				->where('id', $request->id)->get();
+		}
+		if (!$user) {
+			return redirect('/admincp/user/myaccount');
 		}
 		$user_name = DB::table('users')->where('id', $request->id)->pluck('name')->first();
 
@@ -90,10 +90,10 @@ class UserController extends Controller
 		$user = array();
 		if (Auth::user()->name == "admin") {
 			$user = DB::table('users')->where('id', $request->id)->get();
-		} else {
-			$user = DB::table('users')
-				->where('name', '=', Auth::user()->name)
-				->where('id', $request->id)->get();
+		}
+
+		if (!$user) {
+			return redirect('/admincp/user/myaccount');
 		}
 
 		return view('admincp.detailUserRequest', ['user' => $user]);
@@ -151,10 +151,21 @@ class UserController extends Controller
 	public function updateUser(Request $request)
 	{
 		$now = Carbon::now()->toDateTimeString();
-		DB::table('users')
-			->where('id', $request->id)
-			->update(['password' => bcrypt($request->password),
-				'updated_at' => $now]);
+		$user = User::find($request->id);
+
+		if($request->hasFile('avatar')) {
+			$avatar = $request->file('avatar');
+			$filename = time() . '.' . $avatar->getClientOriginalExtension();
+			$avatar_path = 'uploads/user/avatar/' . $filename;
+			Image::make($avatar)->save($avatar_path);
+			$user->avatar = $avatar_path;
+		}
+
+		$user->updated_at 	= $now;
+		$user->password 	= bcrypt($request->password);
+		$user->phone 		= $request->phone;
+		$user->save();
+		
 		if (Auth::user()->name === 'admin') {
 			return Redirect::to('admincp/user/detail/' . $request->id);
 		} else {
@@ -245,7 +256,7 @@ class UserController extends Controller
 	{
 		Auth::logout();
 
-		return redirect()->intended('/');
+		return redirect('/admincp/login');
 	}
 
 	/**

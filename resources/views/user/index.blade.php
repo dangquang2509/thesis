@@ -73,6 +73,7 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			padding: 4px 0;
 		}
 		.single-featured-property .property-content .location {
 			color: #947054;
@@ -213,7 +214,6 @@
 												<option value="4">District 4</option>
 												<option value="5">District 5</option>
 												<option value="7">District 7</option>
-												<option value="Tan Binh">Tan Binh District</option>
 	                                        </select>
 	                                    </div>
 	                                </div>

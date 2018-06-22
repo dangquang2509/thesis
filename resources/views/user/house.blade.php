@@ -141,7 +141,6 @@
 								<option value="4">District 4</option>
 								<option value="5">District 5</option>
 								<option value="7">District 7</option>
-								<option value="Tan Binh">Tan Binh District</option>
 							</select>
 						</div>
 						<div class="col-lg-2 col-sm-4 input">
@@ -308,7 +307,6 @@
 			
 
 			function initMap() {
-
 				if (houses.length == 0){
 					var map = new google.maps.Map(document.getElementById('map'), {
 						zoom: setupMap['zoom'],

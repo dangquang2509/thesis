@@ -1,7 +1,7 @@
 <div class="ot-header">
 	<div class="ot-header-wrapper">
 		<a href="/admincp/top" class="ot-header-title">House Management</a>
-		<a href="/logout" class="ot-header-logout">logout</a>
+		<a href="/admincp/logout" class="ot-header-logout">logout</a>
 		<span class="ot-header-logout">{{ Auth::user()->name  }} | </span>
 	</div>
 </div>

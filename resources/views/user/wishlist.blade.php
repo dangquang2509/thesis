@@ -122,49 +122,51 @@
 						<h1>Wishlist ({{ count($houses) }} houses)</h1>
 					</div>
 				</div>
-				@foreach ($houses->chunk(3) as $houses_row)
-					<div class="row">
-						@foreach($houses_row as $house)
-							<!-- Single Featured Property -->
-			                <div class="col-md-4 col-sm-12">
-			                    <div class="single-featured-property mb-50">
-			                        <!-- Property Thumbnail -->
-			                        <div class="property-thumb">
-			                            <a href="/detail/{{ $house->id }}">
-			                            	<img class="img-responsive" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
-			                            </a>
-			                            <div class="tag">
-			                                <span>For Rent</span>
-			                            </div>
-			                            <div class="list-price">
-			                                <p>${{ $house->price }}</p>
-			                            </div>
-			                        </div>
-			                        <!-- Property Content -->
-			                        <div class="property-content">
-			                            <h5>{{ $house->title }}</h5>
-			                            <p class="location"><img src="resource/img/icon/location.png" alt="">District {{ $house->district }}</p>
-			                            <p>{{ $house->description }}</p>
-			                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-			                                <div class="bathroom">
-			                                    <img src="resource/img/icon/bathtub.png" alt="">
-			                                    <span>{{ $house->num_toilets }} bath</span>
-			                                </div>
-			                                <div class="garage">
-			                                    <img src="resource/img/icon/garage.png" alt="">
-			                                    <span>{{ $house->num_bedrooms }} bed</span>
-			                                </div>
-			                                <div class="space">
-			                                    <img src="resource/img/icon/space.png" alt="">
-			                                    <span>{{ $house->area }} m<sup>2</sup></span>
-			                                </div>
-			                            </div>
-			                        </div>
-			                    </div>
-			                </div>
-						@endforeach
-					</div>
-				@endforeach
+				@if(count($houses) > 0)
+					@foreach ($houses->chunk(3) as $houses_row)
+						<div class="row">
+							@foreach($houses_row as $house)
+								<!-- Single Featured Property -->
+				                <div class="col-md-4 col-sm-12">
+				                    <div class="single-featured-property mb-50">
+				                        <!-- Property Thumbnail -->
+				                        <div class="property-thumb">
+				                            <a href="/detail/{{ $house->id }}">
+				                            	<img class="img-responsive" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
+				                            </a>
+				                            <div class="tag">
+				                                <span>For Rent</span>
+				                            </div>
+				                            <div class="list-price">
+				                                <p>${{ $house->price }}</p>
+				                            </div>
+				                        </div>
+				                        <!-- Property Content -->
+				                        <div class="property-content">
+				                            <h5>{{ $house->title }}</h5>
+				                            <p class="location"><img src="resource/img/icon/location.png" alt="">District {{ $house->district }}</p>
+				                            <p>{{ $house->description }}</p>
+				                            <div class="property-meta-data d-flex align-items-end justify-content-between">
+				                                <div class="bathroom">
+				                                    <img src="resource/img/icon/bathtub.png" alt="">
+				                                    <span>{{ $house->num_toilets }} bath</span>
+				                                </div>
+				                                <div class="garage">
+				                                    <img src="resource/img/icon/garage.png" alt="">
+				                                    <span>{{ $house->num_bedrooms }} bed</span>
+				                                </div>
+				                                <div class="space">
+				                                    <img src="resource/img/icon/space.png" alt="">
+				                                    <span>{{ $house->area }} m<sup>2</sup></span>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+							@endforeach
+						</div>
+					@endforeach
+				@endif
 			</div>
 		</section>
 	</main>

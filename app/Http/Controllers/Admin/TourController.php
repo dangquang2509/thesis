@@ -147,11 +147,12 @@ class TourController extends Controller
 			$dom->save($xmlUrl);
 
 			$img = Ot_Images::where('tour_id', $request->id)->get();
-			foreach ($img as $key => $value) {
-				if (is_null($value)) {
-					$img->tour_id = null;
-					$img->save();
-				}
+
+			foreach ($img as $i) {
+				// if (!is_null($value)) {
+					$i->tour_id = null;
+					$i->save();
+				// }
 			}
 
 			foreach($jSON["spheres"] as $key => $value) {
@@ -363,7 +364,7 @@ class TourController extends Controller
 		if(count($tour) > 0) {
 			return view('admincp.detailTour', ['tour' => $tour]);
 		} else {
-			return redirect()->intended('/admincp');
+			return redirect('/admincp/house/list');
 		}
 	}
 

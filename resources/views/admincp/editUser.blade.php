@@ -17,11 +17,24 @@
 	</div>
 	@foreach($user as $user)
 	<div class="ot-image-detail-content">
-		<form class="form-content clearfix" action="{{ url('/admincp/user/update') }}" name="form_edit_user" onsubmit="return validateFormEditUser()" method="POST" role="form">
+		<form class="form-content clearfix" enctype="multipart/form-data" action="{{ url('/admincp/user/update') }}" name="form_edit_user" onsubmit="return validateFormEditUser()" method="POST" role="form">
 			<div class="ot-content-left">
+				<div class="ot-image-detail-row">
+					<div class="ot-image-detail-label">Avatar</div>
+					<div class="ot-image-detail-value">
+						<img class="user-avatar" src="/{{ $user->avatar }}">
+						<input type="file" name="avatar" id="avatar" style="display: none">
+					</div>
+				</div>
 				<div class="ot-image-detail-row">
 					<div class="ot-image-detail-label">Username</div>
 					<div class="ot-image-detail-value">{{ $user->name }}</div>
+				</div>
+				<div class="ot-image-detail-row">
+					<div class="ot-image-detail-label">Phone</div>
+					<div class="ot-image-detail-value">
+						<input type="text" name="phone" value="{{ $user->phone }}">
+					</div>
 				</div>
 				{{ csrf_field()}}
 				<input type="hidden" value="{{ $user->id}}" name="id">
@@ -77,5 +90,25 @@
 				}
 			}
 		}
+		$(document).ready(function(){
+			$(".user-avatar").click(function(){
+				$("#avatar").trigger('click');
+			});
+			$("#avatar").change(function(){
+				readURL(this);
+			});
+
+			function readURL(input){
+				if (input.files && input.files[0]) {
+				    var reader = new FileReader();
+
+				    reader.onload = function(e) {
+				      $('.user-avatar').attr('src', e.target.result);
+				    }
+
+				    reader.readAsDataURL(input.files[0]);
+				}
+			}
+		});
 	</script>
 @stop

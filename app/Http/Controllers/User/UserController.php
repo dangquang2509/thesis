@@ -15,6 +15,7 @@ use DB;
 use App\Models\Ot_Images;
 use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
+use App\Models\User;
 use App\Models\Ot_Categories;
 use SimpleXMLElement;
 use Session;
@@ -25,7 +26,10 @@ class UserController extends Controller
         $houses = Ot_Tours::where('is_public', true)->orderBy('created_at','desc')->take(3)->get();
         foreach ($houses as $house) {
             $id = $house->id;
-            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $image_thumb = Ot_Images::where('tour_id', $id)
+                                    ->orderBy('created_at','desc')
+                                    ->pluck('image_url')
+                                    ->first();
             $house->image_thumbnail = $image_thumb;
         }
         return view('user.index', ['houses' => $houses, 'message' => '']);
@@ -35,7 +39,10 @@ class UserController extends Controller
         $houses = Ot_Tours::where('is_public', true)->get();
         foreach ($houses as $house) {
             $id = $house->id;
-            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $image_thumb = Ot_Images::where('tour_id', $id)
+                                    ->orderBy('created_at','desc')
+                                    ->pluck('image_url')
+                                    ->first();
             $house->image_thumbnail = $image_thumb;
         }
         return view('user.contact')->with(['houses' => json_encode($houses)]);
@@ -64,7 +71,10 @@ class UserController extends Controller
         }
         foreach ($houses as $house) {
             $id = $house->id;
-            $image_thumb = Ot_Images::where('tour_id', $id)->pluck('image_url')->first();
+            $image_thumb = Ot_Images::where('tour_id', $id)
+                                    ->orderBy('created_at','desc')
+                                    ->pluck('image_url')
+                                    ->first();
             $house->image_thumbnail = $image_thumb;
         }
 
@@ -100,15 +110,24 @@ class UserController extends Controller
             $hs->image_thumbnail = $image_thumb;
         }
 
-        return view('user.house_detail')->with(['house' => $house, 'houseSimilar' => $houseSimilar, 'title'=> $title, 'fav' => $fav]);
+        $username = $house->created_by;
+        $user = User::where('name', '=', $username)->first();
+
+        return view('user.house_detail')->with(['house'         => $house, 
+                                                'houseSimilar'  => $houseSimilar, 
+                                                'title'         => $title, 
+                                                'fav'           => $fav, 
+                                                'user'          => $user]);
     }
 
     public function search(Request $request){
+        $district = $request->district;
         $houses = Ot_Tours::where('is_public', true)
                             ->where('category_id', '=', $request->category)
                             ->where('num_bedrooms', '=', $request->num_bedrooms)
                             ->where('price', '>=', $request->price_min)
                             ->where('price', '<=', $request->price_max)
+                            ->where('district', '=', $request->district)
                             ->get();
         foreach ($houses as $house) {
             $id = $house->id;
@@ -171,16 +190,17 @@ class UserController extends Controller
                         'phone' => $phone,
                         'message'=> $message
         ];
-
         try {
             $mailData =array_merge(array('mail' => $mailTo), $params);
+
             Mail::send('emails.request', array('name'       =>$mailData['name'], 
                                                 'email'     =>$mailData['email'],
                                                 'phone'     =>$mailData['phone'],
                                                 'content'   =>$mailData['message']), 
                 function ($m) use ($mailData) {
+
                     $m->from($mailData['email']);
-                    $m->to($mailData['mail'])->subject('There is a request from guest');
+                    $m->to($mailData['email'])->subject('There is a request from guest');
             });
 
             return response()->json(['success' => 'success']);
