@@ -159,6 +159,13 @@ $(function($) {
 		insertViewer($(this).parent().attr("id"));
 		return;
 	});
+
+	$(document).on("click", ".photo-uploaded img", function() {
+		selectPhoto($(this).parent().attr("id"));
+		// insertViewer($(this).parent().attr("id"));
+		return;
+	});
+
 	$(document).on("click", ".sphere-close", function() {
 
 		deleteMessage();
@@ -178,6 +185,11 @@ $(function($) {
 		selected_sphere_id = null;
 
 		return false;
+	});
+
+	$(document).on("click", ".photo-close", function() {
+		$(this).closest(".photo-item").remove();
+		setBoxMessage();
 	});
 	$(document).on("change", ".scene-title", function() {
 		deleteMessage();
@@ -301,6 +313,22 @@ function uploadSpheres(files) {
 	clearFiles("file_spheres");
 }
 
+function uploadPhotos(files) {
+	deleteMessage();
+
+	$.each(files, function(i, file) {
+		var ret = checkSphereFile(file);
+		var message = get_message(ret, file.name);
+		if (message != null) {
+			insertErrorMessage(message);
+		} else {
+			loadPhoto(file);
+		}
+	});
+
+	clearFiles("file_photos");
+}
+
 // drag sort position for image 360
 $(".sortable").sortable({
 	update: function(event, ui) {
@@ -379,6 +407,17 @@ function setBoxMessage() {
 			'display': 'block'
 		});
 	}
+
+	if ($(".js-drop-photo").children('.js-photo-area').children('.photo-item').length > 0) {
+		$(".js-drop-photo").children('.ot-message').css({
+			'display': 'none'
+		});
+	} else {
+		$(".js-drop-photo").children('.ot-message').css({
+			'display': 'block'
+		});
+	}
+
 }
 
 // check file image size upload valid
@@ -574,6 +613,21 @@ function loadSphere(file) {
 	reader.readAsDataURL(file);
 }
 
+function loadPhoto(file) {
+	var reader = new FileReader();
+	reader.onload = function(e) {
+		if ($(".js-photo-area").children('.photo-item').length >= 30) {
+			insertErrorMessage(get_message("MoreThan30Spheres", ""));
+			return false;
+		}
+		var unique_str = "uploading" + uploading_counter;
+		uploading_counter++;
+		insertPhoto(unique_str, reader.result, "");
+		postingPhoto(file, unique_str);
+	};
+	reader.readAsDataURL(file);
+}
+
 // insert a image vr in block image vr
 function insertSphere(div_id, sphere_source, sphere_title) {
 	var div = document.createElement("div");
@@ -610,6 +664,33 @@ function insertSphere(div_id, sphere_source, sphere_title) {
 		}
 	};
 	image.src = sphere_source;
+}
+
+function insertPhoto(div_id, photo_source, sphere_title) {
+	var div = document.createElement("div");
+	div.id = div_id;
+	div.setAttribute("class", "photo-item clearfix unsortable");
+	$(".js-photo-area").append(div);
+
+	var image = new Image();
+
+	image.onload = function() {
+		var sphere_div = document.getElementById(div_id);
+		if (sphere_div != null) {
+			image.setAttribute("class", "equi-thumbnail");
+
+			image.width = 180;
+			image.height = 90;
+
+			// if (getUploadedSphere(div_id) == null || !getUploadedSphere(div_id).isUploaded) {
+			// 	image.draggable = false;
+			// }
+
+			sphere_div.appendChild(image);
+
+		}
+	};
+	image.src = photo_source;
 }
 
 // get image vr by id in store uploaded images vr
@@ -713,6 +794,102 @@ function postingSphere(file, indicator_key) {
 			}
 
 			insertPlotNumber();
+
+			setBoxMessage();
+		}
+	});
+}
+
+function postingPhoto(file, indicator_key) {
+	var formData = new FormData();
+	formData.append('file', file);
+	formData.append('counter', uploading_counter);
+
+	var sphere_id;
+	var equirectangular_source;
+	var thumbnail_source;
+	var toursphere_url;
+
+	var spinner = new Spinner().spin(document.getElementById(indicator_key));
+	sphere_spinners.set(indicator_key, spinner);
+
+	// var uploaded_sphere = createUploadedSphere(indicator_key, "", "", "", "", false);
+	// uploaded_spheres.push(uploaded_sphere);
+	// insertPlotNumber();
+
+	// jsobj_rebuild_queue.push("true");
+
+	$.ajax('/admincp/house/upload-plain-photo', {
+		method: 'POST',
+		contentType: false,
+		processData: false,
+		data: formData,
+		dataType: 'json',
+		timeout: 1200000,
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			var error_message = null;
+			if (textStatus == "timeout") {
+				error_message = get_message("FailedToUploadFile", file.name);
+			} else if (XMLHttpRequest.responseJSON) {
+				var response_json = XMLHttpRequest.responseJSON;
+				if (XMLHttpRequest.status == "401") {
+					error_message = (response_json.error);
+
+					//Start login if need
+					//End login if need
+					return;
+				} else {
+					error_message = (response_json.error_message);
+				}
+			} else {
+				error_message = get_message("FailedToUploadFile", file.name);
+			}
+			insertErrorMessage(error_message);
+
+			var sphere_div = document.getElementById(indicator_key);
+			sphere_div.parentNode.removeChild(sphere_div);
+
+			removeUploadedSphereById(indicator_key);
+
+			jsobj_rebuild_queue.splice(0, 1);
+		},
+		success: function(data) {
+			sphere_id = (data.sphere_id);
+			equirectangular_source = (data.equirectangular_source);
+			thumbnail_source = (data.thumbnail_source);
+			toursphere_url = (data.toursphere_url);
+
+			var sphere_div = document.getElementById(indicator_key);
+			sphere_div.id = sphere_id;
+
+			sphere_div.className += " photo-uploaded";
+
+			$("#" + sphere_id + " img").attr("draggable", false);
+
+			$("#" + sphere_id + " img").attr("src", thumbnail_source);
+
+			// $("#" + sphere_id).removeClass("unsortable");
+
+			var title = "";
+			if ($("#" + sphere_id + " input").length) {
+				title = $("#" + sphere_id + " input").val();
+			}
+
+			// updateUploadedSphere(indicator_key, sphere_id, title, thumbnail_source, equirectangular_source, toursphere_url, true);
+
+			// if (sortSpheres != null) {
+			// 	updateSortSphereList(indicator_key, sphere_id);
+			// }
+			// jsobj_rebuild_queue.splice(0, 1);
+		},
+		complete: function(data) {
+			var spinner = sphere_spinners.get(indicator_key);
+
+			if (spinner != null) {
+				spinner.stop();
+			}
+
+			// insertPlotNumber();
 
 			setBoxMessage();
 		}
@@ -868,6 +1045,26 @@ function selectSphere(id) {
 	reDraw();
 
 	insertPlotNumber();
+}
+
+function selectPhoto(id) {
+	$('.photo-item img').css('border', 'none');
+	$('.photo-item img').removeClass('selected-sphere');
+	$('.photo-close').remove();
+
+	// if (selected_sphere_id != null) {
+	// 	getUploadedSphere(selected_sphere_id).telopcontent = $('#scene-telop').val();
+	// 	$('#scene-telop').val('');
+	// }
+
+
+	$('#' + id + " img").addClass("selected-sphere");
+	var div = document.createElement("div");
+	var content = document.createTextNode("X");
+	div.appendChild(content);
+	div.setAttribute("class", "photo-close");
+	$("#" + id).append(div);
+
 }
 
 // show krpano when selected image vr
@@ -2173,6 +2370,12 @@ function uploadTour(editfrom, tour_id) {
 		});
 	} else {
 		var tour_param_json = combineTourParam();
+
+		var house_photo = [];
+		$(".js-photo-area").find("div").each(function(){ 
+			house_photo.push(this.id); 
+		});
+		$(".house_photo_param").val(house_photo);
 		$(".js-tour-param").val(tour_param_json);
 		$("#tour_title_param").val($("#tour_title").val());
 		$("#tour_custom_key_param").val($("#tour_custom_key").val());
@@ -2754,8 +2957,29 @@ function restoreAll() {
 
 		});
 
-		// restore sphere list
+		// restore photo list
+		var photos = JSON.parse($(".house_photo_param").val());
+		var photo_arr = [];
+		for (var i = 0; i < photos.length; i++) {
+			var photo = photos[i];
+			insertPhoto(photo.spherical_id, "/uploads/images/thumb/" + photo.image_url, photo.title);
 
+			$("#" + photo.spherical_id).addClass("photo-uploaded");
+
+			$("#" + photo.spherical_id + " img").attr("draggable", false);
+
+			$("#" + photo.spherical_id).removeClass("unsortable");
+
+			$(".js-photo-area").addClass("sphere-container");
+
+			$(".js-drop-photo").children('.ot-message').css({
+				'display': 'none'
+			});
+			photo_arr.push(photo.spherical_id);
+		}
+		$(".house_photo_param").val(photo_arr);
+
+		// restore sphere list
 		for (i in uploaded_spheres) {
 			var sphere = uploaded_spheres[i];
 			if(sphere.title == null) {
@@ -2779,6 +3003,9 @@ function restoreAll() {
 			});
 
 		}
+
+		// restore photo list
+
 		insertPlotNumber();
 		reDraw();
 	};

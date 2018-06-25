@@ -163,6 +163,10 @@
 		.control {
 			margin-top: 42px;
 		}
+		.img-thumb {
+			width: 100%;
+			height: 180px;
+		}
 	</style>
 @stop
 
@@ -339,7 +343,7 @@
 	                        <!-- Property Thumbnail -->
 	                        <div class="property-thumb">
 	                            <a href="/detail/{{ $house->id }}">
-	                            	<img class="img-responsive" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
+	                            	<img class="img-thumb" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
 	                            </a>
 	                            <div class="tag">
 	                                <span>New</span>

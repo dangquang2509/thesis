@@ -150,7 +150,7 @@
 			<input type="number" class="ot-form-row-input-number" name="house_num_bedroom" value="1" min="1" max="10" step="1">
 		</div>
 		<div class="ot-form-row">
-			<label class="ot-form-row-label">Toilet(s)</label>
+			<label class="ot-form-row-label">Bathroom(s)</label>
 			<input type="number" class="ot-form-row-input-number" name="house_num_toilet" value="1" min="1" max="10" step="1">
 		</div>
 		<input name="house_address" class="js-house-address" type="hidden" value="">
@@ -159,6 +159,7 @@
 
 		<input id="tour-param" name="tour_param" class="js-tour-param" type="hidden" value="" />
 		<input id="tour-map" name="tour_map" class="js-tour-map" type="hidden" value="">
+		<input type="hidden" class="house_photo_param" name="house_photo_param" value="">
 	</form>
 	<div class="ot-floormap-view clearfix">
 		<div class="ot-floormap-label">
@@ -222,6 +223,20 @@
 				Please drag and drop 360 degree images here.<br> Or <br>select 360 degree images from 「Import」 button.
 			</p>
 			<div class="js-scroll-area sortable ui-sortable sphere-container clearfix">
+			</div>
+		</div>
+	</div>
+	<div class="ot-sphere-area">
+		<div class="ot-sphere-label">
+			<span>Photos</span>
+			<button class="btn-create-tour" onclick="openFileDialog('file_photos');">Import</button>
+			<input id="file_photos" multiple="multiple" name="file[photos][]" onchange="uploadPhotos(this.files)" style="display:none" type="file">
+		</div>
+		<div class="ot-drop-sphere js-drop-photo">
+			<p class="ot-message">
+				Select photos from 「Import」 button.
+			</p>
+			<div class="js-photo-area sphere-container clearfix">
 			</div>
 		</div>
 	</div>

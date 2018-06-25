@@ -94,6 +94,14 @@ class TourController extends Controller
 				}
 			}
 
+			$photo_arr = explode(",", $request->house_photo_param);
+
+			foreach($photo_arr as $p) {
+				$photo = Ot_Images::where('spherical_id', $p)->first();
+				$photo->tour_id = $objTour->id;
+				$photo->save();
+			}
+
 			$objTour->view_url = "/tour/".$objTour->id;
 			$objTour->xml_url = $pathUpload.'/'.$now.'.xml';
 			$objTour->update();
@@ -164,16 +172,24 @@ class TourController extends Controller
 				}
 			}
 
+			$photo_arr = explode(",", $request->house_photo_param);
+
+			foreach($photo_arr as $p) {
+				$photo = Ot_Images::where('spherical_id', $p)->first();
+				$photo->tour_id = $id;
+				$photo->save();
+			}
+
 			DB::table('houses')
 			->where('id', $id)
 			->update([
-					'title' 		=> $title,
-					'description'	=> $description,
-					'plan_image_id' => $plan_image_id,
-					'config' 		=> $config,
-					'updated_by'    => Auth::user()->name,
-					'updated_at'	=> $now,
-					'category_id'	=> $category_id,
+					'title' 				=> $title,
+					'description'			=> $description,
+					'plan_image_id' 		=> $plan_image_id,
+					'config' 				=> $config,
+					'updated_by'    		=> Auth::user()->name,
+					'updated_at'			=> $now,
+					'category_id'			=> $category_id,
 					'amenities'				=> $amenities ,
 					'project_facility'		=> $project_facility,
 					'traffic'				=> $traffic,
@@ -281,6 +297,49 @@ class TourController extends Controller
 		}
 	}
 
+	public function uploadPhoto(Request $request){
+		if($request->hasFile('file')) {
+			$now = Carbon::now()->timestamp;
+			$now = $now.'-'.$request->counter;
+
+			$pathUpload = 'uploads/images';
+
+			if (!file_exists($pathUpload)) {
+				File::makeDirectory($pathUpload, $mode = 0777, true, true);
+			}
+			if (!file_exists($pathUpload.'/thumb/')) {
+				File::makeDirectory($pathUpload.'/thumb/', $mode = 0777, true, true);
+			}
+			
+			$img 	= $request->file('file');
+			$name 	= $now.'-'.$img->getClientOriginalName();
+			Image::make($img->getRealPath())->resize(180, 90)->save($pathUpload.'/thumb/'.$name);
+			Image::make($img->getRealPath())->save($pathUpload.'/'.$name);
+
+			// $img->move($pathUpload, $name);
+
+			$objImage = new Ot_Images();
+			$objImage->spherical_id = $now;
+			$objImage->title = '';
+			$objImage->image_url = $name;
+			$objImage->description = '';
+			$objImage->is_public = 1;
+			$objImage->type = 2;
+			$objImage->view_url = '/image/'.$now;
+			$objImage->created_by = Auth::user()->name;
+			$objImage->updated_by = Auth::user()->name;
+			$objImage->save();
+
+			$file = array();
+			$file["sphere_id"] = $now;
+			$file["equirectangular_source"] = '/'.$pathUpload.'/'.$name;
+			$file["thumbnail_source"] = '/'.$pathUpload.'/thumb/'.$name;
+			$file["toursphere_url"] = '/image/'.$now;
+
+			$ret['data'] = $file;
+			return response()->json($ret['data']);
+		}
+	}
 	/**
 	 * Ajax
 	 * Upload image minimap
@@ -408,7 +467,15 @@ class TourController extends Controller
 			$floorMapId = DB::table('houses')->where('id', $request->id)->pluck('plan_image_id');
 			$floorMap 	= DB::table('plan_images')->where('id', $floorMapId)->pluck('image_url');
 			$categories = DB::table('category')->get();
-			return view('admincp.editTour', ['tour' => $tour, 'floorMapUrl' => $floorMap, 'categories' => $categories]);
+
+			$photos = Ot_Images::where("tour_id", $request->id)
+								->where("type", 2)
+								->get();
+
+			return view('admincp.editTour', ['tour' 		=> $tour, 
+											'floorMapUrl' 	=> $floorMap, 
+											'categories' 	=> $categories,
+											'photos'     	=> json_encode($photos) ]);
 		} else {
 			return redirect()->intended('/admincp');
 		}

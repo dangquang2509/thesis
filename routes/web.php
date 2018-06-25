@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/house', 'namespace' =
 	Route::post('/save', 'TourController@saveNewTour');
 	Route::post('/update', 'TourController@updateTour');
 	Route::post('/upload-spherical-photo', 'TourController@uploadSpherical');
+	Route::post('/upload-plain-photo', 'TourController@uploadPhoto');
 	Route::post('/upload-plan-photo', 'TourController@uploadPlan');
 	Route::post('/delete-plan-photo', 'TourController@deletePlan');
 	Route::post('/check-tour-key', 'TourController@checkTourKey');

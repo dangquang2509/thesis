@@ -113,11 +113,16 @@ class UserController extends Controller
         $username = $house->created_by;
         $user = User::where('name', '=', $username)->first();
 
+        $photos = Ot_Images::where('tour_id', $request->id)
+                            ->where('type', 2)
+                            ->get();
+
         return view('user.house_detail')->with(['house'         => $house, 
                                                 'houseSimilar'  => $houseSimilar, 
                                                 'title'         => $title, 
                                                 'fav'           => $fav, 
-                                                'user'          => $user]);
+                                                'user'          => $user,
+                                                'photos'        => $photos]);
     }
 
     public function search(Request $request){

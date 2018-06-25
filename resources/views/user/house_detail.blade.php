@@ -36,13 +36,12 @@
 			padding-top: 0;
 		}
 		.section-title {
-			margin-left: 134px;
+			margin-left: 62px;
 			font-weight: bold;
 			padding: 8px 0;
 		}
 		.property, .properties , .property-content, .ot-content {
 			margin: 0 auto;
-			width: 85%;
 		}
 		.ot-content {
 			padding: 12px;
@@ -271,14 +270,16 @@
 		.south-btn {
 			position: relative;
 		    z-index: 1;
-		    min-width: 170px;
-		    height: 50px;
+		    min-width: 150px;
 		    color: #ffffff;
 		    font-size: 14px;
 		    font-weight: 600;
 		    background-color: #947054;
 		    border-radius: 0;
-		    padding: 12px 24px;
+		    padding: 10px 20px;
+		}
+		.black-btn {
+			background: #000;
 		}
 		.span-view {
 			font-size: 14px;
@@ -288,6 +289,137 @@
 		}
 		.other-info {
 			margin-top: 36px;
+		}
+
+		/*image slider*/
+
+		/* Slideshow container */
+		.slideshow-container {
+		  max-width: 1000px;
+		  position: relative;
+		  margin: auto;
+		}
+
+		/* Next & previous buttons */
+		.prev, .next {
+		  cursor: pointer;
+		  position: absolute;
+		  top: 50%;
+		  width: auto;
+		  padding: 16px;
+		  margin-top: -22px;
+		  color: white;
+		  font-weight: bold;
+		  font-size: 18px;
+		  transition: 0.6s ease;
+		  border-radius: 0 3px 3px 0;
+		}
+
+		/* Position the "next button" to the right */
+		.next {
+		  right: 0;
+		  border-radius: 3px 0 0 3px;
+		}
+
+		/* On hover, add a black background color with a little bit see-through */
+		.prev:hover, .next:hover {
+		  background-color: rgba(0,0,0,0.6);
+		}
+
+		/* Caption text */
+		.text {
+		  color: #f2f2f2;
+		  font-size: 15px;
+		  padding: 8px 12px;
+		  position: absolute;
+		  bottom: 8px;
+		  width: 100%;
+		  text-align: center;
+		}
+
+		/* Number text (1/3 etc) */
+		.numbertext {
+		  color: #f2f2f2;
+		  font-size: 12px;
+		  padding: 8px 12px;
+		  position: absolute;
+		  top: 0;
+		}
+
+		/* The dots/bullets/indicators */
+		.dot {
+		  cursor: pointer;
+		  height: 12px;
+		  width: 12px;
+		  margin: 0 2px;
+		  background-color: #bbb;
+		  border-radius: 50%;
+		  display: inline-block;
+		  transition: background-color 0.6s ease;
+		}
+
+		.active, .dot:hover {
+		  background-color: #717171;
+		}
+
+		.modal {
+			background: rgba(0,0,0,.6);
+		}
+		.gallery-house {
+			list-style-type: none;
+			margin: 18px 0;
+		}
+		.gallery-house img {
+			cursor: pointer;
+			max-height: 65px;
+		}
+		.gallery-house li {
+			margin: 4px 0;
+		}
+		.single-accordion.panel {
+			background-color: #ffffff;
+		    border: 0 solid transparent;
+		    border-radius: 4px;
+		    box-shadow: 0 0 0 transparent;
+		    margin-bottom: 15px;
+		}
+		.single-accordion h6 {
+		    margin-bottom: 0;
+    		text-transform: uppercase;
+		}
+		.single-accordion h6 a.collapsed {
+			border: 2px solid #947054;
+    		background-color: transparent;
+    		color: #000000;
+    		font-size: 16px;
+		}
+		.single-accordion h6 a {
+			background-color: #947054;
+		    border-radius: 0;
+		    color: #ffffff;
+		    display: block;
+		    margin: 0;
+		    padding: 15px 60px 15px 15px;
+		    position: relative;
+		    font-size: 16px;
+		    text-transform: capitalize;
+		    font-weight: 500;
+		    border: 2px solid transparent;
+		}
+		.single-accordion h6 a span {
+			font-size: 10px;
+		    position: absolute;
+		    right: 20px;
+		    text-align: center;
+		    top: 18px;
+		}
+		.single-accordion .accordion-content {
+		    border-top: 0 solid transparent;
+    		box-shadow: none;
+		}
+		.single-accordion .accordion-content p {
+		    padding: 20px 15px 5px;
+    		margin-bottom: 0;
 		}
 	</style>
 @stop
@@ -355,6 +487,45 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
+					<div class="listings-btn-groups">
+                            <a href="/house/full/{{ $house->id }}" target="_blank" class="btn south-btn">VIEW FULL SCREEN</a>
+                            <a class="btn south-btn black-btn" data-toggle="modal" data-target="#exampleModal" style="margin-left: 12px;">VIEW PHOTO</a>
+                            <!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        <div class="slideshow-container">
+							        	@if(count($photos) > 0) 
+											@foreach($photos as $key => $value)
+											<div class="mySlides">
+											  <div class="numbertext">{{ $key + 1 }} / {{ count($photos) }}</div>
+											  <img src="/uploads/images/{{ $value->image_url }}" style="width:100%">
+											  <div class="text"></div>
+											</div>
+											@endforeach
+										@endif
+										<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+										<a class="next" onclick="plusSlides(1)">&#10095;</a>
+									</div>
+									<br>
+
+									<div style="text-align:center">
+									  @for ($i = 1; $i <= count($photos); $i++)
+									  	<span class="dot" onclick="currentSlide({{ $i }})"></span> 
+									  @endfor
+									</div>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+                        </div>
 					<div class="listings-content">
 							<span class="span-view"><i class="fa fa-eye"></i> {{ $house->num_views }} views</span>
 							@if($house->fav)
@@ -384,19 +555,55 @@
                                 <span>{{ $house->area }} m<sup>2</sup></span>
                             </div>
                         </div>
+                        <ul class="gallery-house row">
+                        	@foreach($photos as $photo)
+                        		<li class="col-md-2">
+                        			<a data-toggle="modal" data-target="#exampleModal"><img class="img-responsive" src="/uploads/images/{{ $photo->image_url }}"></a>
+                        		</li>
+                        	@endforeach
+                        </ul>
                         <div class="other-info">
-                        	<h3>AMENITIES</h3>
-                        	<p>{{ $house->amenities }}</p>
-                        	<h3>FACITLITIES</h3>
-                        	<p>{{ $house->project_facility }}</p>
-                        	<h3>TRAFFIC</h3>
-                        	<p>{{ $house->traffic }}</p>
-                        	<h3>NOTICE</h3>
-                        	<p>{{ $house->notice }}</p>
-                        </div>
-                        <div class="listings-btn-groups">
-                            <a href="/house/full/{{ $house->id }}" target="_blank" class="btn south-btn">View Full Screen</a>
-                        </div>
+	                        <div class="panel single-accordion">
+	                            <h6>
+	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseAmenities" data-parent="#accordion" data-toggle="collapse" href="#collapseAmenities">AMENITIES
+	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+	                                </a>
+	                            </h6>
+	                            <div id="collapseAmenities" class="accordion-content collapse">
+	                                <p>{{ $house->amenities }}</p>
+	                            </div>
+	                        </div>
+	                        <div class="panel single-accordion">
+	                            <h6>
+	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseFacilities" data-parent="#accordion" data-toggle="collapse" href="#collapseFacilities">FACILITIES
+	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+	                                </a>
+	                            </h6>
+	                            <div id="collapseFacilities" class="accordion-content collapse">
+	                                <p>{{ $house->project_facility }}</p>
+	                            </div>
+	                        </div>
+	                        <div class="panel single-accordion">
+	                            <h6>
+	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTraffic" data-parent="#accordion" data-toggle="collapse" href="#collapseTraffic">TRAFFIC
+	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+	                                </a>
+	                            </h6>
+	                            <div id="collapseTraffic" class="accordion-content collapse">
+	                                <p>{{ $house->traffic }}</p>
+	                            </div>
+	                        </div>
+	                        <div class="panel single-accordion">
+	                            <h6>
+	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseNotice" data-parent="#accordion" data-toggle="collapse" href="#collapseNotice">NOTICE
+	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
+	                                </a>
+	                            </h6>
+	                            <div id="collapseNotice" class="accordion-content collapse">
+	                                <p>{{ $house->notice }}</p>
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
 				</div>
 				<div class="col-md-4">
@@ -405,7 +612,7 @@
                             <img src="/{{ $user->avatar }}" alt="">
                             <div class="realtor---info">
                                 <h2>{{ $user->name }}</h2>
-                                <h6><img src="resource/img/icon/phone-call.png" alt="" style="margin-right: 8px"><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></h6>
+                                <!-- <h6><img src="resource/img/icon/phone-call.png" alt="" style="margin-right: 8px"><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></h6> -->
                                 <h6><img src="resource/img/icon/envelope.png" alt="" style="margin-right: 8px"><a href="mailto:{{ $user->email }}?Subject=" target="_top" >{{ $user->email }}</a></h6>
                             </div>
                             <div class="realtor--contact-form">
@@ -558,7 +765,6 @@
 	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.SmoothScroll.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/select2.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/bootbox.min.js') !!}"></script>
-	<script type="text/javascript" src="{!! asset('resource/js/user/bootstrap.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.fancybox.min.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/jquery.bxslider.js') !!}"></script>
 	<script type="text/javascript" src="{!! asset('resource/js/user/owl.carousel.min.js') !!}"></script>
@@ -604,10 +810,38 @@
 			var windowFeatures = "status=no,height=" + height + ",width=" + width + ",resizable=yes,left=" + leftPosition + ",top=" + topPosition + ",screenX=" + leftPosition + ",screenY=" + topPosition + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no";
 			u = link;
 			t = document.title;
-			// var embed_code = '<iframe src="' + link + '" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>';
+			var embed_code = '<iframe src="' + link + '" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>';
 			// $(".js-embed-code").text(embed_code);
-			$(".js-view-url").text(link);
+			// $(".js-view-url").text(link);
 		});
 
+
+		// image slider
+		var slideIndex = 1;
+		showSlides(slideIndex);
+
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+		  var i;
+		  var slides = document.getElementsByClassName("mySlides");
+		  var dots = document.getElementsByClassName("dot");
+		  if (n > slides.length) {slideIndex = 1}    
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+		      slides[i].style.display = "none";  
+		  }
+		  for (i = 0; i < dots.length; i++) {
+		      dots[i].className = dots[i].className.replace(" active", "");
+		  }
+		  slides[slideIndex-1].style.display = "block";  
+		  dots[slideIndex-1].className += " active";
+		}
 	</script>
 @stop

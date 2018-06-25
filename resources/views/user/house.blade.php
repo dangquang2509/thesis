@@ -122,6 +122,10 @@
 		.page-title {
 			margin: 16px 0;
 		}
+		.img-thumb {
+			width: 100%;
+			height: 190px;
+		}
 	</style>
 @stop
 
@@ -205,7 +209,7 @@
 			                        <!-- Property Thumbnail -->
 			                        <div class="property-thumb">
 			                            <a href="/detail/{{ $house->id }}">
-			                            	<img class="img-responsive" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
+			                            	<img class="img-thumb" src="/uploads/images/{{ $house->image_thumbnail }}" alt="">
 			                            </a>
 			                            <div class="tag">
 			                                <span>For Rent</span>
