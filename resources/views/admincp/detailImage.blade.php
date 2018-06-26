@@ -42,13 +42,6 @@
 						</div>
 					</div>
 					{{ csrf_field()}}
-					<!-- <div class="ot-btn-public-private-area">
-						@if($image->is_public === 1)
-						<button type="button" class="ot-btn-public">公開</button>
-						@else
-						<button type="button" class="ot-btn-public">非公開</button>
-						@endif
-					</div> -->
 					<input type="hidden" value="{{ $image->id}}" name="id" class="image_id">
 					<div class="ot-image-detail-row">
 						<div class="ot-image-detail-label">Spherical ID</div>
@@ -86,14 +79,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="ot-content-right">
-				<div class="ot-btn-edit-image">
-					<a href="/admincp/image/edit/{{ $image->id}}">編集</a>
-				</div>
-				<div>
-					<a class="ot-link-delete js-delete-image">この360画像を削除</a>
-				</div>
-			</div> -->
 		</form>
 	</div>
 	@endforeach
@@ -123,7 +108,7 @@
 			// delete image
 
 			$('.js-delete-image').on('click', function() {
-				var check = confirm("この360画像を削除します。よろしいですか？");
+				var check = confirm("Delete this image. Is it OK?");
 				if (check == true) {
 					$.ajax({
 						url: "/admincp/image/delete/" + $('.image_id').val(),
@@ -134,11 +119,11 @@
 							if (data['row'] > 0) {
 								toastr.success(data['success']);
 							} else if (data['row'] == 0) {
-								toastr.error('この画像が削除されません。');
+								toastr.error('This image will not be deleted.');
 							}
 						},
 						error: function (data) {
-							toastr.error('エラーが発生しました。もう一度お試しください。');
+							toastr.error('An error occurred. please try again.');
 						}
 					});
 				} else {

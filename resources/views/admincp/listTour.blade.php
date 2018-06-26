@@ -75,16 +75,6 @@
 	<div class="ot-page-title-area">
 		<h2 class="ot-page-title">House List</h2>
 	</div>
-	<!-- <form>
-		<select class="ot-input-select">
-			<option value="id">コンテンツID</option>
-			<option value="title">コンテンツタイトル</option>
-			<option value="date_pre">作成日</option>
-			<option value="date_up">更新日</option>
-			<option value="public">公開/非公開</option>
-		</select>
-		<span><input class="ot-input-search" type="text" placeholder="コンテンツIDを入力"></span>
-	</form> -->
 	<div class="ot-image-list-table-area">
 		<div class="ot-list-table-headline">
 			<span>Batch operation  </span><button class="ot-btn-delete js-delete-all" data-url="{{ url('/admincp/house/deleteAll') }}">Delete</button>
@@ -95,7 +85,6 @@
 		<table class="ot-image-list-table" id="table_tour">
 			<thead>
 				<th class="no-sort"><input type="checkbox" id="chk-master"></th>
-				<!-- <th>非公開</th> -->
 				<th class="ot-th-tour-title">Title</th>
 				<th>Category</th>
 				<th>Created By</th>
@@ -107,11 +96,6 @@
 			@foreach($tours as $tour)
 				<tr>
 					<td><input type="checkbox" class="sub-chk" data-id="{{ $tour->id }}"></td>
-					<!-- @if ($tour->is_public === 0)
-						<td class="ot-ic-private"><img src="{{ asset('resource/img/padlock.png') }}"></td>
-					@else
-						<td class="ot-ic-private"></td>
-					@endif -->
 					<td>
 						<a href="/admincp/house/detail/{{ $tour->id }}" class="ot-list-link">
 						@if(trim($tour->title) != "")
@@ -239,8 +223,7 @@
 								} else if (data['error']) {
 									toastr.error(data['error']);
 								} else {
-									toastr.error('エラーが発生しました。もう一度お試しください。');
-									//toastr.error(data['test']);
+									toastr.error('An error occurred. please try again.');
 								}
 							},
 							error: function (data) {

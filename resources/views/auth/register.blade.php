@@ -3,18 +3,18 @@
 @section('css')
 @stop
 
-@section('title', '登録')
+@section('title', 'Register')
 
 @section('content')
     <div class="login-page">
         <div class="form">
             <form class="register-form">
-                <div class="ot-login-title">360コンテンツ管理システム</div>
-                <input type="text" placeholder="ユーザー名"/>
-                <input type="password" placeholder="パスワード"/>
-                <input type="text" placeholder="メールアドレス"/>
-                <button>登録</button>
-                <p class="message">すでに登録していますか？<a href="/login">ログイン</a></p>
+                <div class="ot-login-title">House Management</div>
+                <input type="text" placeholder="username"/>
+                <input type="password" placeholder="password"/>
+                <input type="text" placeholder="email"/>
+                <button>Register</button>
+                <p class="message">Already registered?<a href="/login">Login</a></p>
             </form>
         </div>
     </div>

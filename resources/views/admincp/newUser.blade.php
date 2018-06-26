@@ -29,7 +29,6 @@
 				<div class="ot-image-detail-row">
 					<div class="ot-image-detail-label"></div>
 					<div class="ot-image-detail-notes">
-						<!-- 半角英数文字及びアンダーバー(_)、ハイフン(-) -->
 					</div>
 				</div>
 				<div class="ot-image-detail-row">
@@ -62,20 +61,8 @@
 				<div class="ot-image-detail-row">
 					<div class="ot-image-detail-label"></div>
 					<div class="ot-image-detail-notes">
-						<!-- 確認のため、再度パスワードの入力をお願いします。 -->
 					</div>
 				</div>
-				<!-- <div class="ot-image-detail-row">
-					<div class="ot-image-detail-label">権限設定</div>
-					<div class="ot-image-detail-value">
-						<select class="ot-input-select">
-							<option value="id">[カスタム]</option>
-							<option value="manage">管理者</option>
-							<option value="edit">編集者</option>
-							<option value="reference">参照者</option>
-						</select>
-					</div>
-				</div> -->
 			</div>
 			<div class="ot-content-right">
 				<button class="ot-btn-submit" type="submit">Create</button>

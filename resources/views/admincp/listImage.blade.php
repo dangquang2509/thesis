@@ -15,15 +15,6 @@
 	<div class="ot-page-title-area">
 		<h2 class="ot-page-title">Spherical image list</h2>
 	</div>
-	<!-- <form>
-		<select class="ot-input-select">
-			<option value="id">360画像ID</option>
-			<option value="url">View URL</option>
-			<option value="time">投稿日</option>
-			<option value="public">公開/非公開</option>
-		</select>
-		<span><input class="ot-input-search" type="text" placeholder="360画像IDを入力"></span>
-	</form> -->
 	<div class="ot-image-list-table-area">
 		<div class="ot-list-table-headline">
 			<span>Batch operation</span><button data-url="{{ url('/admincp/image/deleteAll') }}" class="ot-btn-delete js-delete-all">Delete</button>
@@ -34,7 +25,6 @@
 		<table class="ot-image-list-table" id="table_image">
 			<thead>
 				<th class="no-sort"><input type="checkbox" id="chk-master"></th>
-				<!-- <th class="ot-th-private">非公開</th> -->
 				<th class="no-sort">Thumbnail</th>
 				<th>Spherical ID</th>
 				<th>House ID</th>
@@ -46,11 +36,6 @@
 			@foreach($images as $image)
 				<tr>
 					<td><input type="checkbox" class="sub-chk" data-id="{{ $image->id }}"></td>
-					<!-- @if ($image->is_public === 0)
-						<td class="ot-ic-private"><img src="{{ asset('resource/img/padlock.png') }}"></td>
-					@else
-						<td class="ot-ic-private"></td>
-					@endif -->
 					<td><a href="/admincp/image/detail/{{ $image->id}}"><img class="ot-img-thumbnail" src="{{URL::asset('uploads/images/thumb/' . $image->image_url)}}"></a></td>
 					<td><a href="/admincp/image/detail/{{ $image->id}}" class="ot-list-link">{{ $image->spherical_id }}</a></td>
 					<td>{{ $image->tour_id }}</td>
@@ -80,7 +65,7 @@
 					targets: "no-sort"
 				}],
 				language: {
-					emptyTable: "360画像はありません",
+					emptyTable: "No images",
 					paginate: {
 						previous: "<",
 						next: ">",
@@ -103,10 +88,10 @@
 					allVals.push($(this).attr('data-id'));
 				});
 				if(allVals.length <= 0) {
-					toastr.info('行を選択してください');
+					toastr.info('Please select a row');
 				}
 				else {
-					var check = confirm("選択された360画像を削除しますか？");
+					var check = confirm("Delete selected images?");
 					if (check == true) {
 						var join_selected_values = allVals.join(",");
 						$.ajax({
@@ -130,7 +115,7 @@
 								} else if (data['error']) {
 									toastr.error(data['error']);
 								} else {
-									toastr.error('この360画像が削除されません。');
+									toastr.error('This image will not be deleted');
 								}
 							},
 							error: function (data) {

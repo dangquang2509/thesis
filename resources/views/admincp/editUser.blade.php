@@ -81,11 +81,11 @@
 				toastr.error('Please filled in required fields');
 				return false;
 			} else if (pwd.length < 8) {
-				toastr.error('パスワードは8文字以上で入力してください。');
+				toastr.error('Please enter a password with at least 8 characters');
 				return false;
 			} else {
 				if (pwd !== pwd_confirm) {
-					toastr.error('パスワードが一致しません。');
+					toastr.error('Passwords do not match.');
 					return false;
 				}
 			}

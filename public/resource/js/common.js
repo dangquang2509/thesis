@@ -44,7 +44,7 @@ var Plot = "marker";
 var exist_plot = "A marker already exists.";
 var title_not_set = "Image title";
 var JAICO0002 = "(If you delete the floor plan, all information including markers and links will be deleted)";
-var JAPEE0001 = "三脚以外の画像を掲示している間は更新できません。";
+var JAPEE0001 = "It can not be updated while posting an image other than a tripod.";
 
 ///////////////////////////////////////////////////////////////
 // global variables

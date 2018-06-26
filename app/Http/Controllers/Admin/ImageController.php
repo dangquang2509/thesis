@@ -172,7 +172,7 @@ class ImageController extends Controller
 			}
 		}
 
-		return response()->json(['success' => "360画像を削除しました。", 'row' => $row]);
+		return response()->json(['success' => "360 Images deleted.", 'row' => $row]);
 	}
 
 	/**
@@ -187,6 +187,6 @@ class ImageController extends Controller
 			->whereIn('id', explode(",", $ids))->whereNull('tour_id')->delete();
 		$imageCount = DB::table('images')->count();
 
-		return response()->json(['success' => "360画像を削除しました。", 'imageCount' => $imageCount, 'row' => $row]);
+		return response()->json(['success' => "360 Images deleted.", 'imageCount' => $imageCount, 'row' => $row]);
 	}
 }
