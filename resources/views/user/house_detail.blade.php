@@ -420,6 +420,30 @@
 		.single-accordion .accordion-content p {
 		    padding: 20px 15px 5px;
     		margin-bottom: 0;
+    		font-size: 15px;
+		}
+		.amenities-list, .facilities-list {
+			list-style-type: none;
+			margin: 24px 0 0 0;
+		}
+		.amenities-list li, .facilities-list li {
+			width: 30%;
+			display: inline-block;
+		    color: #323232;
+		    font-size: 15px;
+		    margin-bottom: 25px;
+		}
+		.amenities-list li i,
+		.facilities-list li i {
+			width: 27px;
+		    height: 27px;
+		    background-color: #947054;
+		    color: #ffffff;
+		    border-radius: 50%;
+		    text-align: center;
+		    line-height: 27px;
+		    font-size: 12px;
+		    margin-right: 10px;
 		}
 	</style>
 @stop
@@ -565,22 +589,26 @@
                         <div class="other-info">
 	                        <div class="panel single-accordion">
 	                            <h6>
-	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseAmenities" data-parent="#accordion" data-toggle="collapse" href="#collapseAmenities">AMENITIES
+	                                <a role="button" aria-expanded="true" aria-controls="collapseAmenities" data-parent="#accordion" data-toggle="collapse" href="#collapseAmenities">AMENITIES
 	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
 	                                </a>
 	                            </h6>
-	                            <div id="collapseAmenities" class="accordion-content collapse">
-	                                <p>{{ $house->amenities }}</p>
+	                            <div id="collapseAmenities" class="accordion-content collapse in">
+	                                <ul class="amenities-list">
+
+	                    			</ul>
 	                            </div>
 	                        </div>
 	                        <div class="panel single-accordion">
 	                            <h6>
-	                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseFacilities" data-parent="#accordion" data-toggle="collapse" href="#collapseFacilities">FACILITIES
+	                                <a role="button" aria-expanded="true" aria-controls="collapseFacilities" data-parent="#accordion" data-toggle="collapse" href="#collapseFacilities">FACILITIES
 	                                <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
 	                                </a>
 	                            </h6>
-	                            <div id="collapseFacilities" class="accordion-content collapse">
-	                                <p>{{ $house->project_facility }}</p>
+	                            <div id="collapseFacilities" class="accordion-content collapse in">
+	                                <ul class="facilities-list">
+
+	                    			</ul>
 	                            </div>
 	                        </div>
 	                        <div class="panel single-accordion">
@@ -604,6 +632,8 @@
 	                            </div>
 	                        </div>
 	                    </div>
+						<input type="hidden" class="js-house-facilities" value="{{ $house->facilities }}">
+						<input type="hidden" class="js-house-amenities-c" value="{{ $house->amenities_c }}">
                     </div>
 				</div>
 				<div class="col-md-4">
@@ -842,6 +872,86 @@
 		  }
 		  slides[slideIndex-1].style.display = "block";  
 		  dots[slideIndex-1].className += " active";
+		}
+
+		// amenities section 
+		if ($(".js-house-amenities-c").val()) {
+			var amenities = JSON.parse($(".js-house-amenities-c").val());
+			for (var k in amenities) {
+				if (amenities[k] && k === "tv") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>TV</li>");
+				}
+				if (amenities[k] && k === "microwave") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Microwave</li>");
+				}
+				if (amenities[k] && k === "air") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Air Conditioner</li>");
+				}
+				if (amenities[k] && k === "smoke") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Smoke Detector</li>");
+				}
+				if (amenities[k] && k === "balcony") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Balcony</li>");
+				}
+				if (amenities[k] && k === "bath") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Bathtub</li>");
+				}
+				if (amenities[k] && k === "dish") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Dishwasher</li>");
+				}
+				if (amenities[k] && k === "wash") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Washing Machine</li>");
+				}
+				if (amenities[k] && k === "heater") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Room Heater</li>");
+				}
+				if (amenities[k] && k === "kitchen") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Kitchen</i>");
+				}
+				if (amenities[k] && k === "wifi") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Wifi</li>");
+				}
+				if (amenities[k] && k === "refrigerator") {
+					$(".amenities-list").append("<li><i class='fa fa-check'></i>Refrigerator</li>");
+				}
+			}
+		}
+
+			// amenities section 
+		if ($(".js-house-facilities").val()) {
+			var facilities = JSON.parse($(".js-house-facilities").val());
+			for (var k in facilities) {
+				if (facilities[k] && k === "bank") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Banking/ATM</li>");
+				}
+				if (facilities[k] && k === "restaurant") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Restaurant</li>");
+				}
+				if (facilities[k] && k === "supermarket") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Supermarket</li>");
+				}
+				if (facilities[k] && k === "pharmacy") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Pharmacy</li>");
+				}
+				if (facilities[k] && k === "pool") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Pool</li>");
+				}
+				if (facilities[k] && k === "gym") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Gymnasium</li>");
+				}
+				if (facilities[k] && k === "mall") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Shopping Mall</li>");
+				}
+				if (facilities[k] && k === "parking") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Parking</li>");
+				}
+				if (facilities[k] && k === "school") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>School</li>");
+				}
+				if (facilities[k] && k === "playground") {
+					$(".facilities-list").append("<li><i class='fa fa-check'></i>Playground</li>");
+				}
+			}
 		}
 	</script>
 @stop

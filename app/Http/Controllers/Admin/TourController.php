@@ -41,8 +41,7 @@ class TourController extends Controller
 			$objTour->description 	= $request->tour_description;
 			$objTour->category_id 	= $request->tour_category;
 			$objTour->config 		= $request->tour_param;
-			$objTour->amenities 		= $request->house_amenities;
-			$objTour->project_facility 	= $request->house_project_facility;
+			$objTour->facilities 	= $request->house_facilities;
 			$objTour->traffic 			= $request->house_traffic;
 			$objTour->notice 			= $request->house_notice;
 
@@ -56,6 +55,7 @@ class TourController extends Controller
 			$objTour->num_bedrooms 		= $request->house_num_bedroom;
 			$objTour->num_toilets 		= $request->house_num_toilet;
 			$objTour->district 			= $request->house_district;
+			$objTour->amenities_c       = $request->house_amenities_c;
 
 			if ($request->tour_published) {
 				$objTour->is_public = 1;
@@ -118,7 +118,6 @@ class TourController extends Controller
 			if($request->tour_key != "") {
 				$tour_key = $request->tour_key;
 			}
-
 			$id 			= $request->id;
 			$plan_image_id 	= $request->tour_map;
 			$title 			= $request->tour_title;
@@ -127,8 +126,7 @@ class TourController extends Controller
 			$config 		= $request->tour_param;
 			$xmlUrl 		= $request->xml_url;
 
-			$amenities 			= $request->house_amenities;
-			$project_facility 	= $request->house_project_facility;
+			$facilities 		= $request->house_facilities;
 			$traffic 			= $request->house_traffic;
 			$notice 			= $request->house_notice;
 
@@ -141,6 +139,9 @@ class TourController extends Controller
 			$num_bedroom 	= $request->house_num_bedroom;
 			$num_toilet 	= $request->house_num_toilet;
 			$district 		= $request->house_district;
+
+			$house_amenities_c = $request->house_amenities_c;
+
 
 			$now 	= Carbon::now();
 			$jSON 	= json_decode($request->tour_param, true);
@@ -190,8 +191,7 @@ class TourController extends Controller
 					'updated_by'    		=> Auth::user()->name,
 					'updated_at'			=> $now,
 					'category_id'			=> $category_id,
-					'amenities'				=> $amenities ,
-					'project_facility'		=> $project_facility,
+					'facilities'			=> $facilities,
 					'traffic'				=> $traffic,
 					'notice'				=> $notice,
 					'address'				=> $address,
@@ -201,7 +201,8 @@ class TourController extends Controller
 					'area'					=> $area,
 					'num_bedrooms'			=> $num_bedroom,
 					'num_toilets'			=> $num_toilet,
-					'district'				=> $district]);
+					'district'				=> $district,
+					'amenities_c'     		=> $house_amenities_c]);
 
 			return Redirect::to('admincp/house/detail/'. $id);
 		}

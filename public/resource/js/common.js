@@ -2360,6 +2360,9 @@ function deleteFloorMap(floormap_img_id) {
 //
 // Save or edit a tour
 function uploadTour(editfrom, tour_id) {
+	amenities();
+	facilities();
+	
 	deleteMessage();
 	var rets = checkTour(CHECK_KBN_UPLOAD_TOUR);
 	//var tourTitle = $("#tour_title").val();
@@ -2391,7 +2394,63 @@ function uploadTour(editfrom, tour_id) {
 	}
 	return false;
 }
+function amenities() {
+	var am = {};
+	
+	var tv = $(".js-am_tv").prop('checked');
+	am.tv = tv;
+	var microwave = $(".js-am_microwave").prop('checked');
+	am.microwave = microwave;
+	var air = $(".js-am_air").prop('checked');
+	am.air = air;
+	var smoke = $(".js-am_smoke").prop('checked');
+	am.smoke = smoke;
+	var balcony = $(".js-am_balcony").prop('checked');
+	am.balcony = balcony;
+	var bath = $(".js-am_bath").prop('checked');
+	am.bath = bath;
+	var dish = $(".js-am_dish").prop('checked');
+	am.dish = dish;
+	var wash = $(".js-am_wash").prop('checked');
+	am.wash = wash;
+	var heater = $(".js-am_heater").prop('checked');
+	am.heater = heater;
+	var kitchen = $(".js-am_kitchen").prop('checked');
+	am.kitchen = kitchen;
+	var wifi = $(".js-am_wifi").prop('checked');
+	am.wifi = wifi;
+	var refrigerator = $(".js-am_refrigerator").prop('checked');
+	am.refrigerator = refrigerator;
 
+	$(".js-house-amenities").val(JSON.stringify(am));
+}
+
+function facilities() {
+	var fa = {};
+	
+	var bank = $(".js-fa-bank").prop('checked');
+	fa.bank = bank;
+	var restaurant = $(".js-fa-restaurant").prop('checked');
+	fa.restaurant = restaurant;
+	var supermarket = $(".js-fa-supermarket").prop('checked');
+	fa.supermarket = supermarket;
+	var pharmacy = $(".js-fa-pharmacy").prop('checked');
+	fa.pharmacy = pharmacy;
+	var pool = $(".js-fa-pool").prop('checked');
+	fa.pool = pool;
+	var gym = $(".js-fa-gym").prop('checked');
+	fa.gym = gym;
+	var mall = $(".js-fa-mall").prop('checked');
+	fa.mall = mall;
+	var parking = $(".js-fa-parking").prop('checked');
+	fa.parking = parking;
+	var school = $(".js-fa-school").prop('checked');
+	fa.school = school;
+	var playground = $(".js-fa-playground").prop('checked');
+	fa.playground = playground;
+	
+	$(".js-house-facilities").val(JSON.stringify(fa));
+}
 // check tour is valid
 function checkTour(kind) {
 	var messages = new Array();
@@ -3010,6 +3069,108 @@ function restoreAll() {
 		reDraw();
 	};
 	image.src = floorMapUrl;
+
+	if ($(".js-house-facilities").val()) {
+		var facilities = JSON.parse($(".js-house-facilities").val());
+		var bank, restaurant, supermarket, pharmacy, pool, gym, mall, parking, school, playground = false;
+		for (var k in  facilities) {
+			if (k === "bank") {
+				bank = facilities[k];
+			}
+			if (k === "restaurant") {
+				restaurant = facilities[k];
+			}
+			if (k === "supermarket") {
+				supermarket = facilities[k];
+			}
+			if (k === "pharmacy") {
+				pharmacy = facilities[k];
+			}
+			if (k === "pool") {
+				pool = facilities[k];
+			}
+			if (k === "gym") {
+				gym = facilities[k];
+			}
+			if (k === "mall") {
+				mall = facilities[k];
+			}
+			if (k === "parking") {
+				parking = facilities[k];
+			}
+			if (k === "school") {
+				school = facilities[k];
+			}
+			if (k === "playground") {
+				playground = facilities[k];
+			}
+		}
+		$(".js-fa-bank").prop('checked', bank);
+		$(".js-fa-restaurant").prop('checked', restaurant);
+		$(".js-fa-supermarket").prop('checked', supermarket);
+		$(".js-fa-pharmacy").prop('checked', pharmacy);
+		$(".js-fa-pool").prop('checked', pool);
+		$(".js-fa-gym").prop('checked', gym);
+		$(".js-fa-mall").prop('checked', mall);
+		$(".js-fa-parking").prop('checked', parking);
+		$(".js-fa-school").prop('checked', school);
+		$(".js-fa-playground").prop('checked', playground);
+	}
+	if ($(".js-house-amenities").val()) {
+		var amenities = JSON.parse($(".js-house-amenities").val());
+
+		var tv, microwave, air, smoke, balcony, bath, dish, wash, heater, kitchen, wifi, refrigerator = false;
+		for (var k in  amenities) {
+			if (k === "tv") {
+				tv = amenities[k];
+			}
+			if (k === "microwave") {
+				microwave = amenities[k];
+			}
+			if (k === "air") {
+				air = amenities[k];
+			}
+			if (k === "smoke") {
+				smoke = amenities[k];
+			}
+			if (k === "balcony") {
+				balcony = amenities[k];
+			}
+			if (k === "bath") {
+				bath = amenities[k];
+			}
+			if (k === "dish") {
+				dish = amenities[k];
+			}
+			if (k === "wash") {
+				wash = amenities[k];
+			}
+			if (k === "heater") {
+				heater = amenities[k];
+			}
+			if (k === "kitchen") {
+				kitchen = amenities[k];
+			}
+			if (k === "wifi") {
+				wifi = amenities[k];
+			}
+			if (k === "refrigerator") {
+				refrigerator = amenities[k];
+			}
+		}
+		$(".js-am_tv").prop('checked', tv);
+		$(".js-am_microwave").prop('checked', microwave);
+		$(".js-am_air").prop('checked', air);
+		$(".js-am_smoke").prop('checked', smoke);
+		$(".js-am_balcony").prop('checked', balcony);
+		$(".js-am_bath").prop('checked', bath);
+		$(".js-am_dish").prop('checked', dish);
+		$(".js-am_wash").prop('checked', wash);
+		$(".js-am_heater").prop('checked', heater);
+		$(".js-am_kitchen").prop('checked', kitchen);
+		$(".js-am_wifi").prop('checked', wifi);
+		$(".js-am_refrigerator").prop('checked', refrigerator);
+	}
 }
 
 // get scene by tag name

@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/toastr/toastr.min.css') !!}">
 	<link rel="stylesheet" type="text/css" href="{!! asset('resource/css/jquery-ui.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/user/style.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('resource/css/lib/fontawesome-all.css') !!}">
+
 	<style>
 		.pac-card {
 			margin: 10px 10px 0 0;
@@ -72,6 +74,80 @@
     		margin-top: 50px;
     		margin-bottom: 0;
     	}
+
+    	/* switch */
+		.switch {
+		  position: relative;
+		  display: inline-block;
+		  width: 44px;
+		  height: 22px;
+		}
+
+		.switch input {display:none;}
+
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #ccc;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 16px;
+		  width: 14px;
+		  left: 3px;
+		  bottom: 3px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		input:checked + .slider {
+		  background-color: #2196F3;
+		}
+
+		input:focus + .slider {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+		  border-radius: 34px;
+		}
+
+		.slider.round:before {
+		  border-radius: 50%;
+		}
+
+		ul {
+			list-style-type: none;
+		}
+		li {
+			width: 20%;
+			display: inline-block;
+			margin-bottom: 8px;
+		}
+
+		li span {
+			vertical-align: top;
+		}
+		.section-header {
+			margin-left: 12px;
+			font-size: 14px;
+		}
 	</style>
 @stop
 
@@ -123,14 +199,6 @@
 				</select>
 			</div>
 			<div class="ot-form-row">
-				<label class="ot-form-row-label">Amenities</label>
-				<input type="text" class="ot-form-row-input" name="house_amenities" value="{{ $tour->amenities }}">
-			</div>
-			<div class="ot-form-row">
-				<label class="ot-form-row-label">Project Facility</label>
-				<input type="text" class="ot-form-row-input" name="house_project_facility" value="{{ $tour->project_facility }}">
-			</div>
-			<div class="ot-form-row">
 				<label class="ot-form-row-label">Traffic</label>
 				<input type="text" class="ot-form-row-input" name="house_traffic" value="{{ $tour->traffic }}">
 			</div>
@@ -156,6 +224,168 @@
 				<label class="ot-form-row-label">Bathroom(s)</label>
 				<input type="number" class="ot-form-row-input-number" name="house_num_toilet" value="{{ $tour->num_toilets }}" min="1" max="10" step="1">
 			</div>
+			<div class="section-header">AMENITIES</div>
+			<ul class="amenities-section">
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_tv">
+						<span class="slider round"></span>
+					</label>
+					<span>TV</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_microwave">
+						<span class="slider round"></span>
+					</label>
+					<span>Microwave</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_air">
+						<span class="slider round"></span>
+					</label>
+					<span>Air Conditioner</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_smoke">
+						<span class="slider round"></span>
+					</label>
+					<span>Smoke Detector</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_balcony">
+						<span class="slider round"></span>
+					</label>
+					<span>Balcony</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_bath">
+						<span class="slider round"></span>
+					</label>
+					<span>Bathtub</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_dish">
+						<span class="slider round"></span>
+					</label>
+					<span>Dish Washer</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_wash">
+						<span class="slider round"></span>
+					</label>
+					<span>Washing Machine</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_heater">
+						<span class="slider round"></span>
+					</label>
+					<span>Heater</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_kitchen">
+						<span class="slider round"></span>
+					</label>
+					<span>Kitchen</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_wifi">
+						<span class="slider round"></span>
+					</label>
+					<span>Wifi</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-am_refrigerator">
+						<span class="slider round"></span>
+					</label>
+					<span>Refrigerator</span>
+				</li>
+			</ul>
+			<div class="section-header">FACILITIES</div>
+			<ul class="facilities-section">
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-bank">
+						<span class="slider round"></span>
+					</label>
+					<span>Banking/ATM</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-restaurant">
+						<span class="slider round"></span>
+					</label>
+					<span>Restaurant</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-supermarket">
+						<span class="slider round"></span>
+					</label>
+					<span>Supermarket</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-pharmacy">
+						<span class="slider round"></span>
+					</label>
+					<span>Pharmacy</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-pool">
+						<span class="slider round"></span>
+					</label>
+					<span>Swimming Pool</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-gym">
+						<span class="slider round"></span>
+					</label>
+					<span>Gymnasium</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-mall">
+						<span class="slider round"></span>
+					</label>
+					<span>Shopping Mall</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-parking">
+						<span class="slider round"></span>
+					</label>
+					<span>Parking</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-school">
+						<span class="slider round"></span>
+					</label>
+					<span>School</span>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox" class="js-fa-playground">
+						<span class="slider round"></span>
+					</label>
+					<span>Playground</span>
+				</li>
+			</ul>
+			<input type="hidden" class="js-house-amenities" name="house_amenities_c" value="{{ $tour->amenities_c }}">
+			<input type="hidden" class="js-house-facilities" name="house_facilities" value="{{ $tour->facilities }}">
 			<input name="house_address" class="js-house-address" type="hidden" value="{{ $tour->address }}">
 			<input name="house_latitude" class="js-house-latitude" type="hidden" value="{{ $tour->latitude }}">
 			<input name="house_longitude" class="js-house-longitude" type="hidden" value="{{ $tour->longitude }}">
