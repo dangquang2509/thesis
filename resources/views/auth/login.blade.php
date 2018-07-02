@@ -3,7 +3,7 @@
 @section('css')
 @stop
 
-@section('title', 'ログイン')
+@section('title', 'Login')
 
 @section('content')
 	<div class="login-page">

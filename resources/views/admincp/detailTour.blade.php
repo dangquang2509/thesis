@@ -67,7 +67,7 @@
 					<input type="text" name="tour_id" value="{{ $tour->id }}" style="display:none">
 					<div class="ot-btn-area clearfix">
 						<div class="ot-btn-edit">
-							<a href="/admincp/house/edit/{{ $tour->id }}">Edit</a>
+							<a href="/admincp/house/stat/{{ $tour->id }}">View Statistic</a>
 						</div>
 						<div class="ot-btn-delete">
 							<a class="ot-link-delete js-delete-tour">Delete this house</a>

@@ -643,7 +643,7 @@
                             <div class="realtor---info">
                                 <h2>{{ $user->name }}</h2>
                                 <!-- <h6><img src="resource/img/icon/phone-call.png" alt="" style="margin-right: 8px"><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></h6> -->
-                                <h6><img src="resource/img/icon/envelope.png" alt="" style="margin-right: 8px"><a href="mailto:{{ $user->email }}?Subject=" target="_top" >{{ $user->email }}</a></h6>
+                                <!-- <h6><img src="resource/img/icon/envelope.png" alt="" style="margin-right: 8px"><a href="mailto:{{ $user->email }}?Subject=" target="_top" >{{ $user->email }}</a></h6> -->
                             </div>
                             <div class="realtor--contact-form">
                                 <div class="form-group">

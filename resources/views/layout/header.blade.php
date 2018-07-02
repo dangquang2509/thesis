@@ -33,6 +33,9 @@
 					<a class="dropdown-content-link" href="/admincp/user/listRequest">List Request</a>
 				</div>
 			</li>
+			<li class="dropdown">
+				<a href="/admincp/history_request" class="dropbtn">History Request</a>
+			</li>
 		@else
 			<li class="dropdown">
 				<a href="/admincp/user/myaccount" class="dropbtn">My Account</a>

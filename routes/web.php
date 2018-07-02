@@ -32,6 +32,11 @@ Route::get('/admincp/top',  [
     'uses' => 'Admin\TourController@showRecentTour'
 ]);
 
+Route::get('/admincp/history_request',  [
+    'middleware' => 'auth',
+    'uses' => 'Admin\TourController@getHistoryRequest'
+]);
+
 Route::group(['namespace' => "User"], function(){
 	Route::get('/', 'UserController@index');
 	Route::get('/contact', 'UserController@contact');
@@ -74,6 +79,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/house', 'namespace' =
 	Route::post('/save/{id}', 'TourController@SaveEditTour');
 	Route::delete('/delete/{id}', 'TourController@destroy');
 	Route::delete('/deleteAll', 'TourController@deleteAllTour');
+	Route::get('/stat/{id}','UserController@statistic');
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admincp/user', 'namespace' => 'Admin'], function () {
@@ -89,5 +96,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admincp/user', 'namespace' =>
 	Route::delete('/delete/{id}', 'UserController@destroy');
 	Route::delete('/deleteAll', 'UserController@deleteAllUser');
 	Route::get('/myaccount','UserController@myAccount');
+
 });
 

@@ -17,6 +17,8 @@ use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
 use App\Models\User;
 use App\Models\Ot_Categories;
+use App\Models\View_Stat;
+use App\Models\Request_Stat;
 use SimpleXMLElement;
 use Session;
 
@@ -86,8 +88,17 @@ class UserController extends Controller
         if (!$house) {
             return Redirect('/');
         }
+        $now = Carbon::now()->toDateTimeString();
+
         $house->increment('num_views');
         
+        $view_stat = new View_Stat();
+        $view_stat->house_id    = $request->id;
+        $view_stat->viewed_at   = $now;
+        $view_stat->created_at  = $now;
+        $view_stat->updated_at  = $now;
+        $view_stat->save();
+
         $title = $house->title;
 
         $favorites = Session::get('favorites');
@@ -208,6 +219,21 @@ class UserController extends Controller
                     $m->to($mailData['email'])->subject('There is a request from guest');
             });
 
+            $now = Carbon::now()->toDateTimeString();
+
+            $request_stat = new Request_Stat();
+            $request_stat->house_id     = $id;
+            $request_stat->name         = $name;
+            $request_stat->email        = $email;
+            $request_stat->phone        = $phone;
+            $request_stat->message      = $message;
+            $request_stat->requested_at = $now;
+            $request_stat->created_at   = $now;
+            $request_stat->updated_at   = $now;
+
+            $request_stat->save();
+
+
             return response()->json(['success' => 'success']);
         } catch(Exception $e) {
             return array("flag" => 'error');
@@ -215,8 +241,6 @@ class UserController extends Controller
     }
 
     public function wishlist(){
-        // $favorites = [1, 2];
-        // Session::put('favorites', $favorites);
         $ids = Session::get('favorites');
         if ($ids !== null) {
             $houses = Ot_Tours::whereIn('id', $ids)->get();

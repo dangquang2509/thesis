@@ -14,6 +14,7 @@ use App\Models\Ot_Images;
 use App\Models\Ot_Plan_Images;
 use App\Models\Ot_Tours;
 use App\Models\Ot_Categories;
+use App\Models\Request_Stat;
 use SimpleXMLElement;
 
 class TourController extends Controller
@@ -618,5 +619,19 @@ class TourController extends Controller
 
 		return view('admincp.top', ['toursModelHouse' => $tours_model_house, 'imagesModelHouse' => $imageListModelHouse,
 									'toursProperty' => $tours_property, 'imagesProperty' => $imageListProperty]);
+	}
+
+	public function getHistoryRequest(){
+		if (Auth::user()->name === 'admin') {
+			$requests = Request_Stat::all();
+			foreach ($requests as $request) {
+				$house_id = $request->house_id;
+				$agent_name = Ot_Tours::where('id', $house_id)->pluck('created_by')->first();
+				$request->agent_name = $agent_name;
+			}
+		} else {
+			return redirect('/admincp/top');
+		}
+		return view('admincp.history', ['requests' => $requests]);
 	}
 }

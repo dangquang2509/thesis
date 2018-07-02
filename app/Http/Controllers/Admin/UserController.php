@@ -14,6 +14,10 @@ use Carbon\Carbon;
 use App\Models\Ot_Tours;
 use App\Models\Ot_Images;
 use App\Models\User;
+use App\Models\View_Stat;
+use App\Models\Request_Stat;
+
+
 class UserController extends Controller
 {
 	/**
@@ -34,7 +38,7 @@ class UserController extends Controller
 		$users = array();
 		if (Auth::user()->name == "admin") {
 			$users = DB::table('users')
-				->where('role_id', 2)
+				// ->where('role_id', 2)
 				->where('is_active', 1)
 				->get();
 		} else {
@@ -280,5 +284,62 @@ class UserController extends Controller
         }
 
 		return view('admincp.detailUser', ['user' => $user, 'houses' => $houses]);
+	}
+
+	public function statistic(Request $request){
+
+		$user_name = Auth::user()->name;
+
+		$house_id = $request->id;
+		if ($user_name === "admin") {
+			$house = Ot_Tours::where('id', $house_id)
+								->get();
+		} else {
+			$house = Ot_Tours::where('id', $house_id)
+								->where('created_by', $user_name)
+								->get();
+		}
+		if (count($house) === 0) {
+			return redirect('/admincp/house/list');
+		}
+
+
+		$end = strtotime("now");
+		$start = strtotime(" -30 day", $end);
+		$date_label = [];
+		$view_data = []; 
+		$request_data = [];
+		$total_view = 0;
+		$total_request = 0;
+
+		while ($start <= $end) {
+			$start = strtotime("+1 day", $start);
+			$tmp_date = date('Y-m-d', $start);
+			array_push($date_label, $tmp_date);
+
+			$from 	= date('Y-m-d' . ' 00:00:00', $start);
+			$to 	= date('Y-m-d' . ' 23:59:59', $start);
+
+			$view_count = View_Stat::where("house_id", $house_id)
+								 	->where('viewed_at', '>', $from)
+								 	->where('viewed_at', '<', $to)
+									->count();
+			array_push($view_data, $view_count);
+
+			$request_count = Request_Stat::where("house_id", $house_id)
+								 	->where('requested_at', '>', $from)
+								 	->where('requested_at', '<', $to)
+									->count();
+			array_push($request_data, $request_count);
+
+			$total_view += $view_count;
+			$total_request += $request_count;
+		}
+		
+		return view('admincp.stat', ["date_label" 	=> json_encode($date_label),
+									"view_data"  	=> json_encode($view_data),
+									"request_data"	=> json_encode($request_data),
+									"total_view" 	=> $total_view,
+									"total_request"	=> $total_request]);
 	}
 }
